@@ -31,3 +31,9 @@ d3.select('#hstackbarchart')
    .datum(h_stackbarchart_dataset) // bind data to the div
    .call(h_stackbarchart); // draw chart in div
 
+h_stackbarchart.on('was_clicked', function(idx) {
+  console.log(`Custom event received idx: ${idx} billid: ${JSON.stringify(h_stackbarchart_dataset[idx].billid)}`);
+  console.log(`Custom event received this: ${JSON.stringify(this)}`);
+});
+
+

@@ -29,6 +29,11 @@ import * as d3 from "d3";
 
 export function hStackBarChart() {
   //
+  //
+  //
+  let dispatcher = d3.dispatch("was_clicked", "other_event");
+
+  //
   // Internal variables.
   //
   let m_top = 60;
@@ -84,29 +89,34 @@ export function hStackBarChart() {
       }
 
       //
-      // Sort Data
+      // Sort Data.
       dataset.sort(dynamicSort('billid'));
 
+      // Get all bill ids.
       let billIds = dataset.map( function(d) {
             return d.billid;
       });
 
       //
-      // Data Transform
+      // Data Transform.
       let series = d3.stack()
           .keys(renderedAttrs) //.keys(["agree", "disagree"])
           .offset(d3.stackOffsetDiverging)
           (dataset);
 
+      series.map(function(serie) {
+        console.log(`serie: ${JSON.stringify(serie)}`);
+      });
+
       //
-      // SVG container
+      // SVG container.
       let svg = selection.append('svg')
                 .attr("style", "width:100%; height:100%;")
                 .attr("viewBox", "0 0 640 400")
                 .attr("preserveAspectRatio", "xMidYMid meet");
 
       //
-      // Scales
+      // Scales.
       let yScale = d3.scaleBand()
                      .domain(billIds)
                      .rangeRound([m_top, height - m_bottom])
@@ -122,10 +132,9 @@ export function hStackBarChart() {
       //               .range(["#d62728", "#2ca02c", "#9467bd"]);
 
 
-
+      //
+      // Create the options form
       let default_radio = 0;  // Choose the default selection.
-
-      // Create the shape selectors
       let form = selection.append("form").attr("class", "orderby-radios").text("Order By: ");
 
       form.selectAll("label")
@@ -160,12 +169,21 @@ export function hStackBarChart() {
            .enter().append("rect")
              .attr("class", "bar")
              .attr("height", yScale.bandwidth)
-             .attr("x", function(d) { return xScale(d[0]); })
+             .attr("x", function(d, i) {
+               console.log(`--d:${JSON.stringify(d)} i:${i} this;${JSON.stringify(this)}`);
+               return xScale(d[0]);
+             })
              .attr("width", function(d) { return xScale(d[1]) - xScale(d[0]); })
              .attr("y", function(d) { return yScale(d.data.billid); })
              .on("mouseover", function(d){tooltip.text(d[1]-d[0]); return tooltip.style("visibility", "visible");})
              .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
-             .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+             .on("mouseout", function(){return tooltip.style("visibility", "hidden");})
+             .on('click', function(d, i) {
+               //console.log(`idx: ${i}`);
+
+               // Dispatch the custom event
+               dispatcher.call("was_clicked", this, i);
+             });
 
         svg.selectAll("g.layer").exit().remove();
       }
@@ -307,6 +325,21 @@ export function hStackBarChart() {
       return chart;
   };
 
+
+  //
+  // The '.on' instance method that accepts event
+  // listeners. Unlike d3 v4, this cannot be simply
+  // achieved via d3.rebind, which no longer exists.
+  //
+  // return d3.rebind(chart, dispatch, 'on');
+  //
+
+  chart.on = function() {
+    let value = dispatcher.on.apply(dispatcher, arguments);
+    return value === dispatcher ? chart : value;
+  }
+
   return chart;
+
 }
 

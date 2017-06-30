@@ -2,7 +2,11 @@ var utils = require('./_utils'),
   rollup = require( 'rollup' ),
   mkdirp = require('mkdirp'),
   fs = require('fs'),
-  babel = require('babel-core')
+  babel = require('babel-core'),
+  npm = require('rollup-plugin-node-resolve'),
+  commonjs = require('rollup-plugin-commonjs');
+
+var rollup_resolve = require('rollup-plugin-node-resolve');
 
 module.exports = function(options) {
 
@@ -19,7 +23,19 @@ module.exports = function(options) {
       // The bundle's starting point. This file will be
       // included, along with the minimum necessary code
       // from its dependencies
-      entry: './src/index.js'
+      entry: './src/index.js',
+      plugins: [
+        npm({
+          jsnext: true,
+          main: true
+        }),
+        commonjs({
+          include: 'node_modules/**',
+          // search for files other than .js files (must already
+          // be transpiled by a previous plugin!)
+          extensions: [ '.js', '.coffee' ] // defaults to [ '.js' ]
+        })
+      ]
     }).then( function ( bundle ) {
 
       // convert to valid es5 code with babel

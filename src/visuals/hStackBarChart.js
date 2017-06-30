@@ -13,30 +13,32 @@
  *    - v0.1.0 2017.Jun by Guy-Sung Kim, Initial creation.
  */
 
-var m_top = 60;
-var m_bottom = 30;
-var m_left = 70;
-var m_right = 30;
-var width = 640;
-var height = 400;
-var axisTransitionDuration = 700;
-var reRenderTransitionDuration = 1000;
+import * as d3 from "d3";
 
-var dataset = [
+let m_top = 60;
+let m_bottom = 30;
+let m_left = 70;
+let m_right = 30;
+let width = 640;
+let height = 400;
+let axisTransitionDuration = 700;
+let reRenderTransitionDuration = 1000;
+
+let dataset = [
   {billid: "HB 4643", agree: 67, disagree: -54, index: 121},
   {billid: "HB 6066", agree: 87, disagree: -44, index: 131},
   {billid: "HB 5851", agree: 164, disagree: -34, index: 198},
   {billid: "HB 5400", agree: 58, disagree: -18, index: 76}
 ];
 
-var itemNames = d3.keys(dataset[0]).filter(function(key) {
+let itemNames = d3.keys(dataset[0]).filter(function(key) {
                               if (key !== "billid" && key !== "index")
                                 return true;
                               else
                                 return false;
                 });
 
-var tooltip = d3.select("body")
+let tooltip = d3.select("body")
                 .append("div")
                 .style("position", "absolute")
                 .style("color", "white")
@@ -50,36 +52,36 @@ dataset.sort(function(x, y){
   return d3.ascending(x.index, y.index);
 });
 
-var billIds = dataset.map( function(d) {
+let billIds = dataset.map( function(d) {
       return d.billid;
 });
 
 
 //
 // Data Transform
-var series = d3.stack()
+let series = d3.stack()
     .keys(itemNames) //.keys(["agree", "disagree"])
     .offset(d3.stackOffsetDiverging)
     (dataset);
 
 //
 // SVG container
-var svg = d3.select("svg"),
+let svg = d3.select("svg"),
     margin = {top: m_top, right: m_right, bottom: m_bottom, left: m_left};
 
 //
 // Scales
-var yScale = d3.scaleBand()
+let yScale = d3.scaleBand()
                .domain(billIds)
                .rangeRound([m_top, height - m_bottom])
                .padding(0.4);
 
-var xScale = d3.scaleLinear()
+let xScale = d3.scaleLinear()
                .domain([d3.min(series, stackMin), d3.max(series, stackMax)])
                .rangeRound([m_left, width - m_right]);
 
-var zScale = d3.scaleOrdinal(d3.schemeCategory10);
-//var zScale = d3.scaleOrdinal()
+let zScale = d3.scaleOrdinal(d3.schemeCategory10);
+//let zScale = d3.scaleOrdinal()
 //               .domain(itemNames)
 //               .range(["#d62728", "#2ca02c", "#9467bd"]);
 
@@ -188,7 +190,7 @@ function orderByIndex() {
     (dataset);
 
   // Y Domain Update
-  var _billIds = dataset.map( function(d) {
+  let _billIds = dataset.map( function(d) {
         return d.billid;
   });
   yScale.domain(_billIds);
@@ -219,7 +221,7 @@ function orderByAgree() {
     (dataset);
 
   // Y Domain Update
-  var _billIds = dataset.map( function(d) {
+  let _billIds = dataset.map( function(d) {
         return d.billid;
   });
   yScale.domain(_billIds);
@@ -251,7 +253,7 @@ function orderByDisagree() {
     (dataset);
 
   // Y Domain Update
-  var _billIds = dataset.map( function(d) {
+  let _billIds = dataset.map( function(d) {
         return d.billid;
   });
   yScale.domain(_billIds);
@@ -269,7 +271,7 @@ function orderByDisagree() {
 
 //
 // Render Legend
-var legend = svg.selectAll(".legend")
+let legend = svg.selectAll(".legend")
     .data(series.slice(0))
     .enter().append("g")
       .attr("class", "legend")

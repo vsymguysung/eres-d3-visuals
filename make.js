@@ -24,6 +24,11 @@ case 'eslint':
 case 'build':
   build()
   break
+case 'run':
+  build()
+    .then(minify)
+    .then(serve)
+  break
 case 'watch':
   watch()
   break

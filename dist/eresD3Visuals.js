@@ -60,10 +60,6 @@
     return [a, b];
   }
 
-  var descending = function descending(a, b) {
-    return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
-  };
-
   var number = function number(x) {
     return x === null ? NaN : +x;
   };
@@ -1345,10 +1341,6 @@
 
   var select = function select(selector) {
     return typeof selector === "string" ? new Selection([[document.querySelector(selector)]], [document.documentElement]) : new Selection([[selector]], root);
-  };
-
-  var selectAll = function selectAll(selector) {
-    return typeof selector === "string" ? new Selection([document.querySelectorAll(selector)], [document.documentElement]) : new Selection([selector == null ? [] : selector], root);
   };
 
   var define = function define(constructor, factory, prototype) {
@@ -7190,187 +7182,198 @@
     return (a[0] - c[0]) * (b[1] - a[1]) - (a[0] - b[0]) * (c[1] - a[1]);
   }
 
-  var m_top = 60;
-  var m_bottom = 30;
-  var m_left = 70;
-  var m_right = 30;
-  var width = 640;
-  var height = 400;
-  var axisTransitionDuration = 700;
-  var reRenderTransitionDuration = 1000;
+  function hStackBarChart() {
+    var m_top = 60;
+    var m_bottom = 30;
+    var m_left = 70;
+    var m_right = 30;
+    var width = 640;
+    var height = 400;
+    var axisTransitionDuration = 700;
+    var reRenderTransitionDuration = 1000;
 
-  var dataset = [{ billid: "HB 4643", agree: 67, disagree: -54, index: 121 }, { billid: "HB 6066", agree: 87, disagree: -44, index: 131 }, { billid: "HB 5851", agree: 164, disagree: -34, index: 198 }, { billid: "HB 5400", agree: 58, disagree: -18, index: 76 }];
+    function chart(selection$$1) {
+      console.log("selection:" + JSON.stringify(selection$$1));
 
-  var itemNames = keys(dataset[0]).filter(function (key) {
-    if (key !== "billid" && key !== "index") return true;else return false;
-  });
+      selection$$1.each(function (dataset) {
+        console.log("dataset:" + JSON.stringify(dataset));
 
-  var tooltip = select("body").append("div").style("position", "absolute").style("color", "white").style("z-index", "10").style("visibility", "hidden").text("a simple tooltip");
+        var renderedAttrs = keys(dataset[0]).filter(function (key) {
+          if (key !== "billid" && key !== "index") return true;else return false;
+        });
 
-  dataset.sort(function (x, y) {
-    return ascending(x.index, y.index);
-  });
+        var allAttrs = keys(dataset[0]);
+        console.log("allAttrs: " + JSON.stringify(allAttrs));
 
-  var billIds = dataset.map(function (d) {
-    return d.billid;
-  });
+        var tooltip = select("body").append("div").style("position", "absolute").style("color", "white").style("z-index", "10").style("visibility", "hidden").text("a simple tooltip");
 
-  var series = stack().keys(itemNames).offset(diverging)(dataset);
+        function dynamicSort(property) {
+          var sortOrder = 1;
+          if (property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+          }
+          return function (a, b) {
+            var result = a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
+            return result * sortOrder;
+          };
+        }
 
-  var svg = select("svg");
-  var margin = { top: m_top, right: m_right, bottom: m_bottom, left: m_left };
+        dataset.sort(dynamicSort('billid'));
 
-  var yScale = band().domain(billIds).rangeRound([m_top, height - m_bottom]).padding(0.4);
+        var billIds = dataset.map(function (d) {
+          return d.billid;
+        });
 
-  var xScale = linear$2().domain([min(series, stackMin), max(series, stackMax)]).rangeRound([m_left, width - m_right]);
+        var series = stack().keys(renderedAttrs).offset(diverging)(dataset);
 
-  var zScale = ordinal(category10);
+        var svg = selection$$1.append('svg').attr("style", "width:100%; height:100%;").attr("viewBox", "0 0 640 400").attr("preserveAspectRatio", "xMidYMid meet");
 
-  function renderGraph() {
-    svg.append("g").attr("class", "container").selectAll("g").data(series).enter().append("g").attr("class", "layer").attr("fill", function (d) {
-      return zScale(d.key);
-    }).selectAll("rect").data(function (d) {
-      return d;
-    }).enter().append("rect").attr("class", "bar").attr("height", yScale.bandwidth).attr("x", function (d) {
-      return xScale(d[0]);
-    }).attr("width", function (d) {
-      return xScale(d[1]) - xScale(d[0]);
-    }).attr("y", function (d) {
-      return yScale(d.data.billid);
-    }).on("mouseover", function (d) {
-      tooltip.text(d[1] - d[0]);return tooltip.style("visibility", "visible");
-    }).on("mousemove", function () {
-      return tooltip.style("top", event.pageY - 10 + "px").style("left", event.pageX + 10 + "px");
-    }).on("mouseout", function () {
-      return tooltip.style("visibility", "hidden");
-    });
+        var yScale = band().domain(billIds).rangeRound([m_top, height - m_bottom]).padding(0.4);
 
-    svg.selectAll("g.layer").exit().remove();
+        var xScale = linear$2().domain([min(series, stackMin), max(series, stackMax)]).rangeRound([m_left, width - m_right]);
+
+        var zScale = ordinal(category10);
+
+
+        var default_radio = 0;
+        var form = selection$$1.append("form").attr("class", "orderby-radios").text("Order By: ");
+
+        form.selectAll("label").data(allAttrs).enter().append("label").text(function (d) {
+          console.log("d:" + JSON.stringify(d));
+          return d;
+        }).insert("input").attr("type", "radio").attr("class", "orderby").attr("name", "orderby").attr("value", function (d, i) {
+          return d;
+        }).property("checked", function (d, i) {
+          return i === default_radio;
+        }).on("change", orderByChanged);
+
+        function renderGraph() {
+          svg.append("g").attr("class", "container").selectAll("g").data(series).enter().append("g").attr("class", "layer").attr("fill", function (d) {
+            return zScale(d.key);
+          }).selectAll("rect").data(function (d) {
+            return d;
+          }).enter().append("rect").attr("class", "bar").attr("height", yScale.bandwidth).attr("x", function (d) {
+            return xScale(d[0]);
+          }).attr("width", function (d) {
+            return xScale(d[1]) - xScale(d[0]);
+          }).attr("y", function (d) {
+            return yScale(d.data.billid);
+          }).on("mouseover", function (d) {
+            tooltip.text(d[1] - d[0]);return tooltip.style("visibility", "visible");
+          }).on("mousemove", function () {
+            return tooltip.style("top", event.pageY - 10 + "px").style("left", event.pageX + 10 + "px");
+          }).on("mouseout", function () {
+            return tooltip.style("visibility", "hidden");
+          });
+
+          svg.selectAll("g.layer").exit().remove();
+        }
+
+        function renderXaxis() {
+          svg.append("g").attr("class", "x--axis").attr("transform", "translate(0," + m_top + ")").call(axisTop(xScale));
+        }
+
+        function renderYaxis() {
+          svg.append("g").attr("class", "y--axis").attr("transform", "translate(" + (m_left - 10) + ",0)").call(axisLeft(yScale));
+        }
+
+        function render() {
+          renderGraph();
+          renderXaxis();
+          renderYaxis();
+        }
+
+        function stackMin(serie) {
+          return min(serie, function (d) {
+            return d[0];
+          });
+        }
+
+        function stackMax(serie) {
+          return max(serie, function (d) {
+            return d[1];
+          });
+        }
+
+        render();
+
+        function reRenderGraph() {
+          svg.selectAll("g.layer").data(series).attr("fill", function (d) {
+            console.log("0: d:" + JSON.stringify(d));
+            return zScale(d.key);
+          }).selectAll("rect.bar").data(function (d) {
+            console.log("1: d:" + JSON.stringify(d));
+            return d;
+          }).transition().ease(expInOut).duration(axisTransitionDuration).attr("height", yScale.bandwidth).attr("y", function (d) {
+            console.log("2: d:" + JSON.stringify(d));
+            console.log("2: d.data:" + JSON.stringify(d.data));
+            console.log("2: d.data.billid:" + JSON.stringify(d.data.billid));
+            return yScale(d.data.billid);
+          }).attr("x", function (d) {
+            return xScale(d[0]);
+          }).attr("width", function (d) {
+            return xScale(d[1]) - xScale(d[0]);
+          });
+        }
+
+        function orderByChanged() {
+          console.log("orderByChanged this.value:" + this.value);
+
+
+          orderBy(this.value);
+        }
+
+        function orderBy() {
+          var t = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'index';
+
+          console.log("orderBy " + t + " called.");
+
+          dataset.sort(dynamicSort(t));
+
+          series = stack().keys(renderedAttrs).offset(diverging)(dataset);
+
+          var _billIds = dataset.map(function (d) {
+            return d.billid;
+          });
+          yScale.domain(_billIds);
+
+          select(".y--axis").transition().ease(expInOut).duration(reRenderTransitionDuration).call(axisLeft(yScale));
+
+          reRenderGraph();
+        }
+
+        var legend = svg.selectAll(".legend").data(series.slice(0)).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
+          return "translate(-" + width / 6 + "," + i * 20 + ")";
+        }).style("font", "10px sans-serif");
+
+        legend.append("rect").attr("x", width + 18).attr("width", 18).attr("height", 18).attr("fill", function (d, i) {
+          console.log(JSON.stringify(d.key));return zScale(d.key);
+        });
+
+        legend.append("text").attr("x", width + 44).attr("y", 9).attr("dy", ".35em").attr("text-anchor", "start").text(function (d, i) {
+          return d.key;
+        });
+      });
+    }
+    chart.width = function (value) {
+      if (!arguments.length) return width;
+      width = value;
+      return chart;
+    };
+
+    chart.height = function (value) {
+      if (!arguments.length) return height;
+      height = value;
+      return chart;
+    };
+
+    return chart;
   }
 
-  function renderXaxis() {
-    svg.append("g").attr("class", "x--axis").attr("transform", "translate(0," + m_top + ")").call(axisTop(xScale));
-  }
+  var h_stackbarchart_dataset = [{ billid: "HB 4643", agree: 67, disagree: -54, index: 141 }, { billid: "HB 6066", agree: 87, disagree: -44, index: 131 }, { billid: "HB 5851", agree: 164, disagree: -34, index: 198 }, { billid: "HB 5400", agree: 58, disagree: -18, index: 76 }];
 
-  function renderYaxis() {
-    svg.append("g").attr("class", "y--axis").attr("transform", "translate(" + (m_left - 10) + ",0)").call(axisLeft(yScale));
-  }
+  var h_stackbarchart = hStackBarChart().width(640).height(400);
 
-  function render() {
-    renderGraph();
-    renderXaxis();
-    renderYaxis();
-  }
-
-  function stackMin(serie) {
-    return min(serie, function (d) {
-      return d[0];
-    });
-  }
-
-  function stackMax(serie) {
-    return max(serie, function (d) {
-      return d[1];
-    });
-  }
-
-  selectAll("input").on("change", orderByChanged);
-
-  function orderByChanged() {
-    if (this.value === "orderbyindex") orderByIndex();else if (this.value === "orderbyagree") orderByAgree();else if (this.value === "orderbydisagree") orderByDisagree();
-  }
-
-  function reRenderGraph() {
-    svg.selectAll("g.layer").data(series).attr("fill", function (d) {
-      console.log("0: d:" + JSON.stringify(d));
-      return zScale(d.key);
-    }).selectAll("rect.bar").data(function (d) {
-      console.log("1: d:" + JSON.stringify(d));
-      return d;
-    }).transition().ease(expInOut).duration(axisTransitionDuration).attr("height", yScale.bandwidth).attr("y", function (d) {
-      console.log("2: d:" + JSON.stringify(d));
-      console.log("2: d.data:" + JSON.stringify(d.data));
-      console.log("2: d.data.billid:" + JSON.stringify(d.data.billid));
-      return yScale(d.data.billid);
-    }).attr("x", function (d) {
-      return xScale(d[0]);
-    }).attr("width", function (d) {
-      return xScale(d[1]) - xScale(d[0]);
-    });
-  }
-
-  function orderByIndex() {
-    console.log("orderByIndex called.");
-
-    dataset.sort(function (x, y) {
-      return ascending(x.index, y.index);
-    });
-
-    series = stack().keys(itemNames).offset(diverging)(dataset);
-
-    var _billIds = dataset.map(function (d) {
-      return d.billid;
-    });
-    yScale.domain(_billIds);
-
-    select(".y--axis").transition().ease(expInOut).duration(reRenderTransitionDuration).call(axisLeft(yScale));
-
-    reRenderGraph();
-  }
-
-  function orderByAgree() {
-    console.log("orderByAgree called.");
-
-    dataset.sort(function (x, y) {
-      return descending(x.agree, y.agree);
-    });
-
-    series = stack().keys(itemNames).offset(diverging)(dataset);
-
-    var _billIds = dataset.map(function (d) {
-      return d.billid;
-    });
-    yScale.domain(_billIds);
-
-    select(".y--axis").transition().ease(expInOut).duration(reRenderTransitionDuration).call(axisLeft(yScale));
-
-    reRenderGraph();
-  }
-
-  function orderByDisagree() {
-    console.log("orderByDisagree called.");
-
-    dataset.sort(function (x, y) {
-      return descending(x.disagree, y.disagree);
-    });
-
-    series = stack().keys(itemNames).offset(diverging)(dataset);
-
-    var _billIds = dataset.map(function (d) {
-      return d.billid;
-    });
-    yScale.domain(_billIds);
-
-    select(".y--axis").transition().ease(expInOut).duration(reRenderTransitionDuration).call(axisLeft(yScale));
-
-    reRenderGraph();
-  }
-
-  var legend = svg.selectAll(".legend").data(series.slice(0)).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
-    return "translate(-" + width / 6 + "," + i * 20 + ")";
-  }).style("font", "10px sans-serif");
-
-  legend.append("rect").attr("x", width + 18).attr("width", 18).attr("height", 18).attr("fill", function (d, i) {
-    console.log(JSON.stringify(d.key));return zScale(d.key);
-  });
-
-  legend.append("text").attr("x", width + 44).attr("y", 9).attr("dy", ".35em").attr("text-anchor", "start").text(function (d, i) {
-    return d.key;
-  });
-
-  var hStackBarChart = {
-    render: render
-  };
-
-  hStackBarChart.render();
+  select('#hstackbarchart').datum(h_stackbarchart_dataset).call(h_stackbarchart);
 });

@@ -6,11 +6,13 @@ D3 Custom Visual Implementation
 # Introduction
 
 This project has been built with `es6-project-starter-kit`.
+You are free to use ES6 syntax following modular JS programming pattern and 
+all output through the build pipline will be following `Universal Module Definition(UMD)` 
 
 
 # Background knowledge
 
-javascript 2015/es6/next introduces a lot of new cool [features](https://babeljs.io/features.html) unfortunately not yet available in the current modern browsers. This starter kit contains all the tools you need to let you run your ES6 code on any kind of platform.
+`ECMAScript 2015/ES6` introduces a lot of new cool [features](https://babeljs.io/features.html) unfortunately not yet available in the current modern browsers. This starter kit contains all the tools you need to let you run your ES6 code on any kind of platform.
 
 
 # Usage
@@ -21,7 +23,7 @@ Once you've downloaded the files in this repo please run the following command i
 $ npm install
 ```
 
-Browsing the [make.js](make) file you will find all the available terminal commands to compile/test your project. __This file contains also the script name used for the output__
+Browsing the [make.js](https://github.com/vsymguysung/eres-d3-visuals/blob/master/make.js) file you will find all the available terminal commands to compile/test your project. __This file contains also the script name used for the output__
 All the build tasks available are based on the __native javascript promises__ so you will be able to chain and combine them as you prefer
 
 If you have installed correctly all the nodejs modules you can start writing your javascript modules into the `src` folder of course using the awesome javascript es6 syntax.

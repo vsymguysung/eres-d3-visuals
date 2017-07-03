@@ -53,6 +53,12 @@ export function hStackBarChart() {
     selection.each(function(dataset) {
       console.log(`dataset:${JSON.stringify(dataset)}`);
 
+      let _fixedData = dataset.map((d)=>{
+        let _ret = d3.entries(d);
+        return _ret;
+      });
+      console.log(`_fixedData: ${JSON.stringify(_fixedData)}`);
+
       // Get attrs that are for rendering i.e.  'agree', 'disagree'
       let renderedAttrs = d3.keys(dataset[0]).filter(function(key) {
                     if (key !== "billid" && key !== "index")

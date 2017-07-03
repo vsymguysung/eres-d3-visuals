@@ -1,6 +1,6 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define("eresD3Visuals", [], factory);
+    define("vsnxtD3Visuals", [], factory);
   } else if (typeof exports !== "undefined") {
     factory();
   } else {
@@ -8,7 +8,7 @@
       exports: {}
     };
     factory();
-    global.eresD3Visuals = mod.exports;
+    global.vsnxtD3Visuals = mod.exports;
   }
 })(this, function () {
   'use strict';
@@ -429,7 +429,7 @@
 
   var noop = { value: function value() {} };
 
-  function dispatch() {
+  function dispatch$1() {
     for (var i = 0, n = arguments.length, _ = {}, t; i < n; ++i) {
       if (!(t = arguments[i] + "") || t in _) throw new Error("illegal type: " + t);
       _[t] = [];
@@ -451,7 +451,7 @@
     });
   }
 
-  Dispatch.prototype = dispatch.prototype = {
+  Dispatch.prototype = dispatch$1.prototype = {
     constructor: Dispatch,
     on: function on(typename, callback) {
       var _ = this._,
@@ -1341,6 +1341,10 @@
 
   var select = function select(selector) {
     return typeof selector === "string" ? new Selection([[document.querySelector(selector)]], [document.documentElement]) : new Selection([[selector]], root);
+  };
+
+  var selectAll = function selectAll(selector) {
+    return typeof selector === "string" ? new Selection([document.querySelectorAll(selector)], [document.documentElement]) : new Selection([selector == null ? [] : selector], root);
   };
 
   var define = function define(constructor, factory, prototype) {
@@ -2254,7 +2258,7 @@
     return t;
   };
 
-  var emptyOn = dispatch("start", "end", "interrupt");
+  var emptyOn = dispatch$1("start", "end", "interrupt");
   var emptyTween = [];
 
   var CREATED = 0;
@@ -3346,6 +3350,13 @@
     for (var key in map) {
       keys.push(key);
     }return keys;
+  };
+
+  var entries = function entries(map) {
+    var entries = [];
+    for (var key in map) {
+      entries.push({ key: key, value: map[key] });
+    }return entries;
   };
 
   function objectConverter(columns) {
@@ -5383,7 +5394,7 @@
 
   var request = function request(url, callback) {
     var request,
-        event = dispatch("beforesend", "progress", "load", "error"),
+        event = dispatch$1("beforesend", "progress", "load", "error"),
         _mimeType,
         headers = map$1(),
         xhr = new XMLHttpRequest(),
@@ -6792,7 +6803,7 @@
 
   colors("393b795254a36b6ecf9c9ede6379398ca252b5cf6bcedb9c8c6d31bd9e39e7ba52e7cb94843c39ad494ad6616be7969c7b4173a55194ce6dbdde9ed6");
 
-  colors("3182bd6baed69ecae1c6dbefe6550dfd8d3cfdae6bfdd0a231a35474c476a1d99bc7e9c0756bb19e9ac8bcbddcdadaeb636363969696bdbdbdd9d9d9");
+  var category20c = colors("3182bd6baed69ecae1c6dbefe6550dfd8d3cfdae6bfdd0a231a35474c476a1d99bc7e9c0756bb19e9ac8bcbddcdadaeb636363969696bdbdbdd9d9d9");
 
   colors("1f77b4aec7e8ff7f0effbb782ca02c98df8ad62728ff98969467bdc5b0d58c564bc49c94e377c2f7b6d27f7f7fc7c7c7bcbd22dbdb8d17becf9edae5");
 
@@ -6808,6 +6819,245 @@
     return function constant() {
       return x;
     };
+  };
+
+  var abs$1 = Math.abs;
+  var atan2$1 = Math.atan2;
+  var cos$2 = Math.cos;
+  var max$2 = Math.max;
+  var min$1 = Math.min;
+  var sin$2 = Math.sin;
+  var sqrt$2 = Math.sqrt;
+
+  var epsilon$3 = 1e-12;
+  var pi$4 = Math.PI;
+  var halfPi$3 = pi$4 / 2;
+  var tau$4 = 2 * pi$4;
+
+  function acos$1(x) {
+    return x > 1 ? 0 : x < -1 ? pi$4 : Math.acos(x);
+  }
+
+  function asin$1(x) {
+    return x >= 1 ? halfPi$3 : x <= -1 ? -halfPi$3 : Math.asin(x);
+  }
+
+  function arcInnerRadius(d) {
+    return d.innerRadius;
+  }
+
+  function arcOuterRadius(d) {
+    return d.outerRadius;
+  }
+
+  function arcStartAngle(d) {
+    return d.startAngle;
+  }
+
+  function arcEndAngle(d) {
+    return d.endAngle;
+  }
+
+  function arcPadAngle(d) {
+    return d && d.padAngle;
+  }
+
+  function intersect(x0, y0, x1, y1, x2, y2, x3, y3) {
+    var x10 = x1 - x0,
+        y10 = y1 - y0,
+        x32 = x3 - x2,
+        y32 = y3 - y2,
+        t = (x32 * (y0 - y2) - y32 * (x0 - x2)) / (y32 * x10 - x32 * y10);
+    return [x0 + t * x10, y0 + t * y10];
+  }
+
+  function cornerTangents(x0, y0, x1, y1, r1, rc, cw) {
+    var x01 = x0 - x1,
+        y01 = y0 - y1,
+        lo = (cw ? rc : -rc) / sqrt$2(x01 * x01 + y01 * y01),
+        ox = lo * y01,
+        oy = -lo * x01,
+        x11 = x0 + ox,
+        y11 = y0 + oy,
+        x10 = x1 + ox,
+        y10 = y1 + oy,
+        x00 = (x11 + x10) / 2,
+        y00 = (y11 + y10) / 2,
+        dx = x10 - x11,
+        dy = y10 - y11,
+        d2 = dx * dx + dy * dy,
+        r = r1 - rc,
+        D = x11 * y10 - x10 * y11,
+        d = (dy < 0 ? -1 : 1) * sqrt$2(max$2(0, r * r * d2 - D * D)),
+        cx0 = (D * dy - dx * d) / d2,
+        cy0 = (-D * dx - dy * d) / d2,
+        cx1 = (D * dy + dx * d) / d2,
+        cy1 = (-D * dx + dy * d) / d2,
+        dx0 = cx0 - x00,
+        dy0 = cy0 - y00,
+        dx1 = cx1 - x00,
+        dy1 = cy1 - y00;
+
+    if (dx0 * dx0 + dy0 * dy0 > dx1 * dx1 + dy1 * dy1) cx0 = cx1, cy0 = cy1;
+
+    return {
+      cx: cx0,
+      cy: cy0,
+      x01: -ox,
+      y01: -oy,
+      x11: cx0 * (r1 / r - 1),
+      y11: cy0 * (r1 / r - 1)
+    };
+  }
+
+  var arc = function arc() {
+    var innerRadius = arcInnerRadius,
+        outerRadius = arcOuterRadius,
+        cornerRadius = constant$10(0),
+        padRadius = null,
+        startAngle = arcStartAngle,
+        endAngle = arcEndAngle,
+        padAngle = arcPadAngle,
+        context = null;
+
+    function arc() {
+      var buffer,
+          r,
+          r0 = +innerRadius.apply(this, arguments),
+          r1 = +outerRadius.apply(this, arguments),
+          a0 = startAngle.apply(this, arguments) - halfPi$3,
+          a1 = endAngle.apply(this, arguments) - halfPi$3,
+          da = abs$1(a1 - a0),
+          cw = a1 > a0;
+
+      if (!context) context = buffer = path();
+
+      if (r1 < r0) r = r1, r1 = r0, r0 = r;
+
+      if (!(r1 > epsilon$3)) context.moveTo(0, 0);else if (da > tau$4 - epsilon$3) {
+          context.moveTo(r1 * cos$2(a0), r1 * sin$2(a0));
+          context.arc(0, 0, r1, a0, a1, !cw);
+          if (r0 > epsilon$3) {
+            context.moveTo(r0 * cos$2(a1), r0 * sin$2(a1));
+            context.arc(0, 0, r0, a1, a0, cw);
+          }
+        } else {
+            var a01 = a0,
+                a11 = a1,
+                a00 = a0,
+                a10 = a1,
+                da0 = da,
+                da1 = da,
+                ap = padAngle.apply(this, arguments) / 2,
+                rp = ap > epsilon$3 && (padRadius ? +padRadius.apply(this, arguments) : sqrt$2(r0 * r0 + r1 * r1)),
+                rc = min$1(abs$1(r1 - r0) / 2, +cornerRadius.apply(this, arguments)),
+                rc0 = rc,
+                rc1 = rc,
+                t0,
+                t1;
+
+            if (rp > epsilon$3) {
+              var p0 = asin$1(rp / r0 * sin$2(ap)),
+                  p1 = asin$1(rp / r1 * sin$2(ap));
+              if ((da0 -= p0 * 2) > epsilon$3) p0 *= cw ? 1 : -1, a00 += p0, a10 -= p0;else da0 = 0, a00 = a10 = (a0 + a1) / 2;
+              if ((da1 -= p1 * 2) > epsilon$3) p1 *= cw ? 1 : -1, a01 += p1, a11 -= p1;else da1 = 0, a01 = a11 = (a0 + a1) / 2;
+            }
+
+            var x01 = r1 * cos$2(a01),
+                y01 = r1 * sin$2(a01),
+                x10 = r0 * cos$2(a10),
+                y10 = r0 * sin$2(a10);
+
+            if (rc > epsilon$3) {
+              var x11 = r1 * cos$2(a11),
+                  y11 = r1 * sin$2(a11),
+                  x00 = r0 * cos$2(a00),
+                  y00 = r0 * sin$2(a00);
+
+              if (da < pi$4) {
+                var oc = da0 > epsilon$3 ? intersect(x01, y01, x00, y00, x11, y11, x10, y10) : [x10, y10],
+                    ax = x01 - oc[0],
+                    ay = y01 - oc[1],
+                    bx = x11 - oc[0],
+                    by = y11 - oc[1],
+                    kc = 1 / sin$2(acos$1((ax * bx + ay * by) / (sqrt$2(ax * ax + ay * ay) * sqrt$2(bx * bx + by * by))) / 2),
+                    lc = sqrt$2(oc[0] * oc[0] + oc[1] * oc[1]);
+                rc0 = min$1(rc, (r0 - lc) / (kc - 1));
+                rc1 = min$1(rc, (r1 - lc) / (kc + 1));
+              }
+            }
+
+            if (!(da1 > epsilon$3)) context.moveTo(x01, y01);else if (rc1 > epsilon$3) {
+                t0 = cornerTangents(x00, y00, x01, y01, r1, rc1, cw);
+                t1 = cornerTangents(x11, y11, x10, y10, r1, rc1, cw);
+
+                context.moveTo(t0.cx + t0.x01, t0.cy + t0.y01);
+
+                if (rc1 < rc) context.arc(t0.cx, t0.cy, rc1, atan2$1(t0.y01, t0.x01), atan2$1(t1.y01, t1.x01), !cw);else {
+                    context.arc(t0.cx, t0.cy, rc1, atan2$1(t0.y01, t0.x01), atan2$1(t0.y11, t0.x11), !cw);
+                    context.arc(0, 0, r1, atan2$1(t0.cy + t0.y11, t0.cx + t0.x11), atan2$1(t1.cy + t1.y11, t1.cx + t1.x11), !cw);
+                    context.arc(t1.cx, t1.cy, rc1, atan2$1(t1.y11, t1.x11), atan2$1(t1.y01, t1.x01), !cw);
+                  }
+              } else context.moveTo(x01, y01), context.arc(0, 0, r1, a01, a11, !cw);
+
+            if (!(r0 > epsilon$3) || !(da0 > epsilon$3)) context.lineTo(x10, y10);else if (rc0 > epsilon$3) {
+                t0 = cornerTangents(x10, y10, x11, y11, r0, -rc0, cw);
+                t1 = cornerTangents(x01, y01, x00, y00, r0, -rc0, cw);
+
+                context.lineTo(t0.cx + t0.x01, t0.cy + t0.y01);
+
+                if (rc0 < rc) context.arc(t0.cx, t0.cy, rc0, atan2$1(t0.y01, t0.x01), atan2$1(t1.y01, t1.x01), !cw);else {
+                    context.arc(t0.cx, t0.cy, rc0, atan2$1(t0.y01, t0.x01), atan2$1(t0.y11, t0.x11), !cw);
+                    context.arc(0, 0, r0, atan2$1(t0.cy + t0.y11, t0.cx + t0.x11), atan2$1(t1.cy + t1.y11, t1.cx + t1.x11), cw);
+                    context.arc(t1.cx, t1.cy, rc0, atan2$1(t1.y11, t1.x11), atan2$1(t1.y01, t1.x01), !cw);
+                  }
+              } else context.arc(0, 0, r0, a10, a00, cw);
+          }
+
+      context.closePath();
+
+      if (buffer) return context = null, buffer + "" || null;
+    }
+
+    arc.centroid = function () {
+      var r = (+innerRadius.apply(this, arguments) + +outerRadius.apply(this, arguments)) / 2,
+          a = (+startAngle.apply(this, arguments) + +endAngle.apply(this, arguments)) / 2 - pi$4 / 2;
+      return [cos$2(a) * r, sin$2(a) * r];
+    };
+
+    arc.innerRadius = function (_) {
+      return arguments.length ? (innerRadius = typeof _ === "function" ? _ : constant$10(+_), arc) : innerRadius;
+    };
+
+    arc.outerRadius = function (_) {
+      return arguments.length ? (outerRadius = typeof _ === "function" ? _ : constant$10(+_), arc) : outerRadius;
+    };
+
+    arc.cornerRadius = function (_) {
+      return arguments.length ? (cornerRadius = typeof _ === "function" ? _ : constant$10(+_), arc) : cornerRadius;
+    };
+
+    arc.padRadius = function (_) {
+      return arguments.length ? (padRadius = _ == null ? null : typeof _ === "function" ? _ : constant$10(+_), arc) : padRadius;
+    };
+
+    arc.startAngle = function (_) {
+      return arguments.length ? (startAngle = typeof _ === "function" ? _ : constant$10(+_), arc) : startAngle;
+    };
+
+    arc.endAngle = function (_) {
+      return arguments.length ? (endAngle = typeof _ === "function" ? _ : constant$10(+_), arc) : endAngle;
+    };
+
+    arc.padAngle = function (_) {
+      return arguments.length ? (padAngle = typeof _ === "function" ? _ : constant$10(+_), arc) : padAngle;
+    };
+
+    arc.context = function (_) {
+      return arguments.length ? (context = _ == null ? null : _, arc) : context;
+    };
+
+    return arc;
   };
 
   function Linear(context) {
@@ -6852,6 +7102,90 @@
   function y$3(p) {
     return p[1];
   }
+
+  var descending$1 = function descending$1(a, b) {
+    return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
+  };
+
+  var identity$7 = function identity$7(d) {
+    return d;
+  };
+
+  var pie = function pie() {
+    var value = identity$7,
+        sortValues = descending$1,
+        sort = null,
+        startAngle = constant$10(0),
+        endAngle = constant$10(tau$4),
+        padAngle = constant$10(0);
+
+    function pie(data) {
+      var i,
+          n = data.length,
+          j,
+          k,
+          sum = 0,
+          index = new Array(n),
+          arcs = new Array(n),
+          a0 = +startAngle.apply(this, arguments),
+          da = Math.min(tau$4, Math.max(-tau$4, endAngle.apply(this, arguments) - a0)),
+          a1,
+          p = Math.min(Math.abs(da) / n, padAngle.apply(this, arguments)),
+          pa = p * (da < 0 ? -1 : 1),
+          v;
+
+      for (i = 0; i < n; ++i) {
+        if ((v = arcs[index[i] = i] = +value(data[i], i, data)) > 0) {
+          sum += v;
+        }
+      }
+
+      if (sortValues != null) index.sort(function (i, j) {
+        return sortValues(arcs[i], arcs[j]);
+      });else if (sort != null) index.sort(function (i, j) {
+        return sort(data[i], data[j]);
+      });
+
+      for (i = 0, k = sum ? (da - n * pa) / sum : 0; i < n; ++i, a0 = a1) {
+        j = index[i], v = arcs[j], a1 = a0 + (v > 0 ? v * k : 0) + pa, arcs[j] = {
+          data: data[j],
+          index: i,
+          value: v,
+          startAngle: a0,
+          endAngle: a1,
+          padAngle: p
+        };
+      }
+
+      return arcs;
+    }
+
+    pie.value = function (_) {
+      return arguments.length ? (value = typeof _ === "function" ? _ : constant$10(+_), pie) : value;
+    };
+
+    pie.sortValues = function (_) {
+      return arguments.length ? (sortValues = _, sort = null, pie) : sortValues;
+    };
+
+    pie.sort = function (_) {
+      return arguments.length ? (sort = _, sortValues = null, pie) : sort;
+    };
+
+    pie.startAngle = function (_) {
+      return arguments.length ? (startAngle = typeof _ === "function" ? _ : constant$10(+_), pie) : startAngle;
+    };
+
+    pie.endAngle = function (_) {
+      return arguments.length ? (endAngle = typeof _ === "function" ? _ : constant$10(+_), pie) : endAngle;
+    };
+
+    pie.padAngle = function (_) {
+      return arguments.length ? (padAngle = typeof _ === "function" ? _ : constant$10(+_), pie) : padAngle;
+    };
+
+    return pie;
+  };
 
   var slice$5 = Array.prototype.slice;
 
@@ -7183,6 +7517,8 @@
   }
 
   function hStackBarChart() {
+    var dispatcher = dispatch$1("was_clicked", "other_event");
+
     var m_top = 60;
     var m_bottom = 30;
     var m_left = 70;
@@ -7197,6 +7533,12 @@
 
       selection$$1.each(function (dataset) {
         console.log("dataset:" + JSON.stringify(dataset));
+
+        var _fixedData = dataset.map(function (d) {
+          var _ret = entries(d);
+          return _ret;
+        });
+        console.log("_fixedData: " + JSON.stringify(_fixedData));
 
         var renderedAttrs = keys(dataset[0]).filter(function (key) {
           if (key !== "billid" && key !== "index") return true;else return false;
@@ -7227,6 +7569,10 @@
 
         var series = stack().keys(renderedAttrs).offset(diverging)(dataset);
 
+        series.map(function (serie) {
+          console.log("serie: " + JSON.stringify(serie));
+        });
+
         var svg = selection$$1.append('svg').attr("style", "width:100%; height:100%;").attr("viewBox", "0 0 640 400").attr("preserveAspectRatio", "xMidYMid meet");
 
         var yScale = band().domain(billIds).rangeRound([m_top, height - m_bottom]).padding(0.4);
@@ -7234,7 +7580,6 @@
         var xScale = linear$2().domain([min(series, stackMin), max(series, stackMax)]).rangeRound([m_left, width - m_right]);
 
         var zScale = ordinal(category10);
-
 
         var default_radio = 0;
         var form = selection$$1.append("form").attr("class", "orderby-radios").text("Order By: ");
@@ -7253,7 +7598,8 @@
             return zScale(d.key);
           }).selectAll("rect").data(function (d) {
             return d;
-          }).enter().append("rect").attr("class", "bar").attr("height", yScale.bandwidth).attr("x", function (d) {
+          }).enter().append("rect").attr("class", "bar").attr("height", yScale.bandwidth).attr("x", function (d, i) {
+            console.log("--d:" + JSON.stringify(d) + " i:" + i + " this;" + JSON.stringify(this));
             return xScale(d[0]);
           }).attr("width", function (d) {
             return xScale(d[1]) - xScale(d[0]);
@@ -7265,6 +7611,8 @@
             return tooltip.style("top", event.pageY - 10 + "px").style("left", event.pageX + 10 + "px");
           }).on("mouseout", function () {
             return tooltip.style("visibility", "hidden");
+          }).on('click', function (d, i) {
+            dispatcher.call("was_clicked", this, i);
           });
 
           svg.selectAll("g.layer").exit().remove();
@@ -7368,12 +7716,184 @@
       return chart;
     };
 
+    chart.on = function () {
+      var value = dispatcher.on.apply(dispatcher, arguments);
+      return value === dispatcher ? chart : value;
+    };
+
+    return chart;
+  }
+
+  function donutChart() {
+    var width,
+        height,
+        margin = { top: 10, right: 10, bottom: 10, left: 10 },
+        colour = ordinal(category20c),
+        variable,
+        category,
+        padAngle,
+        floatFormat = format('.4r'),
+        cornerRadius,
+        percentFormat = format(',.2%');
+
+    function chart(selection$$1) {
+      selection$$1.each(function (data) {
+        var radius = Math.min(width, height) / 2;
+
+        var pie$$1 = pie().value(function (d) {
+          return floatFormat(d[variable]);
+        }).sort(null);
+
+        var arc$$1 = arc().outerRadius(radius * 0.8).innerRadius(radius * 0.6).cornerRadius(cornerRadius).padAngle(padAngle);
+
+        var outerArc = arc().outerRadius(radius * 0.9).innerRadius(radius * 0.9);
+
+        var svg = selection$$1.append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).append('g').attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+
+        svg.append('g').attr('class', 'slices');
+        svg.append('g').attr('class', 'labelName');
+        svg.append('g').attr('class', 'lines');
+
+        var path$$1 = svg.select('.slices').datum(data).selectAll('path').data(pie$$1).enter().append('path').attr('fill', function (d) {
+          return colour(d.data[category]);
+        }).attr('d', arc$$1);
+
+        var label = svg.select('.labelName').selectAll('text').data(pie$$1).enter().append('text').attr('dy', '.35em').html(function (d) {
+          return d.data[category] + ': <tspan>' + percentFormat(d.data[variable]) + '</tspan>';
+        }).attr('transform', function (d) {
+          var pos = outerArc.centroid(d);
+
+          pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
+          return 'translate(' + pos + ')';
+        }).style('text-anchor', function (d) {
+          return midAngle(d) < Math.PI ? 'start' : 'end';
+        });
+
+        var polyline = svg.select('.lines').selectAll('polyline').data(pie$$1).enter().append('polyline').attr('points', function (d) {
+          var pos = outerArc.centroid(d);
+          pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
+          return [arc$$1.centroid(d), outerArc.centroid(d), pos];
+        });
+
+        selectAll('.labelName text, .slices path').call(toolTip);
+
+        function midAngle(d) {
+          return d.startAngle + (d.endAngle - d.startAngle) / 2;
+        }
+
+        function toolTip(selection$$1) {
+          selection$$1.on('mouseenter', function (data) {
+
+            svg.append('text').attr('class', 'toolCircle').attr('dy', -15).html(toolTipHTML(data)).style('font-size', '.9em').style('text-anchor', 'middle');
+
+            svg.append('circle').attr('class', 'toolCircle').attr('r', radius * 0.55).style('fill', colour(data.data[category])).style('fill-opacity', 0.35);
+          });
+
+          selection$$1.on('mouseout', function () {
+            selectAll('.toolCircle').remove();
+          });
+        }
+
+        function toolTipHTML(data) {
+
+          var tip = '',
+              i = 0;
+
+          for (var key in data.data) {
+            var value = !isNaN(parseFloat(data.data[key])) ? percentFormat(data.data[key]) : data.data[key];
+
+            if (i === 0) tip += '<tspan x="0">' + key + ': ' + value + '</tspan>';else tip += '<tspan x="0" dy="1.2em">' + key + ': ' + value + '</tspan>';
+            i++;
+          }
+
+          return tip;
+        }
+      });
+    }
+
+    chart.width = function (value) {
+      if (!arguments.length) return width;
+      width = value;
+      return chart;
+    };
+
+    chart.height = function (value) {
+      if (!arguments.length) return height;
+      height = value;
+      return chart;
+    };
+
+    chart.margin = function (value) {
+      if (!arguments.length) return margin;
+      margin = value;
+      return chart;
+    };
+
+    chart.radius = function (value) {
+      if (!arguments.length) return radius;
+      radius = value;
+      return chart;
+    };
+
+    chart.padAngle = function (value) {
+      if (!arguments.length) return padAngle;
+      padAngle = value;
+      return chart;
+    };
+
+    chart.cornerRadius = function (value) {
+      if (!arguments.length) return cornerRadius;
+      cornerRadius = value;
+      return chart;
+    };
+
+    chart.colour = function (value) {
+      if (!arguments.length) return colour;
+      colour = value;
+      return chart;
+    };
+
+    chart.variable = function (value) {
+      if (!arguments.length) return variable;
+      variable = value;
+      return chart;
+    };
+
+    chart.category = function (value) {
+      if (!arguments.length) return category;
+      category = value;
+      return chart;
+    };
+
     return chart;
   }
 
   var h_stackbarchart_dataset = [{ billid: "HB 4643", agree: 67, disagree: -54, index: 141 }, { billid: "HB 6066", agree: 87, disagree: -44, index: 131 }, { billid: "HB 5851", agree: 164, disagree: -34, index: 198 }, { billid: "HB 5400", agree: 58, disagree: -18, index: 76 }];
 
+  var donut_dataset = [{
+    "Species": "Halobacillus halophilus",
+    "Probability": 0.02069108308662117,
+    "Error": 0.045296463390387814
+  }, {
+    "Species": "Staphylococcus epidermidis",
+    "Probability": 0.10076903848429238,
+    "Error": 0.0096463390387814
+  }, {
+    "Species": "Chromobacterium violaceum",
+    "Probability": 0.40318269548054262,
+    "Error": 0.03390387814
+  }];
+
   var h_stackbarchart = hStackBarChart().width(640).height(400);
 
   select('#hstackbarchart').datum(h_stackbarchart_dataset).call(h_stackbarchart);
+
+  h_stackbarchart.on('was_clicked', function (idx) {
+    console.log("Custom event received idx: " + idx + " billid: " + JSON.stringify(h_stackbarchart_dataset[idx].billid));
+    console.log("Custom event received this: " + JSON.stringify(this));
+  });
+
+  var donut = donutChart().width(960).height(500).cornerRadius(3).padAngle(0.015).variable('Probability').category('Species');
+
+  select('#donutchart').datum(donut_dataset).call(donut);
 });

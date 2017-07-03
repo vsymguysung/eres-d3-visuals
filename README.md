@@ -1,7 +1,7 @@
 D3 Custom Visual Implementation
 ====================
 
-[Demo](https://vsymguysung.github.io/eres-d3-visuals/)
+[Demo](https://vsymguysung.github.io/vsnxt-d3-visuals/)
 
 # Introduction
 
@@ -23,7 +23,7 @@ Once you've downloaded the files in this repo please run the following command i
 $ npm install
 ```
 
-Browsing the [make.js](https://github.com/vsymguysung/eres-d3-visuals/blob/master/make.js) file you will find all the available terminal commands to compile/test your project. __This file contains also the script name used for the output__
+Browsing the [make.js](https://github.com/vsymguysung/vsnxt-d3-visuals/blob/master/make.js) file you will find all the available terminal commands to compile/test your project. __This file contains also the script name used for the output__
 All the build tasks available are based on the __native javascript promises__ so you will be able to chain and combine them as you prefer
 
 If you have installed correctly all the nodejs modules you can start writing your javascript modules into the `src` folder of course using the awesome javascript es6 syntax.

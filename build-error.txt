@@ -1,0 +1,494 @@
+[32m Executing: ./node_modules/.bin/eslint  tasks src test 
+ [39m
+
+/Users/guysungkim/Documents/emberJS-Projects/vsnxt-d3-visuals/tasks/build.js
+  7:47  error  Extra semicolon  semi
+  9:59  error  Extra semicolon  semi
+
+/Users/guysungkim/Documents/emberJS-Projects/vsnxt-d3-visuals/src/index.js
+  16:21   warning  Strings must use singlequote  quotes
+  16:25   error    Extra semicolon               semi
+  21:12   warning  Strings must use singlequote  quotes
+  22:12   warning  Strings must use singlequote  quotes
+  23:12   warning  Strings must use singlequote  quotes
+  24:12   warning  Strings must use singlequote  quotes
+  25:2    error    Extra semicolon               semi
+  29:5    warning  Strings must use singlequote  quotes
+  29:14   warning  Strings must use singlequote  quotes
+  30:5    warning  Strings must use singlequote  quotes
+  31:5    warning  Strings must use singlequote  quotes
+  31:19   warning  Strings must use singlequote  quotes
+  34:5    warning  Strings must use singlequote  quotes
+  34:14   warning  Strings must use singlequote  quotes
+  35:5    warning  Strings must use singlequote  quotes
+  36:5    warning  Strings must use singlequote  quotes
+  36:19   warning  Strings must use singlequote  quotes
+  44:62   error    Extra semicolon               semi
+  48:26   error    Extra semicolon               semi
+  51:114  error    Extra semicolon               semi
+  52:69   error    Extra semicolon               semi
+  53:3    error    Extra semicolon               semi
+  65:35   error    Extra semicolon               semi
+  69:25   error    Extra semicolon               semi
+
+/Users/guysungkim/Documents/emberJS-Projects/vsnxt-d3-visuals/src/visuals/donutChart.js
+   16:21   warning  Strings must use singlequote                                                                                quotes
+   16:25   error    Extra semicolon                                                                                             semi
+   20:5    error    Expected indentation of 2 spaces but found 4                                                                indent
+   20:28   error    Extra semicolon                                                                                             semi
+   21:5    error    Expected indentation of 2 spaces but found 4                                                                indent
+   21:29   error    Extra semicolon                                                                                             semi
+   22:5    error    Expected indentation of 2 spaces but found 4                                                                indent
+   23:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+   24:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+   25:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+   26:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+   27:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+   28:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+   29:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+   30:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+   31:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+   32:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+   32:42   error    Extra semicolon                                                                                             semi
+   34:5    error    Expected indentation of 2 spaces but found 4                                                                indent
+   34:30   error    Missing space before opening brace                                                                          space-before-blocks
+   35:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+   40:13   error    Expected indentation of 10 spaces but found 12                                                              indent
+   40:53   error    Extra semicolon                                                                                             semi
+   43:13   error    Expected indentation of 10 spaces but found 12                                                              indent
+   44:71   error    Extra semicolon                                                                                             semi
+   44:75   error    Extra semicolon                                                                                             semi
+   45:71   error    Extra semicolon                                                                                             semi
+   45:75   error    Extra semicolon                                                                                             semi
+   46:37   error    Extra semicolon                                                                                             semi
+   47:71   error    Extra semicolon                                                                                             semi
+   51:66   error    Extra semicolon                                                                                             semi
+   52:17   error    Extra semicolon                                                                                             semi
+   56:13   error    Expected indentation of 10 spaces but found 12                                                              indent
+   58:61   error    Extra semicolon                                                                                             semi
+   59:50   error    Extra semicolon                                                                                             semi
+   61:28   error    Extra semicolon                                                                                             semi
+   65:13   error    Expected indentation of 10 spaces but found 12                                                              indent
+   69:36   error    Extra semicolon                                                                                             semi
+   72:13   error    Expected indentation of 10 spaces but found 12                                                              indent
+   74:43   error    Extra semicolon                                                                                             semi
+   79:13   error    Expected indentation of 10 spaces but found 12                                                              indent
+   80:23   warning  Strings must use singlequote                                                                                quotes
+   80:32   warning  Strings must use singlequote                                                                                quotes
+   81:23   warning  Strings must use singlequote                                                                                quotes
+   82:23   warning  Strings must use singlequote                                                                                quotes
+   82:46   warning  Strings must use singlequote                                                                                quotes
+   86:86   error    Extra semicolon                                                                                             semi
+   91:13   error    Expected indentation of 10 spaces but found 12                                                              indent
+   91:52   error    Extra semicolon                                                                                             semi
+   92:13   error    Expected indentation of 10 spaces but found 12                                                              indent
+   92:55   error    Extra semicolon                                                                                             semi
+   93:13   error    Expected indentation of 10 spaces but found 12                                                              indent
+   93:51   error    Extra semicolon                                                                                             semi
+   98:13   error    Expected indentation of 10 spaces but found 12                                                              indent
+  102:76   error    Extra semicolon                                                                                             semi
+  103:32   error    Extra semicolon                                                                                             semi
+  108:13   error    Expected indentation of 10 spaces but found 12                                                              indent
+  114:46   error    Extra semicolon                                                                                             semi
+  115:47   error    Extra semicolon                                                                                             semi
+  116:53   error    Extra semicolon                                                                                             semi
+  117:71   warning  Strings must use singlequote                                                                                quotes
+  117:108  error    Extra semicolon                                                                                             semi
+  121:105  error    Extra semicolon                                                                                             semi
+  128:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  128:51   error    Extra semicolon                                                                                             semi
+  131:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  131:78   error    Extra semicolon                                                                                             semi
+  132:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  132:52   error    Extra semicolon                                                                                             semi
+  136:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  136:28   error    Gratuitous parentheses around expression                                                                    no-extra-parens
+  136:69   error    Extra semicolon                                                                                             semi
+  137:19   error    Extra semicolon                                                                                             semi
+  142:13   error    Expected indentation of 10 spaces but found 12                                                              indent
+  149:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  149:51   error    Extra semicolon                                                                                             semi
+  150:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  150:78   error    Extra semicolon                                                                                             semi
+  151:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  152:19   error    Extra semicolon                                                                                             semi
+  157:13   error    Expected indentation of 10 spaces but found 12                                                              indent
+  157:72   error    Extra semicolon                                                                                             semi
+  164:13   error    Expected indentation of 10 spaces but found 12                                                              indent
+  164:89   error    Extra semicolon                                                                                             semi
+  167:13   error    Expected indentation of 10 spaces but found 12                                                              indent
+  170:17   error    Expected indentation of 14 spaces but found 16                                                              indent
+  172:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  177:56   error    Extra semicolon                                                                                             semi
+  179:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  183:53   error    Extra semicolon                                                                                             semi
+  185:19   error    Extra semicolon                                                                                             semi
+  188:17   error    Expected indentation of 14 spaces but found 16                                                              indent
+  189:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  189:57   error    Extra semicolon                                                                                             semi
+  190:19   error    Extra semicolon                                                                                             semi
+  195:13   error    Expected indentation of 10 spaces but found 12                                                              indent
+  197:17   error    Expected indentation of 14 spaces but found 16                                                              indent
+  198:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  198:28   error    Extra semicolon                                                                                             semi
+  200:17   warning  The body of a for-in should be wrapped in an if statement to filter unwanted properties from the prototype  guard-for-in
+  200:17   error    Expected indentation of 14 spaces but found 16                                                              indent
+  204:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  204:37   error    Extra semicolon                                                                                             semi
+  205:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  206:57   error    Extra semicolon                                                                                             semi
+  207:35   warning  Strings must use singlequote                                                                                quotes
+  207:44   error    Extra semicolon                                                                                             semi
+  209:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  210:35   warning  Strings must use singlequote                                                                                quotes
+  210:48   error    Extra semicolon                                                                                             semi
+  211:45   error    Extra semicolon                                                                                             semi
+  213:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  213:62   error    Extra semicolon                                                                                             semi
+  218:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  218:33   warning  Strings must use singlequote                                                                                quotes
+  219:79   error    Extra semicolon                                                                                             semi
+  220:82   error    Extra semicolon                                                                                             semi
+  222:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  223:92   error    Extra semicolon                                                                                             semi
+  224:95   error    Extra semicolon                                                                                             semi
+  226:21   error    Expected indentation of 18 spaces but found 20                                                              indent
+  226:24   error    Extra semicolon                                                                                             semi
+  229:17   error    Expected indentation of 14 spaces but found 16                                                              indent
+  229:27   error    Extra semicolon                                                                                             semi
+  233:11   error    Extra semicolon                                                                                             semi
+  237:5    error    Expected indentation of 2 spaces but found 4                                                                indent
+  238:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  238:44   error    Extra semicolon                                                                                             semi
+  239:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  239:22   error    Extra semicolon                                                                                             semi
+  240:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  240:21   error    Extra semicolon                                                                                             semi
+  241:6    error    Extra semicolon                                                                                             semi
+  243:5    error    Expected indentation of 2 spaces but found 4                                                                indent
+  244:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  244:45   error    Extra semicolon                                                                                             semi
+  245:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  245:23   error    Extra semicolon                                                                                             semi
+  246:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  246:21   error    Extra semicolon                                                                                             semi
+  247:6    error    Extra semicolon                                                                                             semi
+  249:5    error    Expected indentation of 2 spaces but found 4                                                                indent
+  250:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  250:45   error    Extra semicolon                                                                                             semi
+  251:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  251:23   error    Extra semicolon                                                                                             semi
+  252:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  252:21   error    Extra semicolon                                                                                             semi
+  253:6    error    Extra semicolon                                                                                             semi
+  255:5    error    Expected indentation of 2 spaces but found 4                                                                indent
+  256:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  256:45   error    Extra semicolon                                                                                             semi
+  257:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  257:23   error    Extra semicolon                                                                                             semi
+  258:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  258:21   error    Extra semicolon                                                                                             semi
+  259:6    error    Extra semicolon                                                                                             semi
+  261:5    error    Expected indentation of 2 spaces but found 4                                                                indent
+  262:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  262:47   error    Extra semicolon                                                                                             semi
+  263:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  263:25   error    Extra semicolon                                                                                             semi
+  264:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  264:21   error    Extra semicolon                                                                                             semi
+  265:6    error    Extra semicolon                                                                                             semi
+  267:5    error    Expected indentation of 2 spaces but found 4                                                                indent
+  268:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  268:51   error    Extra semicolon                                                                                             semi
+  269:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  269:29   error    Extra semicolon                                                                                             semi
+  270:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  270:21   error    Extra semicolon                                                                                             semi
+  271:6    error    Extra semicolon                                                                                             semi
+  273:5    error    Expected indentation of 2 spaces but found 4                                                                indent
+  274:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  274:45   error    Extra semicolon                                                                                             semi
+  275:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  275:23   error    Extra semicolon                                                                                             semi
+  276:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  276:21   error    Extra semicolon                                                                                             semi
+  277:6    error    Extra semicolon                                                                                             semi
+  279:5    error    Expected indentation of 2 spaces but found 4                                                                indent
+  280:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  280:47   error    Extra semicolon                                                                                             semi
+  281:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  281:25   error    Extra semicolon                                                                                             semi
+  282:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  282:21   error    Extra semicolon                                                                                             semi
+  283:6    error    Extra semicolon                                                                                             semi
+  285:5    error    Expected indentation of 2 spaces but found 4                                                                indent
+  286:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  286:47   error    Extra semicolon                                                                                             semi
+  287:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  287:25   error    Extra semicolon                                                                                             semi
+  288:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  288:21   error    Extra semicolon                                                                                             semi
+  289:6    error    Extra semicolon                                                                                             semi
+  291:5    error    Expected indentation of 2 spaces but found 4                                                                indent
+  292:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  292:52   error    Extra semicolon                                                                                             semi
+  293:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  293:30   error    Extra semicolon                                                                                             semi
+  294:9    error    Expected indentation of 6 spaces but found 8                                                                indent
+  294:21   error    Extra semicolon                                                                                             semi
+  295:6    error    Extra semicolon                                                                                             semi
+  297:5    error    Expected indentation of 2 spaces but found 4                                                                indent
+  297:17   error    Extra semicolon                                                                                             semi
+
+/Users/guysungkim/Documents/emberJS-Projects/vsnxt-d3-visuals/src/visuals/hStackBarChart.js
+   16:21   warning  Strings must use singlequote                      quotes
+   16:25   error    Extra semicolon                                   semi
+   34:32   warning  Strings must use singlequote                      quotes
+   34:47   warning  Strings must use singlequote                      quotes
+   34:61   error    Extra semicolon                                   semi
+   39:17   error    Extra semicolon                                   semi
+   40:20   error    Extra semicolon                                   semi
+   41:18   error    Extra semicolon                                   semi
+   42:19   error    Extra semicolon                                   semi
+   43:18   error    Extra semicolon                                   semi
+   44:19   error    Extra semicolon                                   semi
+   45:35   error    Extra semicolon                                   semi
+   46:40   error    Extra semicolon                                   semi
+   51:58   error    Extra semicolon                                   semi
+   54:56   error    Extra semicolon                                   semi
+   58:21   error    Expected indentation of 8 spaces but found 20     indent
+   58:33   warning  Strings must use singlequote                      quotes
+   58:53   warning  Strings must use singlequote                      quotes
+   59:34   error    Extra semicolon                                   semi
+   60:21   error    Expected indentation of 8 spaces but found 20     indent
+   61:35   error    Extra semicolon                                   semi
+   62:9    error    Extra semicolon                                   semi
+   65:41   error    Extra semicolon                                   semi
+   66:59   error    Extra semicolon                                   semi
+   69:31   warning  Strings must use singlequote                      quotes
+   70:31   warning  Strings must use singlequote                      quotes
+   71:30   warning  Strings must use singlequote                      quotes
+   71:42   warning  Strings must use singlequote                      quotes
+   72:30   warning  Strings must use singlequote                      quotes
+   72:39   warning  Strings must use singlequote                      quotes
+   73:30   warning  Strings must use singlequote                      quotes
+   73:41   warning  Strings must use singlequote                      quotes
+   74:30   warning  Strings must use singlequote                      quotes
+   74:44   warning  Strings must use singlequote                      quotes
+   75:29   warning  Strings must use singlequote                      quotes
+   75:48   error    Extra semicolon                                   semi
+   80:11   error    Expected indentation of 8 spaces but found 10     indent
+   80:28   error    Extra semicolon                                   semi
+   81:11   error    Expected indentation of 8 spaces but found 10     indent
+   81:11   error    Expected space(s) after "if"                      keyword-spacing
+   81:30   warning  Strings must use singlequote                      quotes
+   82:15   error    Expected indentation of 12 spaces but found 14    indent
+   82:29   error    Extra semicolon                                   semi
+   83:15   error    Expected indentation of 12 spaces but found 14    indent
+   83:44   error    Extra semicolon                                   semi
+   85:11   error    Expected indentation of 8 spaces but found 10     indent
+   85:29   error    A space is required after ','                     comma-spacing
+   86:15   error    Expected indentation of 12 spaces but found 14    indent
+   86:28   error    Gratuitous parentheses around expression          no-extra-parens
+   86:63   error    Gratuitous parentheses around expression          no-extra-parens
+   86:98   error    Extra semicolon                                   semi
+   87:15   error    Expected indentation of 12 spaces but found 14    indent
+   87:40   error    Extra semicolon                                   semi
+   93:42   error    Extra semicolon                                   semi
+   97:13   error    Expected indentation of 8 spaces but found 12     indent
+   97:28   error    Extra semicolon                                   semi
+   98:9    error    Extra semicolon                                   semi
+  104:42   error    Unexpected space between function name and paren  no-spaced-func
+  105:20   error    Extra semicolon                                   semi
+  108:55   error    Extra semicolon                                   semi
+  109:9    error    Extra semicolon                                   semi
+  114:23   warning  Strings must use singlequote                      quotes
+  114:32   warning  Strings must use singlequote                      quotes
+  115:23   warning  Strings must use singlequote                      quotes
+  115:34   warning  Strings must use singlequote                      quotes
+  116:23   warning  Strings must use singlequote                      quotes
+  116:46   warning  Strings must use singlequote                      quotes
+  116:62   error    Extra semicolon                                   semi
+  123:35   error    Extra semicolon                                   semi
+  127:60   error    Extra semicolon                                   semi
+  129:56   error    Extra semicolon                                   semi
+  137:28   error    Extra semicolon                                   semi
+  138:35   warning  Strings must use singlequote                      quotes
+  138:48   warning  Strings must use singlequote                      quotes
+  138:57   warning  Strings must use singlequote                      quotes
+  138:80   warning  Strings must use singlequote                      quotes
+  138:93   error    Extra semicolon                                   semi
+  140:22   warning  Strings must use singlequote                      quotes
+  143:19   warning  Strings must use singlequote                      quotes
+  145:50   error    Extra semicolon                                   semi
+  146:21   error    Extra semicolon                                   semi
+  148:19   warning  Strings must use singlequote                      quotes
+  149:17   warning  Strings must use singlequote                      quotes
+  149:25   warning  Strings must use singlequote                      quotes
+  150:17   warning  Strings must use singlequote                      quotes
+  150:26   warning  Strings must use singlequote                      quotes
+  151:17   warning  Strings must use singlequote                      quotes
+  151:25   warning  Strings must use singlequote                      quotes
+  152:17   warning  Strings must use singlequote                      quotes
+  152:50   error    Extra semicolon                                   semi
+  153:21   warning  Strings must use singlequote                      quotes
+  153:72   error    Extra semicolon                                   semi
+  154:15   warning  Strings must use singlequote                      quotes
+  154:40   error    Extra semicolon                                   semi
+  160:20   warning  Strings must use singlequote                      quotes
+  161:20   warning  Strings must use singlequote                      quotes
+  161:29   warning  Strings must use singlequote                      quotes
+  162:23   warning  Strings must use singlequote                      quotes
+  164:28   warning  Strings must use singlequote                      quotes
+  165:20   warning  Strings must use singlequote                      quotes
+  165:29   warning  Strings must use singlequote                      quotes
+  166:20   warning  Strings must use singlequote                      quotes
+  166:62   error    Extra semicolon                                   semi
+  167:23   warning  Strings must use singlequote                      quotes
+  168:40   error    Extra semicolon                                   semi
+  169:28   warning  Strings must use singlequote                      quotes
+  170:20   warning  Strings must use singlequote                      quotes
+  170:29   warning  Strings must use singlequote                      quotes
+  171:20   warning  Strings must use singlequote                      quotes
+  172:20   warning  Strings must use singlequote                      quotes
+  173:91   error    Extra semicolon                                   semi
+  174:35   error    Extra semicolon                                   semi
+  176:20   warning  Strings must use singlequote                      quotes
+  176:77   error    Extra semicolon                                   semi
+  177:20   warning  Strings must use singlequote                      quotes
+  177:67   error    Extra semicolon                                   semi
+  178:18   warning  Strings must use singlequote                      quotes
+  178:42   error    Missing space before opening brace                space-before-blocks
+  178:89   warning  Strings must use singlequote                      quotes
+  178:103  warning  Strings must use singlequote                      quotes
+  178:113  error    Extra semicolon                                   semi
+  179:18   warning  Strings must use singlequote                      quotes
+  179:41   error    Missing space before opening brace                space-before-blocks
+  179:63   warning  Strings must use singlequote                      quotes
+  179:70   error    Gratuitous parentheses around expression          no-extra-parens
+  179:87   warning  Strings must use singlequote                      quotes
+  179:99   warning  Strings must use singlequote                      quotes
+  179:105  error    A space is required after ','                     comma-spacing
+  179:106  error    Gratuitous parentheses around expression          no-extra-parens
+  179:123  warning  Strings must use singlequote                      quotes
+  179:128  error    Extra semicolon                                   semi
+  180:18   warning  Strings must use singlequote                      quotes
+  180:40   error    Missing space before opening brace                space-before-blocks
+  180:62   warning  Strings must use singlequote                      quotes
+  180:76   warning  Strings must use singlequote                      quotes
+  180:85   error    Extra semicolon                                   semi
+  185:32   warning  Strings must use singlequote                      quotes
+  185:55   error    Extra semicolon                                   semi
+  186:16   error    Extra semicolon                                   semi
+  188:23   warning  Strings must use singlequote                      quotes
+  188:49   error    Extra semicolon                                   semi
+  192:20   warning  Strings must use singlequote                      quotes
+  193:19   warning  Strings must use singlequote                      quotes
+  193:28   warning  Strings must use singlequote                      quotes
+  194:19   warning  Strings must use singlequote                      quotes
+  194:32   warning  Strings must use singlequote                      quotes
+  194:57   warning  Strings must use singlequote                      quotes
+  195:38   error    Extra semicolon                                   semi
+  199:20   warning  Strings must use singlequote                      quotes
+  200:19   warning  Strings must use singlequote                      quotes
+  200:28   warning  Strings must use singlequote                      quotes
+  201:19   warning  Strings must use singlequote                      quotes
+  201:32   warning  Strings must use singlequote                      quotes
+  201:63   warning  Strings must use singlequote                      quotes
+  202:39   error    Extra semicolon                                   semi
+  207:22   error    Extra semicolon                                   semi
+  208:22   error    Extra semicolon                                   semi
+  209:22   error    Extra semicolon                                   semi
+  213:55   error    Extra semicolon                                   semi
+  213:59   error    Extra semicolon                                   semi
+  217:55   error    Extra semicolon                                   semi
+  217:59   error    Extra semicolon                                   semi
+  221:15   error    Extra semicolon                                   semi
+  224:23   warning  Strings must use singlequote                      quotes
+  226:19   warning  Strings must use singlequote                      quotes
+  227:27   warning  Strings must use singlequote                      quotes
+  227:55   error    Extra semicolon                                   semi
+  228:35   error    Extra semicolon                                   semi
+  230:22   warning  Strings must use singlequote                      quotes
+  232:25   warning  Strings must use singlequote                      quotes
+  232:53   error    Extra semicolon                                   semi
+  233:21   error    Extra semicolon                                   semi
+  238:19   warning  Strings must use singlequote                      quotes
+  239:19   warning  Strings must use singlequote                      quotes
+  240:27   warning  Strings must use singlequote                      quotes
+  240:55   error    Extra semicolon                                   semi
+  241:27   warning  Strings must use singlequote                      quotes
+  241:65   error    Extra semicolon                                   semi
+  242:27   warning  Strings must use singlequote                      quotes
+  242:79   error    Extra semicolon                                   semi
+  243:43   error    Extra semicolon                                   semi
+  245:19   warning  Strings must use singlequote                      quotes
+  245:57   error    Extra semicolon                                   semi
+  246:19   warning  Strings must use singlequote                      quotes
+  246:76   error    Extra semicolon                                   semi
+  246:80   error    Extra semicolon                                   semi
+  250:63   error    Extra semicolon                                   semi
+  255:28   error    Extra semicolon                                   semi
+  259:44   error    Extra semicolon                                   semi
+  262:37   error    Extra semicolon                                   semi
+  267:42   error    Unexpected space between function name and paren  no-spaced-func
+  268:20   error    Extra semicolon                                   semi
+  272:15   error    Expected indentation of 10 spaces but found 14    indent
+  272:30   error    Extra semicolon                                   semi
+  273:11   error    Extra semicolon                                   semi
+  274:32   error    Extra semicolon                                   semi
+  277:19   warning  Strings must use singlequote                      quotes
+  281:37   error    Extra semicolon                                   semi
+  284:24   error    Extra semicolon                                   semi
+  290:34   warning  Strings must use singlequote                      quotes
+  292:27   warning  Strings must use singlequote                      quotes
+  293:19   warning  Strings must use singlequote                      quotes
+  293:28   warning  Strings must use singlequote                      quotes
+  294:19   warning  Strings must use singlequote                      quotes
+  294:56   warning  Strings must use singlequote                      quotes
+  294:72   error    Gratuitous parentheses around expression          no-extra-parens
+  294:85   warning  Strings must use singlequote                      quotes
+  294:100  warning  Strings must use singlequote                      quotes
+  294:103  error    Extra semicolon                                   semi
+  295:20   warning  Strings must use singlequote                      quotes
+  295:28   warning  Strings must use singlequote                      quotes
+  295:46   error    Extra semicolon                                   semi
+  297:9    error    Expected indentation of 6 spaces but found 8      indent
+  297:23   warning  Strings must use singlequote                      quotes
+  298:19   warning  Strings must use singlequote                      quotes
+  299:19   warning  Strings must use singlequote                      quotes
+  300:19   warning  Strings must use singlequote                      quotes
+  301:19   warning  Strings must use singlequote                      quotes
+  301:41   error    Missing space before opening brace                space-before-blocks
+  301:102  error    Extra semicolon                                   semi
+  303:9    error    Expected indentation of 6 spaces but found 8      indent
+  303:23   warning  Strings must use singlequote                      quotes
+  304:19   warning  Strings must use singlequote                      quotes
+  305:19   warning  Strings must use singlequote                      quotes
+  306:19   warning  Strings must use singlequote                      quotes
+  306:25   warning  Strings must use singlequote                      quotes
+  307:19   warning  Strings must use singlequote                      quotes
+  307:34   warning  Strings must use singlequote                      quotes
+  308:49   error    Extra semicolon                                   semi
+  308:53   error    Extra semicolon                                   semi
+  310:7    error    Extra semicolon                                   semi
+  317:7    error    Expected indentation of 4 spaces but found 6      indent
+  317:42   error    Extra semicolon                                   semi
+  318:7    error    Expected indentation of 4 spaces but found 6      indent
+  318:20   error    Extra semicolon                                   semi
+  319:7    error    Expected indentation of 4 spaces but found 6      indent
+  319:19   error    Extra semicolon                                   semi
+  320:4    error    Extra semicolon                                   semi
+  323:7    error    Expected indentation of 4 spaces but found 6      indent
+  323:43   error    Extra semicolon                                   semi
+  324:7    error    Expected indentation of 4 spaces but found 6      indent
+  324:21   error    Extra semicolon                                   semi
+  325:7    error    Expected indentation of 4 spaces but found 6      indent
+  325:19   error    Extra semicolon                                   semi
+  326:4    error    Extra semicolon                                   semi
+  338:59   error    Extra semicolon                                   semi
+  339:48   error    Extra semicolon                                   semi
+  342:15   error    Extra semicolon                                   semi
+
+✖ 481 problems (340 errors, 141 warnings)
+

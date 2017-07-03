@@ -1,5 +1,5 @@
 // name of the library
-global.library = 'eresD3Visuals'
+global.library = 'vsnxtD3Visuals'
 
 var command = process.argv[2],
   utils   = require('./tasks/_utils'),

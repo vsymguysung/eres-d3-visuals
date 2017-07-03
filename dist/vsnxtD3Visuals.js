@@ -6803,7 +6803,7 @@
 
   colors("393b795254a36b6ecf9c9ede6379398ca252b5cf6bcedb9c8c6d31bd9e39e7ba52e7cb94843c39ad494ad6616be7969c7b4173a55194ce6dbdde9ed6");
 
-  var category20c = colors("3182bd6baed69ecae1c6dbefe6550dfd8d3cfdae6bfdd0a231a35474c476a1d99bc7e9c0756bb19e9ac8bcbddcdadaeb636363969696bdbdbdd9d9d9");
+  colors("3182bd6baed69ecae1c6dbefe6550dfd8d3cfdae6bfdd0a231a35474c476a1d99bc7e9c0756bb19e9ac8bcbddcdadaeb636363969696bdbdbdd9d9d9");
 
   colors("1f77b4aec7e8ff7f0effbb782ca02c98df8ad62728ff98969467bdc5b0d58c564bc49c94e377c2f7b6d27f7f7fc7c7c7bcbd22dbdb8d17becf9edae5");
 
@@ -7725,10 +7725,12 @@
   }
 
   function donutChart() {
+    var viewbox_width = 640;
+    var viewbox_height = 640;
     var width,
         height,
         margin = { top: 10, right: 10, bottom: 10, left: 10 },
-        colour = ordinal(category20c),
+        colour = ordinal(category10),
         variable,
         category,
         padAngle,
@@ -7748,7 +7750,7 @@
 
         var outerArc = arc().outerRadius(radius * 0.9).innerRadius(radius * 0.9);
 
-        var svg = selection$$1.append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).append('g').attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+        var svg = selection$$1.append('svg').attr("style", "width:100%; height:100%;").attr("viewBox", "0 0 " + viewbox_width + " " + viewbox_height).attr("preserveAspectRatio", "xMidYMid meet").attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).append('g').attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
         svg.append('g').attr('class', 'slices');
         svg.append('g').attr('class', 'labelName');
@@ -7777,6 +7779,12 @@
 
         selectAll('.labelName text, .slices path').call(toolTip);
 
+
+        select('.labelName text').each(function (d, i) {
+          var onMouseEnterFunc = select(this).on("mouseenter");
+          onMouseEnterFunc.apply(this, [d, i]);
+        });
+
         function midAngle(d) {
           return d.startAngle + (d.endAngle - d.startAngle) / 2;
         }
@@ -7784,13 +7792,11 @@
         function toolTip(selection$$1) {
           selection$$1.on('mouseenter', function (data) {
 
+            selectAll('.toolCircle').remove();
+
             svg.append('text').attr('class', 'toolCircle').attr('dy', -15).html(toolTipHTML(data)).style('font-size', '.9em').style('text-anchor', 'middle');
 
             svg.append('circle').attr('class', 'toolCircle').attr('r', radius * 0.55).style('fill', colour(data.data[category])).style('fill-opacity', 0.35);
-          });
-
-          selection$$1.on('mouseout', function () {
-            selectAll('.toolCircle').remove();
           });
         }
 
@@ -7865,23 +7871,23 @@
       return chart;
     };
 
+    chart.percentFormat = function (value) {
+      if (!arguments.length) return percentFormat;
+      percentFormat = value;
+      return chart;
+    };
+
     return chart;
   }
 
   var h_stackbarchart_dataset = [{ billid: "HB 4643", agree: 67, disagree: -54, index: 141 }, { billid: "HB 6066", agree: 87, disagree: -44, index: 131 }, { billid: "HB 5851", agree: 164, disagree: -34, index: 198 }, { billid: "HB 5400", agree: 58, disagree: -18, index: 76 }];
 
   var donut_dataset = [{
-    "Species": "Halobacillus halophilus",
-    "Probability": 0.02069108308662117,
-    "Error": 0.045296463390387814
+    "Vote Type": "Agree",
+    "Vote Number": 10000
   }, {
-    "Species": "Staphylococcus epidermidis",
-    "Probability": 0.10076903848429238,
-    "Error": 0.0096463390387814
-  }, {
-    "Species": "Chromobacterium violaceum",
-    "Probability": 0.40318269548054262,
-    "Error": 0.03390387814
+    "Vote Type": "Disagree",
+    "Vote Number": 7000
   }];
 
   var h_stackbarchart = hStackBarChart().width(640).height(400);
@@ -7893,7 +7899,7 @@
     console.log("Custom event received this: " + JSON.stringify(this));
   });
 
-  var donut = donutChart().width(960).height(500).cornerRadius(3).padAngle(0.015).variable('Probability').category('Species');
+  var donut = donutChart().width(640).height(400).cornerRadius(3).padAngle(0.015).variable('Vote Number').category('Vote Type').percentFormat(format(',d'));
 
   select('#donutchart').datum(donut_dataset).call(donut);
 });

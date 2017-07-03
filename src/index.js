@@ -38,25 +38,36 @@ let h_stackbarchart_dataset = [
 //]
 
 
+//let donut_dataset =
+//[
+//  {
+//    "Species": "Halobacillus halophilus",
+//    "Probability": 0.02069108308662117,
+//    "Error": 0.045296463390387814
+//  },
+//  {
+//    "Species": "Staphylococcus epidermidis",
+//    "Probability": 0.10076903848429238,
+//    "Error": 0.0096463390387814
+//  },
+//  {
+//    "Species": "Chromobacterium violaceum",
+//    "Probability": 0.40318269548054262,
+//    "Error": 0.03390387814
+//  },
+//]
+
 let donut_dataset =
 [
   {
-    "Species": "Halobacillus halophilus",
-    "Probability": 0.02069108308662117,
-    "Error": 0.045296463390387814
+    "Vote Type": "Agree",
+    "Vote Number": 10000,
   },
   {
-    "Species": "Staphylococcus epidermidis",
-    "Probability": 0.10076903848429238,
-    "Error": 0.0096463390387814
-  },
-  {
-    "Species": "Chromobacterium violaceum",
-    "Probability": 0.40318269548054262,
-    "Error": 0.03390387814
-  },
+    "Vote Type": "Disagree",
+    "Vote Number": 7000,
+  }
 ]
-
 
 
 //
@@ -76,13 +87,14 @@ h_stackbarchart.on('was_clicked', function(idx) {
 //
 // Donut Chart
 //
-var donut = donutChart()
-        .width(960)
-        .height(500)
-        .cornerRadius(3) // sets how rounded the corners are on each slice
-        .padAngle(0.015) // effectively dictates the gap between slices
-        .variable('Probability')
-        .category('Species');
+let donut = donutChart()
+                .width(640)
+                .height(400)
+                .cornerRadius(3) // sets how rounded the corners are on each slice
+                .padAngle(0.015) // effectively dictates the gap between slices
+                .variable('Vote Number')
+                .category('Vote Type')
+                .percentFormat(d3.format(',d'));
 
 d3.select('#donutchart')
             .datum(donut_dataset) // bind data to the div

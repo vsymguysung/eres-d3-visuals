@@ -16,10 +16,12 @@
 import * as d3 from "d3";
 
 export function donutChart() {
+    let viewbox_width = 640;
+    let viewbox_height = 640;
     var width,
         height,
         margin = {top: 10, right: 10, bottom: 10, left: 10},
-        colour = d3.scaleOrdinal(d3.schemeCategory20c), // colour scheme
+        colour = d3.scaleOrdinal(d3.schemeCategory10), // colour scheme
         variable, // value in data that will dictate proportions on chart
         category, // compare data by
         padAngle, // effectively dictates the gap between slices
@@ -57,6 +59,9 @@ export function donutChart() {
             // ===========================================================================================
             // append the svg object to the selection
             var svg = selection.append('svg')
+                .attr("style", "width:100%; height:100%;")
+                .attr("viewBox", `0 0 ${viewbox_width} ${viewbox_height}`)
+                .attr("preserveAspectRatio", "xMidYMid meet")
                 .attr('width', width + margin.left + margin.right)
                 .attr('height', height + margin.top + margin.bottom)
               .append('g')
@@ -126,6 +131,11 @@ export function donutChart() {
             d3.selectAll('.labelName text, .slices path').call(toolTip);
             // ===========================================================================================
 
+            d3.select('.labelName text').each(function(d, i) {
+              var onMouseEnterFunc = d3.select(this).on("mouseenter");
+              onMouseEnterFunc.apply(this, [d, i]);
+            });
+
             // ===========================================================================================
             // Functions
 
@@ -137,6 +147,8 @@ export function donutChart() {
 
                 // add tooltip (svg circle element) when mouse enters label or slice
                 selection.on('mouseenter', function (data) {
+
+                    d3.selectAll('.toolCircle').remove();
 
                     svg.append('text')
                         .attr('class', 'toolCircle')
@@ -153,10 +165,10 @@ export function donutChart() {
 
                 });
 
-                // remove the tooltip when mouse leaves the slice/label
-                selection.on('mouseout', function () {
-                    d3.selectAll('.toolCircle').remove();
-                });
+                //// remove the tooltip when mouse leaves the slice/label
+                //selection.on('mouseout', function () {
+                //    d3.selectAll('.toolCircle').remove();
+                //});
             }
 
             // function to create the HTML string for the tool tip. Loops through each key in data object
@@ -237,6 +249,12 @@ export function donutChart() {
     chart.category = function(value) {
         if (!arguments.length) return category;
         category = value;
+        return chart;
+    };
+
+    chart.percentFormat = function(value) {
+        if (!arguments.length) return percentFormat;
+        percentFormat = value;
         return chart;
     };
 

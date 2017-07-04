@@ -7585,7 +7585,6 @@
         var form = selection$$1.append("form").attr("class", "orderby-radios").text("Order By: ");
 
         form.selectAll("label").data(allAttrs).enter().append("label").text(function (d) {
-          console.log("d:" + JSON.stringify(d));
           return d;
         }).insert("input").attr("type", "radio").attr("class", "orderby").attr("name", "orderby").attr("value", function (d, i) {
           return d;
@@ -7599,7 +7598,6 @@
           }).selectAll("rect").data(function (d) {
             return d;
           }).enter().append("rect").attr("class", "bar").attr("height", yScale.bandwidth).attr("x", function (d, i) {
-            console.log("--d:" + JSON.stringify(d) + " i:" + i + " this;" + JSON.stringify(this));
             return xScale(d[0]);
           }).attr("width", function (d) {
             return xScale(d[1]) - xScale(d[0]);
@@ -7648,15 +7646,10 @@
 
         function reRenderGraph() {
           svg.selectAll("g.layer").data(series).attr("fill", function (d) {
-            console.log("0: d:" + JSON.stringify(d));
             return zScale(d.key);
           }).selectAll("rect.bar").data(function (d) {
-            console.log("1: d:" + JSON.stringify(d));
             return d;
           }).transition().ease(expInOut).duration(axisTransitionDuration).attr("height", yScale.bandwidth).attr("y", function (d) {
-            console.log("2: d:" + JSON.stringify(d));
-            console.log("2: d.data:" + JSON.stringify(d.data));
-            console.log("2: d.data.billid:" + JSON.stringify(d.data.billid));
             return yScale(d.data.billid);
           }).attr("x", function (d) {
             return xScale(d[0]);
@@ -7883,10 +7876,10 @@
   var h_stackbarchart_dataset = [{ billid: "HB 4643", agree: 67, disagree: -54, index: 141 }, { billid: "HB 6066", agree: 87, disagree: -44, index: 131 }, { billid: "HB 5851", agree: 164, disagree: -34, index: 198 }, { billid: "HB 5400", agree: 58, disagree: -18, index: 76 }];
 
   var donut_dataset = [{
-    "Vote Type": "Agree",
+    "Type": "Agree",
     "Vote Number": 10000
   }, {
-    "Vote Type": "Disagree",
+    "Type": "Disagree",
     "Vote Number": 7000
   }];
 
@@ -7899,7 +7892,7 @@
     console.log("Custom event received this: " + JSON.stringify(this));
   });
 
-  var donut = donutChart().width(640).height(400).cornerRadius(3).padAngle(0.015).variable('Vote Number').category('Vote Type').percentFormat(format(',d'));
+  var donut = donutChart().width(640).height(400).cornerRadius(3).padAngle(0.015).variable('Vote Number').category('Type').percentFormat(format(',d'));
 
   select('#donutchart').datum(donut_dataset).call(donut);
 });

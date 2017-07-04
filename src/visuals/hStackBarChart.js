@@ -148,7 +148,7 @@ export function hStackBarChart() {
           .enter()
           .append("label")
           .text(function(d) {
-            console.log(`d:${JSON.stringify(d)}`);
+            //console.log(`d:${JSON.stringify(d)}`);
             return d;
           })
           .insert("input")
@@ -176,7 +176,7 @@ export function hStackBarChart() {
              .attr("class", "bar")
              .attr("height", yScale.bandwidth)
              .attr("x", function(d, i) {
-               console.log(`--d:${JSON.stringify(d)} i:${i} this;${JSON.stringify(this)}`);
+               //console.log(`--d:${JSON.stringify(d)} i:${i} this;${JSON.stringify(this)}`);
                return xScale(d[0]);
              })
              .attr("width", function(d) { return xScale(d[1]) - xScale(d[0]); })
@@ -230,12 +230,12 @@ export function hStackBarChart() {
         svg.selectAll("g.layer")
           .data(series)
             .attr("fill", function(d) {
-              console.log("0: d:" + JSON.stringify(d));
+              //console.log("0: d:" + JSON.stringify(d));
               return zScale(d.key);
             })
           .selectAll("rect.bar")
           .data(function(d) {
-            console.log("1: d:" + JSON.stringify(d));
+            //console.log("1: d:" + JSON.stringify(d));
             return d;
           })
             .transition()
@@ -243,9 +243,9 @@ export function hStackBarChart() {
             .duration(axisTransitionDuration)
             .attr("height", yScale.bandwidth)
             .attr("y", function(d) {
-              console.log("2: d:" + JSON.stringify(d));
-              console.log("2: d.data:" + JSON.stringify(d.data));
-              console.log("2: d.data.billid:" + JSON.stringify(d.data.billid));
+              //console.log("2: d:" + JSON.stringify(d));
+              //console.log("2: d.data:" + JSON.stringify(d.data));
+              //console.log("2: d.data.billid:" + JSON.stringify(d.data.billid));
               return yScale(d.data.billid);
             })
             .attr("x", function(d) { return xScale(d[0]); })

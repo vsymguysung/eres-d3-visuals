@@ -16,8 +16,6 @@
 import * as d3 from "d3";
 
 export function donutChart() {
-    let viewbox_width = 640;
-    let viewbox_height = 640;
     var width,
         height,
         margin = {top: 10, right: 10, bottom: 10, left: 10},
@@ -32,6 +30,10 @@ export function donutChart() {
     function chart(selection){
         selection.each(function(data) {
             // generate chart
+
+            let _extent = d3.extent(data, function(d) { return d['Vote Number']});
+            let _sumVariable = d3.sum(_extent, function(d){return d;});
+            console.log(`data: ${JSON.stringify(data)} _extent: ${JSON.stringify(_extent)} _sumVariable: ${_sumVariable}`);
 
             // ===========================================================================================
             // Set up constructors for making donut. See https://github.com/d3/d3-shape/blob/master/README.md
@@ -60,10 +62,10 @@ export function donutChart() {
             // append the svg object to the selection
             var svg = selection.append('svg')
                 .attr("style", "width:100%; height:100%;")
-                .attr("viewBox", `0 0 ${viewbox_width} ${viewbox_height}`)
+                .attr("viewBox", `0 0 ${width} ${height}`)
                 .attr("preserveAspectRatio", "xMidYMid meet")
-                .attr('width', width + margin.left + margin.right)
-                .attr('height', height + margin.top + margin.bottom)
+                //.attr('width', width + margin.left + margin.right)
+                //.attr('height', height + margin.top + margin.bottom)
               .append('g')
                 .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
             // ===========================================================================================
@@ -189,6 +191,9 @@ export function donutChart() {
                     else tip += '<tspan x="0" dy="1.2em">' + key + ': ' + value + '</tspan>';
                     i++;
                 }
+
+                // Add the sumVariable value.
+                tip += '<tspan x="0" dy="1.2em">Total:' + _sumVariable + '</tspan>';
 
                 return tip;
             }

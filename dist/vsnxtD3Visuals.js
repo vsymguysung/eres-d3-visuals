@@ -275,6 +275,25 @@
     return min;
   };
 
+  var sum = function sum(values, valueof) {
+    var n = values.length,
+        i = -1,
+        value,
+        sum = 0;
+
+    if (valueof == null) {
+      while (++i < n) {
+        if (value = +values[i]) sum += value;
+      }
+    } else {
+      while (++i < n) {
+        if (value = +valueof(values[i], i, values)) sum += value;
+      }
+    }
+
+    return sum;
+  };
+
   function length(d) {
     return d.length;
   }
@@ -7527,6 +7546,7 @@
     var height = 400;
     var axisTransitionDuration = 700;
     var reRenderTransitionDuration = 1000;
+    var barBetweenPadding = 0.2;
 
     function chart(selection$$1) {
       console.log("selection:" + JSON.stringify(selection$$1));
@@ -7575,7 +7595,7 @@
 
         var svg = selection$$1.append('svg').attr("style", "width:100%; height:100%;").attr("viewBox", "0 0 640 400").attr("preserveAspectRatio", "xMidYMid meet");
 
-        var yScale = band().domain(billIds).rangeRound([m_top, height - m_bottom]).padding(0.4);
+        var yScale = band().domain(billIds).rangeRound([m_top, height - m_bottom]).padding(barBetweenPadding);
 
         var xScale = linear$2().domain([min(series, stackMin), max(series, stackMax)]).rangeRound([m_left, width - m_right]);
 
@@ -7718,8 +7738,6 @@
   }
 
   function donutChart() {
-    var viewbox_width = 640;
-    var viewbox_height = 640;
     var width,
         height,
         margin = { top: 10, right: 10, bottom: 10, left: 10 },
@@ -7733,6 +7751,15 @@
 
     function chart(selection$$1) {
       selection$$1.each(function (data) {
+
+        var _extent = extent(data, function (d) {
+          return d['Vote Number'];
+        });
+        var _sumVariable = sum(_extent, function (d) {
+          return d;
+        });
+        console.log("data: " + JSON.stringify(data) + " _extent: " + JSON.stringify(_extent) + " _sumVariable: " + _sumVariable);
+
         var radius = Math.min(width, height) / 2;
 
         var pie$$1 = pie().value(function (d) {
@@ -7743,7 +7770,7 @@
 
         var outerArc = arc().outerRadius(radius * 0.9).innerRadius(radius * 0.9);
 
-        var svg = selection$$1.append('svg').attr("style", "width:100%; height:100%;").attr("viewBox", "0 0 " + viewbox_width + " " + viewbox_height).attr("preserveAspectRatio", "xMidYMid meet").attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).append('g').attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+        var svg = selection$$1.append('svg').attr("style", "width:100%; height:100%;").attr("viewBox", "0 0 " + width + " " + height).attr("preserveAspectRatio", "xMidYMid meet").append('g').attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
         svg.append('g').attr('class', 'slices');
         svg.append('g').attr('class', 'labelName');
@@ -7804,6 +7831,8 @@
             if (i === 0) tip += '<tspan x="0">' + key + ': ' + value + '</tspan>';else tip += '<tspan x="0" dy="1.2em">' + key + ': ' + value + '</tspan>';
             i++;
           }
+
+          tip += '<tspan x="0" dy="1.2em">Total:' + _sumVariable + '</tspan>';
 
           return tip;
         }
@@ -7873,7 +7902,7 @@
     return chart;
   }
 
-  var h_stackbarchart_dataset = [{ billid: "HB 4643", agree: 67, disagree: -54, index: 141 }, { billid: "HB 6066", agree: 87, disagree: -44, index: 131 }, { billid: "HB 5851", agree: 164, disagree: -34, index: 198 }, { billid: "HB 5400", agree: 58, disagree: -18, index: 76 }];
+  var h_stackbarchart_dataset = [{ billid: "HB 4643", agree: 67, disagree: 54, index: 121 }, { billid: "HB 6066", agree: 87, disagree: 44, index: 131 }, { billid: "HB 5851", agree: 164, disagree: 34, index: 198 }, { billid: "HB 5400", agree: 58, disagree: 18, index: 76 }, { billid: "HB 5700", agree: 88, disagree: 18, index: 106 }, { billid: "HB 8200", agree: 75, disagree: 108, index: 196 }, { billid: "HB 9200", agree: 63, disagree: 23, index: 86 }, { billid: "HB 3400", agree: 128, disagree: 88, index: 216 }];
 
   var donut_dataset = [{
     "Type": "Agree",
@@ -7892,7 +7921,7 @@
     console.log("Custom event received this: " + JSON.stringify(this));
   });
 
-  var donut = donutChart().width(640).height(400).cornerRadius(3).padAngle(0.015).variable('Vote Number').category('Type').percentFormat(format(',d'));
+  var donut = donutChart().width(620).height(420).cornerRadius(3).padAngle(0.015).variable('Vote Number').category('Type').percentFormat(format(',d'));
 
   select('#donutchart').datum(donut_dataset).call(donut);
 });

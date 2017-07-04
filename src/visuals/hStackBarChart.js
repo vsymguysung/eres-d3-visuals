@@ -44,6 +44,7 @@ export function hStackBarChart() {
   let height = 400;
   let axisTransitionDuration = 700;
   let reRenderTransitionDuration = 1000;
+  let barBetweenPadding = 0.2;
 
   //
   // Generate Chart
@@ -126,7 +127,7 @@ export function hStackBarChart() {
       let yScale = d3.scaleBand()
                      .domain(billIds)
                      .rangeRound([m_top, height - m_bottom])
-                     .padding(0.4);
+                     .padding(barBetweenPadding);
 
       let xScale = d3.scaleLinear()
                      .domain([d3.min(series, stackMin), d3.max(series, stackMax)])

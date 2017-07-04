@@ -18,10 +18,14 @@ import { hStackBarChart } from './visuals/hStackBarChart'
 import { donutChart } from './visuals/donutChart'
 
 let h_stackbarchart_dataset = [
-  {billid: "HB 4643", agree: 67, disagree: -54, index: 141},
-  {billid: "HB 6066", agree: 87, disagree: -44, index: 131},
-  {billid: "HB 5851", agree: 164, disagree: -34, index: 198},
-  {billid: "HB 5400", agree: 58, disagree: -18, index: 76}
+  {billid: "HB 4643", agree: 67, disagree: 54, index: 121},
+  {billid: "HB 6066", agree: 87, disagree: 44, index: 131},
+  {billid: "HB 5851", agree: 164, disagree: 34, index: 198},
+  {billid: "HB 5400", agree: 58, disagree: 18, index: 76},
+  {billid: "HB 5700", agree: 88, disagree: 18, index: 106},
+  {billid: "HB 8200", agree: 75, disagree: 108, index: 196},
+  {billid: "HB 9200", agree: 63, disagree: 23, index: 86},
+  {billid: "HB 3400", agree: 128, disagree: 88, index: 216}
 ];
 
 let donut_dataset =
@@ -34,7 +38,7 @@ let donut_dataset =
     "Type": "Disagree",
     "Vote Number": 7000,
   }
-]
+];
 
 //
 // Horizontal Stacked Bar Chart
@@ -54,8 +58,8 @@ h_stackbarchart.on('was_clicked', function(idx) {
 // Donut Chart
 //
 let donut = donutChart()
-                .width(640)
-                .height(400)
+                .width(620)
+                .height(420)
                 .cornerRadius(3) // sets how rounded the corners are on each slice
                 .padAngle(0.015) // effectively dictates the gap between slices
                 .variable('Vote Number')

@@ -7536,7 +7536,7 @@
   }
 
   function hStackBarChart() {
-    var dispatcher = dispatch$1("was_clicked", "other_event");
+    var dispatcher = dispatch$1("was_clicked", "was_dblclicked");
 
     var m_top = 60;
     var m_bottom = 30;
@@ -7612,6 +7612,9 @@
           return i === default_radio;
         }).on("change", orderByChanged);
 
+        var waitForDouble = null;
+        var dblClickThreshold = 250;
+
         function renderGraph() {
           svg.append("g").attr("class", "container").selectAll("g").data(series).enter().append("g").attr("class", "layer").attr("fill", function (d) {
             return zScale(d.key);
@@ -7630,7 +7633,22 @@
           }).on("mouseout", function () {
             return tooltip.style("visibility", "hidden");
           }).on('click', function (d, i) {
-            dispatcher.call("was_clicked", this, i);
+            var _this = this;
+
+            console.log("click idx: " + i + " d3.event.detail: " + JSON.stringify(event$1.detail));
+
+            event$1.preventDefault();
+            if (waitForDouble != null) {
+              clearTimeout(waitForDouble);
+              waitForDouble = null;
+
+              dispatcher.call("was_dblclicked", this, i);
+            } else {
+              waitForDouble = setTimeout(function () {
+                dispatcher.call("was_clicked", _this, i);
+                waitForDouble = null;
+              }, dblClickThreshold);
+            }
           });
 
           svg.selectAll("g.layer").exit().remove();
@@ -7904,12 +7922,19 @@
 
   var h_stackbarchart_dataset = [{ billid: "HB 4643", agree: 67, disagree: 54, index: 121 }, { billid: "HB 6066", agree: 87, disagree: 44, index: 131 }, { billid: "HB 5851", agree: 164, disagree: 34, index: 198 }, { billid: "HB 5400", agree: 58, disagree: 18, index: 76 }, { billid: "HB 5700", agree: 88, disagree: 18, index: 106 }, { billid: "HB 8200", agree: 75, disagree: 108, index: 196 }, { billid: "HB 9200", agree: 63, disagree: 23, index: 86 }, { billid: "HB 3400", agree: 128, disagree: 88, index: 216 }];
 
+  var _agreeSum = sum(h_stackbarchart_dataset, function (d) {
+    return d.agree;
+  });
+  var _disagreeSum = sum(h_stackbarchart_dataset, function (d) {
+    return d.disagree;
+  });
+  console.log("_agreeSum: " + _agreeSum + " _disagreeSum: " + _disagreeSum);
   var donut_dataset = [{
     "Type": "Agree",
-    "Vote Number": 10000
+    "Vote Number": _agreeSum
   }, {
     "Type": "Disagree",
-    "Vote Number": 7000
+    "Vote Number": _disagreeSum
   }];
 
   var h_stackbarchart = hStackBarChart().width(640).height(400);
@@ -7917,7 +7942,12 @@
   select('#hstackbarchart').datum(h_stackbarchart_dataset).call(h_stackbarchart);
 
   h_stackbarchart.on('was_clicked', function (idx) {
-    console.log("Custom event received idx: " + idx + " billid: " + JSON.stringify(h_stackbarchart_dataset[idx].billid));
+    console.log("Custom \"was_clicked\" event received idx: " + idx + " billid: " + JSON.stringify(h_stackbarchart_dataset[idx].billid));
+    console.log("Custom event received this: " + JSON.stringify(this));
+  });
+
+  h_stackbarchart.on('was_dblclicked', function (idx) {
+    console.log("Custom \"was_dblclicked\" event received idx: " + idx + " billid: " + JSON.stringify(h_stackbarchart_dataset[idx].billid));
     console.log("Custom event received this: " + JSON.stringify(this));
   });
 

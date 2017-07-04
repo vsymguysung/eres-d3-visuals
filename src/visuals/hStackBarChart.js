@@ -31,7 +31,7 @@ export function hStackBarChart() {
   //
   //
   //
-  let dispatcher = d3.dispatch("was_clicked", "other_event");
+  let dispatcher = d3.dispatch("was_clicked", "was_dblclicked");
 
   //
   // Internal variables.
@@ -163,6 +163,9 @@ export function hStackBarChart() {
 
       //
       // Rendering
+      let waitForDouble = null;
+      let dblClickThreshold = 250;
+
       function renderGraph() {
         svg.append("g")
              .attr("class", "container")
@@ -186,10 +189,25 @@ export function hStackBarChart() {
              .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
              .on("mouseout", function(){return tooltip.style("visibility", "hidden");})
              .on('click', function(d, i) {
-               //console.log(`idx: ${i}`);
+                console.log(`click idx: ${i} d3.event.detail: ${JSON.stringify(d3.event.detail)}`);
 
-               // Dispatch the custom event
-               dispatcher.call("was_clicked", this, i);
+                // Register click handler on selection, that issues click and dblclick as appropriate
+                d3.event.preventDefault();
+                if (waitForDouble != null) {
+                  clearTimeout(waitForDouble);
+                  waitForDouble = null;
+                  //const currentEvent = d3.event;
+
+                  // Dispatch the custom event
+                  dispatcher.call("was_dblclicked", this, i);
+                } else {
+                  //const currentEvent = d3.event;
+                  waitForDouble = setTimeout(() => {
+                                    // Dispatch the custom event
+                                    dispatcher.call("was_clicked", this, i);
+                                    waitForDouble = null;
+                                  }, dblClickThreshold);
+                }
              });
 
         svg.selectAll("g.layer").exit().remove();

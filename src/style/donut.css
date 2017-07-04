@@ -14,8 +14,11 @@ polyline{
 
 /* In biology we generally italicise species names. */
 .labelName {
-    font-size: 0.9em;
+    font-size: 1.7em;
     font-style: italic;
 }
 
+.toolCircle tspan {
+  font-size: 1.5em;
+}
 

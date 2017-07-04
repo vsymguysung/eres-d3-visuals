@@ -7602,7 +7602,7 @@
         var zScale = ordinal(category10);
 
         var default_radio = 0;
-        var form = selection$$1.append("form").attr("class", "orderby-radios").text("Order By: ");
+        var form = selection$$1.insert("form", ":first-child").attr("class", "orderby-radios").text("Order By: ");
 
         form.selectAll("label").data(allAttrs).enter().append("label").text(function (d) {
           return d;
@@ -7767,6 +7767,8 @@
         cornerRadius,
         percentFormat = format(',.2%');
 
+    var fontSize = '1.1em';
+
     function chart(selection$$1) {
       selection$$1.each(function (data) {
 
@@ -7832,7 +7834,7 @@
 
             selectAll('.toolCircle').remove();
 
-            svg.append('text').attr('class', 'toolCircle').attr('dy', -15).html(toolTipHTML(data)).style('font-size', '.9em').style('text-anchor', 'middle');
+            svg.append('text').attr('class', 'toolCircle').attr('dy', -15).html(toolTipHTML(data)).style('font-size', fontSize).style('text-anchor', 'middle');
 
             svg.append('circle').attr('class', 'toolCircle').attr('r', radius * 0.55).style('fill', colour(data.data[category])).style('fill-opacity', 0.35);
           });
@@ -7943,15 +7945,13 @@
 
   h_stackbarchart.on('was_clicked', function (idx) {
     console.log("Custom \"was_clicked\" event received idx: " + idx + " billid: " + JSON.stringify(h_stackbarchart_dataset[idx].billid));
-    console.log("Custom event received this: " + JSON.stringify(this));
   });
 
   h_stackbarchart.on('was_dblclicked', function (idx) {
     console.log("Custom \"was_dblclicked\" event received idx: " + idx + " billid: " + JSON.stringify(h_stackbarchart_dataset[idx].billid));
-    console.log("Custom event received this: " + JSON.stringify(this));
   });
 
-  var donut = donutChart().width(620).height(420).cornerRadius(3).padAngle(0.015).variable('Vote Number').category('Type').percentFormat(format(',d'));
+  var donut = donutChart().width(900).height(600).cornerRadius(3).padAngle(0.015).variable('Vote Number').category('Type').percentFormat(format(',d'));
 
   select('#donutchart').datum(donut_dataset).call(donut);
 });

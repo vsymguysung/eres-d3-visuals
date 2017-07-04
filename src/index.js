@@ -28,18 +28,6 @@ let h_stackbarchart_dataset = [
   {billid: "HB 3400", agree: 128, disagree: 88, index: 216}
 ];
 
-//let donut_dataset =
-//[
-//  {
-//    "Type": "Agree",
-//    "Vote Number": 10000,
-//  },
-//  {
-//    "Type": "Disagree",
-//    "Vote Number": 7000,
-//  }
-//];
-
 let _agreeSum = d3.sum(h_stackbarchart_dataset, function(d) { return d.agree; });
 let _disagreeSum = d3.sum(h_stackbarchart_dataset, function(d) { return d.disagree; });
 console.log(`_agreeSum: ${_agreeSum} _disagreeSum: ${_disagreeSum}`);
@@ -57,7 +45,6 @@ let donut_dataset =
   }
 ];
 
-
 //
 // Horizontal Stacked Bar Chart
 //
@@ -69,20 +56,20 @@ d3.select('#hstackbarchart')
 
 h_stackbarchart.on('was_clicked', function(idx) {
   console.log(`Custom "was_clicked" event received idx: ${idx} billid: ${JSON.stringify(h_stackbarchart_dataset[idx].billid)}`);
-  console.log(`Custom event received this: ${JSON.stringify(this)}`);
+  //console.log(`Custom event received this: ${JSON.stringify(this)}`);
 });
 
 h_stackbarchart.on('was_dblclicked', function(idx) {
   console.log(`Custom "was_dblclicked" event received idx: ${idx} billid: ${JSON.stringify(h_stackbarchart_dataset[idx].billid)}`);
-  console.log(`Custom event received this: ${JSON.stringify(this)}`);
+  //console.log(`Custom event received this: ${JSON.stringify(this)}`);
 });
 
 //
 // Donut Chart
 //
 let donut = donutChart()
-                .width(620)
-                .height(420)
+                .width(900)
+                .height(600)
                 .cornerRadius(3) // sets how rounded the corners are on each slice
                 .padAngle(0.015) // effectively dictates the gap between slices
                 .variable('Vote Number')

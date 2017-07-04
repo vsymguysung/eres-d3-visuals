@@ -27,6 +27,8 @@ export function donutChart() {
         cornerRadius, // sets how rounded the corners are on each slice
         percentFormat = d3.format(',.2%');
 
+    let fontSize = '1.1em';
+
     function chart(selection){
         selection.each(function(data) {
             // generate chart
@@ -156,7 +158,7 @@ export function donutChart() {
                         .attr('class', 'toolCircle')
                         .attr('dy', -15) // hard-coded. can adjust this to adjust text vertical alignment in tooltip
                         .html(toolTipHTML(data)) // add text to the circle.
-                        .style('font-size', '.9em')
+                        .style('font-size', fontSize)
                         .style('text-anchor', 'middle'); // centres text in tooltip
 
                     svg.append('circle')

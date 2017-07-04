@@ -142,7 +142,7 @@ export function hStackBarChart() {
       //
       // Create the options form
       let default_radio = 0;  // Choose the default selection.
-      let form = selection.append("form").attr("class", "orderby-radios").text("Order By: ");
+      let form = selection.insert("form", ":first-child").attr("class", "orderby-radios").text("Order By: ");
 
       form.selectAll("label")
           .data(allAttrs)

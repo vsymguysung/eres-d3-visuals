@@ -18,6 +18,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+<link rel="stylesheet" href="src/style/m-query.css">
 <link rel="stylesheet" href="src/style/main.css">
 <link rel="stylesheet" href="src/style/hStackBar.css">
 <link rel="stylesheet" href="src/style/donut.css">
@@ -45,14 +46,13 @@
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px">
 
-  <!-- Push down content on small screens --> 
-  <div class="w3-hide-large" style="margin-top:83px"></div>
+  <!-- Push down content on small screens -->
+  <div class="w3-hide-large" style="margin-top:90px"></div>
 
+  <!-- Chart Section -->
   <div class="w3-container w3-center w3-padding-32" id="dashboard">
-    <h4><b>Dashboard</b></h4>
-
-    <!-- Chart Section -->
     <div class="w3-content">
+      <h4><b>Dashboard</b></h4>
       <div class="w3-row-padding">
         <div id="avartar" class="w3-half">
           <img class="img-viewer-image" src="https://usavotes.org/states/Michigan/images/pictures/2015-2016b/House/Glenn,Gary.jpg" width="100%" height="100%">
@@ -87,8 +87,8 @@
   <div class="w3-container w3-light-grey w3-padding-32 w3-padding-large" id="contact">
     <div class="w3-content" style="max-width:600px">
       <h4 class="w3-center"><b>Contact Me</b></h4>
-      <p>Do you want me to photograph you? Fill out the form and fill me in with the details :) I love meeting new people!</p>
-      <form action="/action_page.php" target="_blank">
+      <p>Do you want me to consult you? Fill out the form and fill me in with the details :) I love meeting new people!</p>
+      <form action="/form-request" target="_blank">
         <div class="w3-section">
           <label>Name</label>
           <input class="w3-input w3-border" type="text" name="Name" required>
@@ -130,7 +130,7 @@
             -->
             <span class="w3-large">Ipsum</span><br>
             <span>Praes tinci sed</span>
-          </li> 
+          </li>
         </ul>
       </div>
 
@@ -147,7 +147,7 @@
     </div>
   </footer>
 
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+  <div class="w3-black w3-center w3-padding-24">Powered by <a href="/" title="VoteSpotter" target="_blank" class="w3-hover-opacity">Mackinac</a></div>
 
 <!-- End page content -->
 </div>
@@ -158,7 +158,7 @@ function w3_open() {
     document.getElementById("mySidebar").style.display = "block";
     document.getElementById("myOverlay").style.display = "block";
 }
- 
+
 function w3_close() {
     document.getElementById("mySidebar").style.display = "none";
     document.getElementById("myOverlay").style.display = "none";
@@ -172,7 +172,6 @@ function onClick(element) {
   captionText.innerHTML = element.alt;
 }
 </script>
-
 
 </body>
 </html>

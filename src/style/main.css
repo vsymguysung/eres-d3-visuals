@@ -14,10 +14,13 @@ svg {
     filter: drop-shadow( 0px 3px 3px rgba(0,0,0,.25) );
 }
 
+#dashboard {
+  /*padding-top: 50px !important;*/
+}
+
 #avartar {
-  width: 160px;
-  height: 180px;
-  margin: 40px 0 0 70px;
+  /*height: 180px;*/
+  margin-top: 35px;
 }
 
 #avartar img {

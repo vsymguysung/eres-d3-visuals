@@ -18,26 +18,28 @@ svg {
   /*padding-top: 50px !important;*/
 }
 
-#avartar {
+#avatar {
   margin-top: 35px;
 }
 
-#avartar img {
+#avatar img {
   width: 120px;
   height: 120px;
 }
 
-#avartar #profile {
+#avatar #profile {
   width: 100%;
   height: 120px;
   padding-top: 10px
 }
-#avartar #profile #title {
+#avatar #profile #title {
   font-size: .9em;
 }
-#avartar #profile #name {
+
+#avatar #profile #name {
   font-weight: bold;
 }
+
 #donutchart {
   float: right;
 }

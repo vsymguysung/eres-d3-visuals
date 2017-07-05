@@ -1,10 +1,11 @@
 var utils = require('./_utils'),
-  rollup = require( 'rollup' ),
-  mkdirp = require('mkdirp'),
-  fs = require('fs'),
-  babel = require('babel-core'),
-  npm = require('rollup-plugin-node-resolve'),
-  commonjs = require('rollup-plugin-commonjs');
+    rollup = require( 'rollup' ),
+    mkdirp = require('mkdirp'),
+    fs = require('fs'),
+    babel = require('babel-core'),
+    noderesolve = require('rollup-plugin-node-resolve'),
+    handlebars = require('rollup-plugin-handlebars-plus'),
+    commonjs = require('rollup-plugin-commonjs');
 
 var rollup_resolve = require('rollup-plugin-node-resolve');
 
@@ -25,7 +26,7 @@ module.exports = function(options) {
       // from its dependencies
       entry: './src/index.js',
       plugins: [
-        npm({
+        noderesolve({
           jsnext: true,
           main: true
         }),
@@ -34,7 +35,11 @@ module.exports = function(options) {
           // search for files other than .js files (must already
           // be transpiled by a previous plugin!)
           extensions: [ '.js', '.coffee' ] // defaults to [ '.js' ]
+        }),
+        handlebars({
+          helpers: ['../../src/utils/HandlebarsHelpers.js']
         })
+
       ]
     }).then( function ( bundle ) {
 

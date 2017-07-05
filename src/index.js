@@ -1,5 +1,5 @@
 /**
- * @module eres-d3-visuals
+ * @module vsnxt-d3-visuals
  *
  *
  * File: index.js
@@ -14,9 +14,9 @@
  */
 
 import * as d3 from "d3";
-import { hStackBarChart } from './visuals/hStackBarChart'
-import { donutChart } from './visuals/donutChart'
-
+import { hStackBarChart } from './visuals/hStackBarChart';
+import { donutChart } from './visuals/donutChart';
+import avatarTemplate from './templates/avatar.hbs';
 
 
 let h_stackbarchart_dataset = [
@@ -33,7 +33,8 @@ let h_stackbarchart_dataset = [
 let dataset = {
   name: 'Gary Glenn',
   title: 'Michigan House of Representatives',
-  avartarUrl: 'https://usavotes.org/states/Michigan/images/pictures/2015-2016b/House/Glenn,Gary.jpg',
+  avatarUrl: 'https://usavotes.org/states/Michigan/images/pictures/2015-2016b/House/Glenn,Gary.jpg',
+  email: 'gary@gmail.com',
   h_stackbarchart_dataset:h_stackbarchart_dataset
 };
 
@@ -90,4 +91,9 @@ d3.select('#donutchart')
             .call(donut); // draw chart in div
 
 
+//
+// Update avatar section DOM
+//
+let tmplOutput = avatarTemplate({ title: dataset.title, name: dataset.name, avatarUrl: dataset.avatarUrl, email: dataset.email });
+$('#avatar').html(tmplOutput);
 

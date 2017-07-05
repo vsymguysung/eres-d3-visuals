@@ -7924,10 +7924,17 @@
 
   var h_stackbarchart_dataset = [{ billid: "HB 4643", agree: 67, disagree: 54, index: 121 }, { billid: "HB 6066", agree: 87, disagree: 44, index: 131 }, { billid: "HB 5851", agree: 164, disagree: 34, index: 198 }, { billid: "HB 5400", agree: 58, disagree: 18, index: 76 }, { billid: "HB 5700", agree: 88, disagree: 18, index: 106 }, { billid: "HB 8200", agree: 75, disagree: 108, index: 196 }, { billid: "HB 9200", agree: 63, disagree: 23, index: 86 }, { billid: "HB 3400", agree: 128, disagree: 88, index: 216 }];
 
-  var _agreeSum = sum(h_stackbarchart_dataset, function (d) {
+  var dataset = {
+    name: '',
+    title: '',
+    avartarUrl: '',
+    h_stackbarchart_dataset: h_stackbarchart_dataset
+  };
+
+  var _agreeSum = sum(dataset.h_stackbarchart_dataset, function (d) {
     return d.agree;
   });
-  var _disagreeSum = sum(h_stackbarchart_dataset, function (d) {
+  var _disagreeSum = sum(dataset.h_stackbarchart_dataset, function (d) {
     return d.disagree;
   });
   console.log("_agreeSum: " + _agreeSum + " _disagreeSum: " + _disagreeSum);
@@ -7941,14 +7948,14 @@
 
   var h_stackbarchart = hStackBarChart().width(640).height(400);
 
-  select('#hstackbarchart').datum(h_stackbarchart_dataset).call(h_stackbarchart);
+  select('#hstackbarchart').datum(dataset.h_stackbarchart_dataset).call(h_stackbarchart);
 
   h_stackbarchart.on('was_clicked', function (idx) {
-    console.log("Custom \"was_clicked\" event received idx: " + idx + " billid: " + JSON.stringify(h_stackbarchart_dataset[idx].billid));
+    console.log("Custom \"was_clicked\" event received idx: " + idx + " billid: " + JSON.stringify(dataset.h_stackbarchart_dataset[idx].billid));
   });
 
   h_stackbarchart.on('was_dblclicked', function (idx) {
-    console.log("Custom \"was_dblclicked\" event received idx: " + idx + " billid: " + JSON.stringify(h_stackbarchart_dataset[idx].billid));
+    console.log("Custom \"was_dblclicked\" event received idx: " + idx + " billid: " + JSON.stringify(dataset.h_stackbarchart_dataset[idx].billid));
   });
 
   var donut = donutChart().width(900).height(600).cornerRadius(3).padAngle(0.015).variable('Vote Number').category('Type').percentFormat(format(',d'));

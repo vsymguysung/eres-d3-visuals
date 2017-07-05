@@ -17,6 +17,8 @@ import * as d3 from "d3";
 import { hStackBarChart } from './visuals/hStackBarChart'
 import { donutChart } from './visuals/donutChart'
 
+
+
 let h_stackbarchart_dataset = [
   {billid: "HB 4643", agree: 67, disagree: 54, index: 121},
   {billid: "HB 6066", agree: 87, disagree: 44, index: 131},
@@ -28,8 +30,15 @@ let h_stackbarchart_dataset = [
   {billid: "HB 3400", agree: 128, disagree: 88, index: 216}
 ];
 
-let _agreeSum = d3.sum(h_stackbarchart_dataset, function(d) { return d.agree; });
-let _disagreeSum = d3.sum(h_stackbarchart_dataset, function(d) { return d.disagree; });
+let dataset = {
+  name: 'Gary Glenn',
+  title: 'Michigan House of Representatives',
+  avartarUrl: 'https://usavotes.org/states/Michigan/images/pictures/2015-2016b/House/Glenn,Gary.jpg',
+  h_stackbarchart_dataset:h_stackbarchart_dataset
+};
+
+let _agreeSum = d3.sum(dataset.h_stackbarchart_dataset, function(d) { return d.agree; });
+let _disagreeSum = d3.sum(dataset.h_stackbarchart_dataset, function(d) { return d.disagree; });
 console.log(`_agreeSum: ${_agreeSum} _disagreeSum: ${_disagreeSum}`);
 let _totalSum = _agreeSum + _disagreeSum;
 
@@ -51,16 +60,16 @@ let donut_dataset =
 let h_stackbarchart = hStackBarChart().width(640).height(400);
 
 d3.select('#hstackbarchart')
-   .datum(h_stackbarchart_dataset) // bind data to the div
+   .datum(dataset.h_stackbarchart_dataset) // bind data to the div
    .call(h_stackbarchart); // draw chart in div
 
 h_stackbarchart.on('was_clicked', function(idx) {
-  console.log(`Custom "was_clicked" event received idx: ${idx} billid: ${JSON.stringify(h_stackbarchart_dataset[idx].billid)}`);
+  console.log(`Custom "was_clicked" event received idx: ${idx} billid: ${JSON.stringify(dataset.h_stackbarchart_dataset[idx].billid)}`);
   //console.log(`Custom event received this: ${JSON.stringify(this)}`);
 });
 
 h_stackbarchart.on('was_dblclicked', function(idx) {
-  console.log(`Custom "was_dblclicked" event received idx: ${idx} billid: ${JSON.stringify(h_stackbarchart_dataset[idx].billid)}`);
+  console.log(`Custom "was_dblclicked" event received idx: ${idx} billid: ${JSON.stringify(dataset.h_stackbarchart_dataset[idx].billid)}`);
   //console.log(`Custom event received this: ${JSON.stringify(this)}`);
 });
 

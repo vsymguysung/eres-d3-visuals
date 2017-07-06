@@ -7790,7 +7790,7 @@
 
         var outerArc = arc().outerRadius(radius * 0.9).innerRadius(radius * 0.9);
 
-        var svg = selection$$1.append('svg').attr("style", "width:100%; height:100%;").attr("viewBox", "0 0 " + width + " " + height).attr("preserveAspectRatio", "xMidYMid meet").append('g').attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+        var svg = selection$$1.append('svg').attr('style', 'width:100%; height:100%;').attr('viewBox', "0 0 " + width + " " + height).attr('preserveAspectRatio', 'xMidYMid meet').append('g').attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
         svg.append('g').attr('class', 'slices');
         svg.append('g').attr('class', 'labelName');
@@ -9002,7 +9002,7 @@
     return asString || typeof $ === 'undefined' ? html : $(html);
   };
 
-  var h_stackbarchart_dataset = [{ billid: "HB 4643", agree: 67, disagree: 54, index: 121 }, { billid: "HB 6066", agree: 87, disagree: 44, index: 131 }, { billid: "HB 5851", agree: 164, disagree: 34, index: 198 }, { billid: "HB 5400", agree: 58, disagree: 18, index: 76 }, { billid: "HB 5700", agree: 88, disagree: 18, index: 106 }, { billid: "HB 8200", agree: 75, disagree: 108, index: 196 }, { billid: "HB 9200", agree: 63, disagree: 23, index: 86 }, { billid: "HB 3400", agree: 128, disagree: 88, index: 216 }];
+  var h_stackbarchart_dataset = [{ billid: 'HB 4643', agree: 67, disagree: 54, index: 121 }, { billid: 'HB 6066', agree: 87, disagree: 44, index: 131 }, { billid: 'HB 5851', agree: 164, disagree: 34, index: 198 }, { billid: 'HB 5400', agree: 58, disagree: 18, index: 76 }, { billid: 'HB 5700', agree: 88, disagree: 18, index: 106 }, { billid: 'HB 8200', agree: 75, disagree: 108, index: 196 }, { billid: 'HB 9200', agree: 63, disagree: 23, index: 86 }, { billid: 'HB 3400', agree: 128, disagree: 88, index: 216 }];
 
   var dataset = {
     name: 'Gary Glenn',
@@ -9020,11 +9020,11 @@
   });
   console.log("_agreeSum: " + _agreeSum + " _disagreeSum: " + _disagreeSum);
   var donut_dataset = [{
-    "Type": "Agree",
-    "Vote Number": _agreeSum
+    'Type': 'Agree',
+    'Vote Number': _agreeSum
   }, {
-    "Type": "Disagree",
-    "Vote Number": _disagreeSum
+    'Type': 'Disagree',
+    'Vote Number': _disagreeSum
   }];
 
   var h_stackbarchart = hStackBarChart().width(640).height(400);

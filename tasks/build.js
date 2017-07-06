@@ -4,8 +4,9 @@ var utils = require('./_utils'),
     fs = require('fs'),
     babel = require('babel-core'),
     noderesolve = require('rollup-plugin-node-resolve'),
+    commonjs = require('rollup-plugin-commonjs')
     handlebars = require('rollup-plugin-handlebars-plus'),
-    commonjs = require('rollup-plugin-commonjs');
+    scss = require('rollup-plugin-sass');
 
 var rollup_resolve = require('rollup-plugin-node-resolve');
 
@@ -38,8 +39,11 @@ module.exports = function(options) {
         }),
         handlebars({
           helpers: ['../../src/utils/HandlebarsHelpers.js']
-        })
-
+        }),
+        scss({
+          outputStyle: 'compressed',
+          output: './dist/style/index.css',
+        }),
       ]
     }).then( function ( bundle ) {
 

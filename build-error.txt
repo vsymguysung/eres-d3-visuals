@@ -2,32 +2,63 @@
  [39m
 
 /Users/guysungkim/Documents/emberJS-Projects/vsnxt-d3-visuals/tasks/build.js
-   8:47  error  Extra semicolon  semi
-  10:59  error  Extra semicolon  semi
+   2:5   error    Expected indentation of 2 spaces but found 4  indent
+   3:5   error    Expected indentation of 2 spaces but found 4  indent
+   4:5   error    Expected indentation of 2 spaces but found 4  indent
+   5:5   error    Expected indentation of 2 spaces but found 4  indent
+   6:5   error    Expected indentation of 2 spaces but found 4  indent
+   7:5   error    Expected indentation of 2 spaces but found 4  indent
+   8:5   error    Expected indentation of 2 spaces but found 4  indent
+   8:49  error    Extra semicolon                               semi
+  10:59  error    Extra semicolon                               semi
+  45:23  warning  Unexpected trailing comma                     comma-dangle
 
 /Users/guysungkim/Documents/emberJS-Projects/vsnxt-d3-visuals/src/index.js
-  117:6  error  Parsing error: Unexpected token tmplOutput
+  16:21   warning  Strings must use singlequote                                  quotes
+  16:25   error    Extra semicolon                                               semi
+  17:58   error    Extra semicolon                                               semi
+  18:50   error    Extra semicolon                                               semi
+  19:52   error    Extra semicolon                                               semi
+  23:12   warning  Strings must use singlequote                                  quotes
+  24:12   warning  Strings must use singlequote                                  quotes
+  25:12   warning  Strings must use singlequote                                  quotes
+  26:12   warning  Strings must use singlequote                                  quotes
+  27:12   warning  Strings must use singlequote                                  quotes
+  28:12   warning  Strings must use singlequote                                  quotes
+  29:12   warning  Strings must use singlequote                                  quotes
+  30:12   warning  Strings must use singlequote                                  quotes
+  31:2    error    Extra semicolon                                               semi
+  38:27   error    Missing space before value for key 'h_stackbarchart_dataset'  key-spacing
+  39:2    error    Extra semicolon                                               semi
+  41:85   error    Extra semicolon                                               semi
+  41:89   error    Extra semicolon                                               semi
+  42:91   error    Extra semicolon                                               semi
+  42:95   error    Extra semicolon                                               semi
+  43:69   error    Extra semicolon                                               semi
+  44:41   error    Extra semicolon                                               semi
+  47:1    error    Expected indentation of 2 spaces but found 0                  indent
+  49:5    warning  Strings must use singlequote                                  quotes
+  49:13   warning  Strings must use singlequote                                  quotes
+  50:5    warning  Strings must use singlequote                                  quotes
+  53:5    warning  Strings must use singlequote                                  quotes
+  53:13   warning  Strings must use singlequote                                  quotes
+  54:5    warning  Strings must use singlequote                                  quotes
+  56:1    error    Expected indentation of 2 spaces but found 0                  indent
+  56:2    error    Extra semicolon                                               semi
+  61:62   error    Extra semicolon                                               semi
+  65:26   error    Extra semicolon                                               semi
+  68:136  error    Extra semicolon                                               semi
+  70:3    error    Extra semicolon                                               semi
+  73:139  error    Extra semicolon                                               semi
+  75:3    error    Extra semicolon                                               semi
+  87:48   error    Extra semicolon                                               semi
+  91:25   error    Extra semicolon                                               semi
+  97:130  error    Extra semicolon                                               semi
+  98:30   error    Extra semicolon                                               semi
 
-/Users/guysungkim/Documents/emberJS-Projects/vsnxt-d3-visuals/src/lib/templateEngine.js
-  18:49   error    Extra semicolon            semi
-  19:56   error    Extra semicolon            semi
-  20:50   error    Extra semicolon            semi
-  24:64   error    Extra semicolon            semi
-  27:28   error    Extra semicolon            semi
-  30:65   error    Extra semicolon            semi
-  33:23   error    Extra semicolon            semi
-  34:4    warning  Unexpected trailing comma  comma-dangle
-  35:2    error    Extra semicolon            semi
-  38:23   error    Extra semicolon            semi
-  41:19   error    Extra semicolon            semi
-  44:21   error    Extra semicolon            semi
-  46:44   error    Extra semicolon            semi
-  48:30   error    Extra semicolon            semi
-  51:24   error    Extra semicolon            semi
-  53:116  error    Extra semicolon            semi
-  55:17   error    Extra semicolon            semi
-  56:9    error    Extra semicolon            semi
-  59:29   error    Extra semicolon            semi
+/Users/guysungkim/Documents/emberJS-Projects/vsnxt-d3-visuals/src/utils/HandlebarsHelpers.js
+  18:43  error  Extra semicolon  semi
+  19:5   error  Extra semicolon  semi
 
 /Users/guysungkim/Documents/emberJS-Projects/vsnxt-d3-visuals/src/visuals/donutChart.js
    16:21   warning  Strings must use singlequote                                                                                quotes
@@ -482,5 +513,5 @@
   364:48   error    Extra semicolon                                   semi
   367:15   error    Extra semicolon                                   semi
 
-✖ 471 problems (350 errors, 121 warnings)
+✖ 502 problems (366 errors, 136 warnings)
 

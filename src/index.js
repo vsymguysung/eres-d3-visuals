@@ -17,7 +17,7 @@ import * as d3 from "d3";
 import { hStackBarChart } from './visuals/hStackBarChart';
 import { donutChart } from './visuals/donutChart';
 import avatarTemplate from './templates/avatar.hbs';
-
+import './scss/main.scss'
 
 let h_stackbarchart_dataset = [
   {billid: "HB 4643", agree: 67, disagree: 54, index: 121},

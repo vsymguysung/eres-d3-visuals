@@ -1,7 +1,7 @@
 var utils = require('./_utils'),
   eslint = require('./eslint'),
   build = require('./build'),
-  chokidar = require('chokidar')
+  chokidar = require('chokidar');
 
 module.exports = function(options) {
 

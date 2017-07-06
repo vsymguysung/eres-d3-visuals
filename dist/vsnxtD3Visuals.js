@@ -7604,7 +7604,7 @@
         var default_radio = 0;
         var form = selection$$1.insert("form", ":first-child").attr("class", "orderby-radios").text("Order By: ");
 
-        form.selectAll("label").data(allAttrs).enter().append("label").text(function (d) {
+        form.selectAll("label").data(allAttrs).enter().append("label").attr("class", "checkbox-inline").text(function (d) {
           return d;
         }).insert("input").attr("type", "radio").attr("class", "orderby").attr("name", "orderby").attr("value", function (d, i) {
           return d;

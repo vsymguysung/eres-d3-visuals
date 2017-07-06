@@ -8,10 +8,15 @@
    5:5   error    Expected indentation of 2 spaces but found 4  indent
    6:5   error    Expected indentation of 2 spaces but found 4  indent
    7:5   error    Expected indentation of 2 spaces but found 4  indent
-   8:5   error    Expected indentation of 2 spaces but found 4  indent
-   8:49  error    Extra semicolon                               semi
-  10:59  error    Extra semicolon                               semi
-  45:23  warning  Unexpected trailing comma                     comma-dangle
+   8:5   error    Expected indentation of 0 spaces but found 4  indent
+   8:58  error    Unexpected use of comma operator              no-sequences
+   9:41  error    Extra semicolon                               semi
+  11:59  error    Extra semicolon                               semi
+  45:43  warning  Unexpected trailing comma                     comma-dangle
+  46:11  warning  Unexpected trailing comma                     comma-dangle
+
+/Users/guysungkim/Documents/emberJS-Projects/vsnxt-d3-visuals/tasks/watch.js
+  4:33  error  Extra semicolon  semi
 
 /Users/guysungkim/Documents/emberJS-Projects/vsnxt-d3-visuals/src/index.js
   16:21   warning  Strings must use singlequote                                  quotes
@@ -297,8 +302,8 @@
    82:48   error    Extra semicolon                                   semi
    87:11   error    Expected indentation of 8 spaces but found 10     indent
    87:28   error    Extra semicolon                                   semi
-   88:11   error    Expected indentation of 8 spaces but found 10     indent
    88:11   error    Expected space(s) after "if"                      keyword-spacing
+   88:11   error    Expected indentation of 8 spaces but found 10     indent
    88:30   warning  Strings must use singlequote                      quotes
    89:15   error    Expected indentation of 12 spaces but found 14    indent
    89:29   error    Extra semicolon                                   semi
@@ -339,179 +344,181 @@
   145:109  error    Extra semicolon                                   semi
   147:22   warning  Strings must use singlequote                      quotes
   150:19   warning  Strings must use singlequote                      quotes
-  153:21   error    Extra semicolon                                   semi
-  155:19   warning  Strings must use singlequote                      quotes
-  156:17   warning  Strings must use singlequote                      quotes
-  156:25   warning  Strings must use singlequote                      quotes
+  151:17   warning  Strings must use singlequote                      quotes
+  151:26   warning  Strings must use singlequote                      quotes
+  154:21   error    Extra semicolon                                   semi
+  156:19   warning  Strings must use singlequote                      quotes
   157:17   warning  Strings must use singlequote                      quotes
-  157:26   warning  Strings must use singlequote                      quotes
+  157:25   warning  Strings must use singlequote                      quotes
   158:17   warning  Strings must use singlequote                      quotes
-  158:25   warning  Strings must use singlequote                      quotes
+  158:26   warning  Strings must use singlequote                      quotes
   159:17   warning  Strings must use singlequote                      quotes
-  159:50   error    Extra semicolon                                   semi
-  160:21   warning  Strings must use singlequote                      quotes
-  160:72   error    Extra semicolon                                   semi
-  161:15   warning  Strings must use singlequote                      quotes
-  161:40   error    Extra semicolon                                   semi
-  166:31   error    Extra semicolon                                   semi
-  167:34   error    Extra semicolon                                   semi
-  170:20   warning  Strings must use singlequote                      quotes
+  159:25   warning  Strings must use singlequote                      quotes
+  160:17   warning  Strings must use singlequote                      quotes
+  160:50   error    Extra semicolon                                   semi
+  161:21   warning  Strings must use singlequote                      quotes
+  161:72   error    Extra semicolon                                   semi
+  162:15   warning  Strings must use singlequote                      quotes
+  162:40   error    Extra semicolon                                   semi
+  167:31   error    Extra semicolon                                   semi
+  168:34   error    Extra semicolon                                   semi
   171:20   warning  Strings must use singlequote                      quotes
-  171:29   warning  Strings must use singlequote                      quotes
-  172:23   warning  Strings must use singlequote                      quotes
-  174:28   warning  Strings must use singlequote                      quotes
-  175:20   warning  Strings must use singlequote                      quotes
-  175:29   warning  Strings must use singlequote                      quotes
+  172:20   warning  Strings must use singlequote                      quotes
+  172:29   warning  Strings must use singlequote                      quotes
+  173:23   warning  Strings must use singlequote                      quotes
+  175:28   warning  Strings must use singlequote                      quotes
   176:20   warning  Strings must use singlequote                      quotes
-  176:62   error    Extra semicolon                                   semi
-  177:23   warning  Strings must use singlequote                      quotes
-  178:40   error    Extra semicolon                                   semi
-  179:28   warning  Strings must use singlequote                      quotes
-  180:20   warning  Strings must use singlequote                      quotes
-  180:29   warning  Strings must use singlequote                      quotes
+  176:29   warning  Strings must use singlequote                      quotes
+  177:20   warning  Strings must use singlequote                      quotes
+  177:62   error    Extra semicolon                                   semi
+  178:23   warning  Strings must use singlequote                      quotes
+  179:40   error    Extra semicolon                                   semi
+  180:28   warning  Strings must use singlequote                      quotes
   181:20   warning  Strings must use singlequote                      quotes
+  181:29   warning  Strings must use singlequote                      quotes
   182:20   warning  Strings must use singlequote                      quotes
-  184:35   error    Extra semicolon                                   semi
-  186:20   warning  Strings must use singlequote                      quotes
-  186:77   error    Extra semicolon                                   semi
+  183:20   warning  Strings must use singlequote                      quotes
+  185:35   error    Extra semicolon                                   semi
   187:20   warning  Strings must use singlequote                      quotes
-  187:67   error    Extra semicolon                                   semi
-  188:18   warning  Strings must use singlequote                      quotes
-  188:42   error    Missing space before opening brace                space-before-blocks
-  188:89   warning  Strings must use singlequote                      quotes
-  188:103  warning  Strings must use singlequote                      quotes
-  188:113  error    Extra semicolon                                   semi
+  187:77   error    Extra semicolon                                   semi
+  188:20   warning  Strings must use singlequote                      quotes
+  188:67   error    Extra semicolon                                   semi
   189:18   warning  Strings must use singlequote                      quotes
-  189:41   error    Missing space before opening brace                space-before-blocks
-  189:63   warning  Strings must use singlequote                      quotes
-  189:70   error    Gratuitous parentheses around expression          no-extra-parens
-  189:87   warning  Strings must use singlequote                      quotes
-  189:99   warning  Strings must use singlequote                      quotes
-  189:105  error    A space is required after ','                     comma-spacing
-  189:106  error    Gratuitous parentheses around expression          no-extra-parens
-  189:123  warning  Strings must use singlequote                      quotes
-  189:128  error    Extra semicolon                                   semi
+  189:42   error    Missing space before opening brace                space-before-blocks
+  189:89   warning  Strings must use singlequote                      quotes
+  189:103  warning  Strings must use singlequote                      quotes
+  189:113  error    Extra semicolon                                   semi
   190:18   warning  Strings must use singlequote                      quotes
-  190:40   error    Missing space before opening brace                space-before-blocks
-  190:62   warning  Strings must use singlequote                      quotes
-  190:76   warning  Strings must use singlequote                      quotes
-  190:85   error    Extra semicolon                                   semi
-  192:17   error    Expected indentation of 15 spaces but found 16    indent
-  192:99   error    Extra semicolon                                   semi
-  195:17   error    Expected indentation of 15 spaces but found 16    indent
-  195:42   error    Extra semicolon                                   semi
+  190:41   error    Missing space before opening brace                space-before-blocks
+  190:63   warning  Strings must use singlequote                      quotes
+  190:70   error    Gratuitous parentheses around expression          no-extra-parens
+  190:87   warning  Strings must use singlequote                      quotes
+  190:99   warning  Strings must use singlequote                      quotes
+  190:105  error    A space is required after ','                     comma-spacing
+  190:106  error    Gratuitous parentheses around expression          no-extra-parens
+  190:123  warning  Strings must use singlequote                      quotes
+  190:128  error    Extra semicolon                                   semi
+  191:18   warning  Strings must use singlequote                      quotes
+  191:40   error    Missing space before opening brace                space-before-blocks
+  191:62   warning  Strings must use singlequote                      quotes
+  191:76   warning  Strings must use singlequote                      quotes
+  191:85   error    Extra semicolon                                   semi
+  193:17   error    Expected indentation of 15 spaces but found 16    indent
+  193:99   error    Extra semicolon                                   semi
   196:17   error    Expected indentation of 15 spaces but found 16    indent
-  197:46   error    Extra semicolon                                   semi
-  198:39   error    Extra semicolon                                   semi
-  202:35   warning  Strings must use singlequote                      quotes
-  202:61   error    Extra semicolon                                   semi
-  207:37   error    Expected indentation of 20 spaces but found 36    indent
-  207:53   warning  Strings must use singlequote                      quotes
-  207:76   error    Extra semicolon                                   semi
+  196:42   error    Extra semicolon                                   semi
+  197:17   error    Expected indentation of 15 spaces but found 16    indent
+  198:46   error    Extra semicolon                                   semi
+  199:39   error    Extra semicolon                                   semi
+  203:35   warning  Strings must use singlequote                      quotes
+  203:61   error    Extra semicolon                                   semi
   208:37   error    Expected indentation of 20 spaces but found 36    indent
-  208:57   error    Extra semicolon                                   semi
-  209:35   error    Expected indentation of 18 spaces but found 34    indent
-  209:56   error    Extra semicolon                                   semi
-  211:16   error    Extra semicolon                                   semi
-  213:23   warning  Strings must use singlequote                      quotes
-  213:49   error    Extra semicolon                                   semi
-  217:20   warning  Strings must use singlequote                      quotes
-  218:19   warning  Strings must use singlequote                      quotes
-  218:28   warning  Strings must use singlequote                      quotes
+  208:53   warning  Strings must use singlequote                      quotes
+  208:76   error    Extra semicolon                                   semi
+  209:37   error    Expected indentation of 20 spaces but found 36    indent
+  209:57   error    Extra semicolon                                   semi
+  210:35   error    Expected indentation of 18 spaces but found 34    indent
+  210:56   error    Extra semicolon                                   semi
+  212:16   error    Extra semicolon                                   semi
+  214:23   warning  Strings must use singlequote                      quotes
+  214:49   error    Extra semicolon                                   semi
+  218:20   warning  Strings must use singlequote                      quotes
   219:19   warning  Strings must use singlequote                      quotes
-  219:32   warning  Strings must use singlequote                      quotes
-  219:57   warning  Strings must use singlequote                      quotes
-  220:38   error    Extra semicolon                                   semi
-  224:20   warning  Strings must use singlequote                      quotes
-  225:19   warning  Strings must use singlequote                      quotes
-  225:28   warning  Strings must use singlequote                      quotes
+  219:28   warning  Strings must use singlequote                      quotes
+  220:19   warning  Strings must use singlequote                      quotes
+  220:32   warning  Strings must use singlequote                      quotes
+  220:57   warning  Strings must use singlequote                      quotes
+  221:38   error    Extra semicolon                                   semi
+  225:20   warning  Strings must use singlequote                      quotes
   226:19   warning  Strings must use singlequote                      quotes
-  226:32   warning  Strings must use singlequote                      quotes
-  226:63   warning  Strings must use singlequote                      quotes
-  227:39   error    Extra semicolon                                   semi
-  232:22   error    Extra semicolon                                   semi
+  226:28   warning  Strings must use singlequote                      quotes
+  227:19   warning  Strings must use singlequote                      quotes
+  227:32   warning  Strings must use singlequote                      quotes
+  227:63   warning  Strings must use singlequote                      quotes
+  228:39   error    Extra semicolon                                   semi
   233:22   error    Extra semicolon                                   semi
   234:22   error    Extra semicolon                                   semi
-  238:55   error    Extra semicolon                                   semi
-  238:59   error    Extra semicolon                                   semi
-  242:55   error    Extra semicolon                                   semi
-  242:59   error    Extra semicolon                                   semi
-  246:15   error    Extra semicolon                                   semi
-  249:23   warning  Strings must use singlequote                      quotes
-  251:19   warning  Strings must use singlequote                      quotes
-  253:35   error    Extra semicolon                                   semi
-  255:22   warning  Strings must use singlequote                      quotes
-  258:21   error    Extra semicolon                                   semi
-  263:19   warning  Strings must use singlequote                      quotes
+  235:22   error    Extra semicolon                                   semi
+  239:55   error    Extra semicolon                                   semi
+  239:59   error    Extra semicolon                                   semi
+  243:55   error    Extra semicolon                                   semi
+  243:59   error    Extra semicolon                                   semi
+  247:15   error    Extra semicolon                                   semi
+  250:23   warning  Strings must use singlequote                      quotes
+  252:19   warning  Strings must use singlequote                      quotes
+  254:35   error    Extra semicolon                                   semi
+  256:22   warning  Strings must use singlequote                      quotes
+  259:21   error    Extra semicolon                                   semi
   264:19   warning  Strings must use singlequote                      quotes
-  268:43   error    Extra semicolon                                   semi
-  270:19   warning  Strings must use singlequote                      quotes
-  270:57   error    Extra semicolon                                   semi
+  265:19   warning  Strings must use singlequote                      quotes
+  269:43   error    Extra semicolon                                   semi
   271:19   warning  Strings must use singlequote                      quotes
-  271:76   error    Extra semicolon                                   semi
-  271:80   error    Extra semicolon                                   semi
-  275:63   error    Extra semicolon                                   semi
-  280:28   error    Extra semicolon                                   semi
-  284:44   error    Extra semicolon                                   semi
-  287:37   error    Extra semicolon                                   semi
-  292:42   error    Unexpected space between function name and paren  no-spaced-func
-  293:20   error    Extra semicolon                                   semi
-  297:15   error    Expected indentation of 10 spaces but found 14    indent
-  297:30   error    Extra semicolon                                   semi
-  298:11   error    Extra semicolon                                   semi
-  299:32   error    Extra semicolon                                   semi
-  302:19   warning  Strings must use singlequote                      quotes
-  306:37   error    Extra semicolon                                   semi
-  309:24   error    Extra semicolon                                   semi
-  315:34   warning  Strings must use singlequote                      quotes
-  317:27   warning  Strings must use singlequote                      quotes
-  318:19   warning  Strings must use singlequote                      quotes
-  318:28   warning  Strings must use singlequote                      quotes
+  271:57   error    Extra semicolon                                   semi
+  272:19   warning  Strings must use singlequote                      quotes
+  272:76   error    Extra semicolon                                   semi
+  272:80   error    Extra semicolon                                   semi
+  276:63   error    Extra semicolon                                   semi
+  281:28   error    Extra semicolon                                   semi
+  285:44   error    Extra semicolon                                   semi
+  288:37   error    Extra semicolon                                   semi
+  293:42   error    Unexpected space between function name and paren  no-spaced-func
+  294:20   error    Extra semicolon                                   semi
+  298:15   error    Expected indentation of 10 spaces but found 14    indent
+  298:30   error    Extra semicolon                                   semi
+  299:11   error    Extra semicolon                                   semi
+  300:32   error    Extra semicolon                                   semi
+  303:19   warning  Strings must use singlequote                      quotes
+  307:37   error    Extra semicolon                                   semi
+  310:24   error    Extra semicolon                                   semi
+  316:34   warning  Strings must use singlequote                      quotes
+  318:27   warning  Strings must use singlequote                      quotes
   319:19   warning  Strings must use singlequote                      quotes
-  319:56   warning  Strings must use singlequote                      quotes
-  319:72   error    Gratuitous parentheses around expression          no-extra-parens
-  319:85   warning  Strings must use singlequote                      quotes
-  319:100  warning  Strings must use singlequote                      quotes
-  319:103  error    Extra semicolon                                   semi
-  320:20   warning  Strings must use singlequote                      quotes
-  320:28   warning  Strings must use singlequote                      quotes
-  320:46   error    Extra semicolon                                   semi
-  322:9    error    Expected indentation of 6 spaces but found 8      indent
-  322:23   warning  Strings must use singlequote                      quotes
-  323:19   warning  Strings must use singlequote                      quotes
+  319:28   warning  Strings must use singlequote                      quotes
+  320:19   warning  Strings must use singlequote                      quotes
+  320:56   warning  Strings must use singlequote                      quotes
+  320:72   error    Gratuitous parentheses around expression          no-extra-parens
+  320:85   warning  Strings must use singlequote                      quotes
+  320:100  warning  Strings must use singlequote                      quotes
+  320:103  error    Extra semicolon                                   semi
+  321:20   warning  Strings must use singlequote                      quotes
+  321:28   warning  Strings must use singlequote                      quotes
+  321:46   error    Extra semicolon                                   semi
+  323:9    error    Expected indentation of 6 spaces but found 8      indent
+  323:23   warning  Strings must use singlequote                      quotes
   324:19   warning  Strings must use singlequote                      quotes
   325:19   warning  Strings must use singlequote                      quotes
   326:19   warning  Strings must use singlequote                      quotes
-  326:41   error    Missing space before opening brace                space-before-blocks
-  326:102  error    Extra semicolon                                   semi
-  328:9    error    Expected indentation of 6 spaces but found 8      indent
-  328:23   warning  Strings must use singlequote                      quotes
-  329:19   warning  Strings must use singlequote                      quotes
+  327:19   warning  Strings must use singlequote                      quotes
+  327:41   error    Missing space before opening brace                space-before-blocks
+  327:102  error    Extra semicolon                                   semi
+  329:9    error    Expected indentation of 6 spaces but found 8      indent
+  329:23   warning  Strings must use singlequote                      quotes
   330:19   warning  Strings must use singlequote                      quotes
   331:19   warning  Strings must use singlequote                      quotes
-  331:25   warning  Strings must use singlequote                      quotes
   332:19   warning  Strings must use singlequote                      quotes
-  332:34   warning  Strings must use singlequote                      quotes
-  333:49   error    Extra semicolon                                   semi
-  333:53   error    Extra semicolon                                   semi
-  335:7    error    Extra semicolon                                   semi
-  342:7    error    Expected indentation of 4 spaces but found 6      indent
-  342:42   error    Extra semicolon                                   semi
+  332:25   warning  Strings must use singlequote                      quotes
+  333:19   warning  Strings must use singlequote                      quotes
+  333:34   warning  Strings must use singlequote                      quotes
+  334:49   error    Extra semicolon                                   semi
+  334:53   error    Extra semicolon                                   semi
+  336:7    error    Extra semicolon                                   semi
   343:7    error    Expected indentation of 4 spaces but found 6      indent
-  343:20   error    Extra semicolon                                   semi
+  343:42   error    Extra semicolon                                   semi
   344:7    error    Expected indentation of 4 spaces but found 6      indent
-  344:19   error    Extra semicolon                                   semi
-  345:4    error    Extra semicolon                                   semi
-  348:7    error    Expected indentation of 4 spaces but found 6      indent
-  348:43   error    Extra semicolon                                   semi
+  344:20   error    Extra semicolon                                   semi
+  345:7    error    Expected indentation of 4 spaces but found 6      indent
+  345:19   error    Extra semicolon                                   semi
+  346:4    error    Extra semicolon                                   semi
   349:7    error    Expected indentation of 4 spaces but found 6      indent
-  349:21   error    Extra semicolon                                   semi
+  349:43   error    Extra semicolon                                   semi
   350:7    error    Expected indentation of 4 spaces but found 6      indent
-  350:19   error    Extra semicolon                                   semi
-  351:4    error    Extra semicolon                                   semi
-  363:59   error    Extra semicolon                                   semi
-  364:48   error    Extra semicolon                                   semi
-  367:15   error    Extra semicolon                                   semi
+  350:21   error    Extra semicolon                                   semi
+  351:7    error    Expected indentation of 4 spaces but found 6      indent
+  351:19   error    Extra semicolon                                   semi
+  352:4    error    Extra semicolon                                   semi
+  364:59   error    Extra semicolon                                   semi
+  365:48   error    Extra semicolon                                   semi
+  368:15   error    Extra semicolon                                   semi
 
-✖ 502 problems (366 errors, 136 warnings)
+✖ 507 problems (368 errors, 139 warnings)
 

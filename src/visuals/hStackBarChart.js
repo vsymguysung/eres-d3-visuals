@@ -148,6 +148,7 @@ export function hStackBarChart() {
           .data(allAttrs)
           .enter()
           .append("label")
+          .attr("class", "checkbox-inline")
           .text(function(d) {
             //console.log(`d:${JSON.stringify(d)}`);
             return d;

@@ -1,4 +1,4 @@
-var utils = require('./_utils')
+var utils = require('./_utils');
 
 module.exports = function(options) {
 
@@ -9,9 +9,9 @@ module.exports = function(options) {
       'src',
       'test'
     ]
-  }, options)
+  }, options);
 
   // Run eslint
-  return utils.exec('./node_modules/.bin/eslint', options.folders)
+  return utils.exec('./node_modules/.bin/eslint', options.folders);
 
 }

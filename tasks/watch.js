@@ -1,7 +1,7 @@
 var utils = require('./_utils'),
-  eslint = require('./eslint'),
-  build = require('./build'),
-  chokidar = require('chokidar');
+    eslint = require('./eslint'),
+    build = require('./build'),
+    chokidar = require('chokidar');
 
 module.exports = function(options) {
 
@@ -15,7 +15,7 @@ module.exports = function(options) {
       'unlinkDir',
       'addDir'
     ]
-  }, options)
+  }, options);
 
   // return a promise based on a certain task triggered
   var runOnlyOn = function(event) {
@@ -25,10 +25,10 @@ module.exports = function(options) {
     } else {
       return Promise.reject()
     }
-  }
+  };
 
   // run eslint when a source file gets updated
-  utils.print('Watching the files in the src/**/**/*.js path', 'cool')
+  utils.print('Watching the files in the src/**/**/*.js path', 'cool');
   chokidar.watch('src/**/**/*.js', {
     ignoreInitial: true
   }).on('all', function(event) {
@@ -36,7 +36,7 @@ module.exports = function(options) {
     runOnlyOn(event)
       .then(eslint)
       .then(build)
-      .catch(e => utils.print(e, 'error'))
-  })
+      .catch(e => utils.print(e, 'error'));
+  });
 
 }

@@ -13,9 +13,9 @@ module.exports = function(options) {
       {
         sourcePath: 'node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js',
         destPath: 'dist/lib/bootstrap.min.js'
-      },
+      }
     ]
-  }, options)
+  }, options);
 
   /**
    * Create a promise based on the result

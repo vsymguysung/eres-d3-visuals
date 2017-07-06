@@ -22,15 +22,15 @@ var spawn = require('child_process').spawn,
      * @returns { Array } - options array
      */
     optionsToArray(obj, optionsPrefix, hasEquals) {
-      optionsPrefix = optionsPrefix || '--'
-      var ret = []
+      optionsPrefix = optionsPrefix || '--';
+      var ret = [];
       Object.keys(obj).forEach((key) => {
-        ret.push(optionsPrefix + key + (hasEquals ? '=' : ''))
+        ret.push(optionsPrefix + key + (hasEquals ? '=' : ''));
         if (obj[key]) {
-          ret.push(obj[key])
+          ret.push(obj[key]);
         }
       })
-      return ret
+      return ret;
     },
     /**
      * Simple object extend function
@@ -41,10 +41,10 @@ var spawn = require('child_process').spawn,
     extend(obj1, obj2) {
       for (var i in obj2) {
         if (obj2.hasOwnProperty(i)) {
-          obj1[i] = obj2[i]
+          obj1[i] = obj2[i];
         }
       }
-      return obj1
+      return obj1;
     },
     /**
      * Run any system command
@@ -56,29 +56,29 @@ var spawn = require('child_process').spawn,
     exec(command, args, envVariables) {
 
       var path = require('path'),
-        os = require('os')
+        os = require('os');
 
       return new Promise(function(resolve, reject) {
 
-        if (os.platform() == 'win32' || os.platform() == 'win64') command += '.cmd'
+        if (os.platform() == 'win32' || os.platform() == 'win64') command += '.cmd';
 
         // extend the env variables with some other custom options
-        utils.extend(process.env, envVariables)
-        utils.print(`Executing: ${command}  ${args.join(' ')} \n`, 'confirm')
+        utils.extend(process.env, envVariables);
+        utils.print(`Executing: ${command}  ${args.join(' ')} \n`, 'confirm');
 
         var cmd = spawn(path.normalize(command), args, {
           stdio: 'inherit',
           cwd: process.cwd()
-        })
+        });
 
         cmd.on('exit', function(code) {
           if (code === 1)
-            reject()
+            reject();
           else
-            resolve()
-        })
+            resolve();
+        });
 
-      })
+      });
 
     },
     /**
@@ -88,33 +88,33 @@ var spawn = require('child_process').spawn,
      * @returns { Array } files path list
      */
     listFiles(path, mustDelete) {
-      utils.print(`Listing all the files in the folder: ${path}`, 'confirm')
-      var files = []
+      utils.print(`Listing all the files in the folder: ${path}`, 'confirm');
+      var files = [];
       if (fs.existsSync(path)) {
-        var tmpFiles = fs.readdirSync(path)
+        var tmpFiles = fs.readdirSync(path);
         tmpFiles.forEach((file) => {
-          var curPath = path + '/' + file
-          files.push(curPath)
+          var curPath = path + '/' + file;
+          files.push(curPath);
           if (fs.lstatSync(curPath).isDirectory()) { // recurse
-            utils.listFiles(curPath, mustDelete)
+            utils.listFiles(curPath, mustDelete);
           } else if (mustDelete) { // delete file
-            fs.unlinkSync(curPath)
+            fs.unlinkSync(curPath);
           }
         })
         if (mustDelete) {
-          fs.rmdirSync(path)
+          fs.rmdirSync(path);
         }
       }
 
-      return files
+      return files;
     },
     /**
      * Delete synchronously any folder or file
      * @param  { String } path - path to clean
      */
     clean(path) {
-      var files = utils.listFiles(path, true)
-      utils.print(`Deleting the following files: \n ${files.join('\n')}`, 'cool')
+      var files = utils.listFiles(path, true);
+      utils.print(`Deleting the following files: \n ${files.join('\n')}`, 'cool');
     },
     /**
      * Log messages in the terminal using custom colors
@@ -122,25 +122,25 @@ var spawn = require('child_process').spawn,
      * @param  { String } type - message type to handle the right color
      */
     print(msg, type) {
-      var color
+      var color;
       switch (type) {
-      case 'error':
-        color = '\x1B[31m'
-        break
-      case 'warning':
-        color = '\x1B[33m'
-        break
-      case 'confirm':
-        color = '\x1B[32m'
-        break
-      case 'cool':
-        color = '\x1B[36m'
-        break
-      default:
-        color = ''
+        case 'error':
+          color = '\x1B[31m';
+          break;
+        case 'warning':
+          color = '\x1B[33m';
+          break;
+        case 'confirm':
+          color = '\x1B[32m';
+          break;
+        case 'cool':
+          color = '\x1B[36m';
+          break;
+        default:
+          color = '';
       }
-      console.log(`${color} ${msg} \x1B[39m`)
+      console.log(`${color} ${msg} \x1B[39m`);
     }
-  }
+  };
 
 module.exports = utils

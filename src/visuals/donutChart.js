@@ -13,7 +13,7 @@
  *    - v0.1.0 2017.Jun by Guy-Sung Kim, Initial creation.
  */
 
-import * as d3 from "d3";
+import * as d3 from 'd3';
 
 export function donutChart() {
     var width,
@@ -34,7 +34,7 @@ export function donutChart() {
             // generate chart
 
             let _extent = d3.extent(data, function(d) { return d['Vote Number']});
-            let _sumVariable = d3.sum(_extent, function(d){return d;});
+            let _sumVariable = d3.sum(_extent, function(d) { return d; });
             console.log(`data: ${JSON.stringify(data)} _extent: ${JSON.stringify(_extent)} _sumVariable: ${_sumVariable}`);
 
             // ===========================================================================================
@@ -63,9 +63,9 @@ export function donutChart() {
             // ===========================================================================================
             // append the svg object to the selection
             var svg = selection.append('svg')
-                .attr("style", "width:100%; height:100%;")
-                .attr("viewBox", `0 0 ${width} ${height}`)
-                .attr("preserveAspectRatio", "xMidYMid meet")
+                .attr('style', 'width:100%; height:100%;')
+                .attr('viewBox', `0 0 ${width} ${height}`)
+                .attr('preserveAspectRatio', 'xMidYMid meet')
                 //.attr('width', width + margin.left + margin.right)
                 //.attr('height', height + margin.top + margin.bottom)
               .append('g')
@@ -267,5 +267,4 @@ export function donutChart() {
 
     return chart;
 }
-
 

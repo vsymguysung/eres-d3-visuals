@@ -29,7 +29,7 @@ import * as d3 from "d3";
 
 export function hStackBarChart() {
   //
-  //
+  // Define custome event dispatcher.
   //
   let dispatcher = d3.dispatch("was_clicked", "was_dblclicked");
 

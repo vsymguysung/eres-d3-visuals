@@ -9041,7 +9041,14 @@
 
   var donut = donutChart().width(900).height(600).cornerRadius(3).padAngle(0.015).variable('Vote Number').category('Type').percentFormat(format(',d'));
 
-  select('#donutchart').datum(donut_dataset).call(donut);
-  var tmplOutput = avatarTemplate({ title: dataset.title, name: dataset.name, avatarUrl: dataset.avatarUrl, email: dataset.email });
+  select('#donutchart').datum(donut_dataset).call(donut);var title = dataset.title,
+      name = dataset.name,
+      avatarUrl = dataset.avatarUrl,
+      email = dataset.email;
+
+  console.log("destructuring title: " + JSON.stringify(title));
+  console.log("destructuring obj: " + JSON.stringify({ title: title, name: name, avatarUrl: avatarUrl, email: email }));
+
+  var tmplOutput = avatarTemplate({ title: title, name: name, avatarUrl: avatarUrl, email: email });
   $('#avatar').html(tmplOutput);
 });

@@ -4,14 +4,14 @@ var utils = require('./_utils'),
     fs = require('fs'),
     babel = require('babel-core'),
     noderesolve = require('rollup-plugin-node-resolve'),
-    commonjs = require('rollup-plugin-commonjs')
+    commonjs = require('rollup-plugin-commonjs'),
     handlebars = require('rollup-plugin-handlebars-plus'),
     scss = require('rollup-plugin-sass');
 
 module.exports = function(options) {
 
   // delete the old ./dist folder
-  utils.clean('./dist')
+  utils.clean('./dist');
 
   /**
    * Create a promise based on the result of the webpack compiling script
@@ -40,8 +40,8 @@ module.exports = function(options) {
         }),
         scss({
           outputStyle: 'compressed',
-          output: './dist/style/index.css',
-        }),
+          output: './dist/style/index.css'
+        })
       ]
     }).then( function ( bundle ) {
 
@@ -58,18 +58,18 @@ module.exports = function(options) {
           presets: ['es2015'],
           plugins: ['transform-es2015-modules-umd']
         }
-      ).code
+      ).code;
 
       mkdirp('./dist', function() {
         try {
-          fs.writeFileSync(`./dist/${ global.library }.js`, result, 'utf8')
-          resolve()
+          fs.writeFileSync(`./dist/${ global.library }.js`, result, 'utf8');
+          resolve();
         } catch (e) {
-          reject(e)
+          reject(e);
         }
-      })
+      });
 
-    }).catch(e =>{ utils.print(e, 'error') })
-  })
+    }).catch(e =>{ utils.print(e, 'error') });
+  });
 
 }

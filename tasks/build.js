@@ -8,8 +8,6 @@ var utils = require('./_utils'),
     handlebars = require('rollup-plugin-handlebars-plus'),
     scss = require('rollup-plugin-sass');
 
-var rollup_resolve = require('rollup-plugin-node-resolve');
-
 module.exports = function(options) {
 
   // delete the old ./dist folder

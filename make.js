@@ -8,7 +8,8 @@ var command = process.argv[2],
   minify  = require('./tasks/minify'),
   build   = require('./tasks/build'),
   watch   = require('./tasks/watch'),
-  serve   = require('./tasks/serve')
+  serve   = require('./tasks/serve'),
+  assets  = require('./tasks/assets');
 
 /**
  * Each task required (except watch) returns a promise so you will be able to chain them as you prefer
@@ -27,6 +28,7 @@ case 'build':
 case 'run':
   build()
     .then(minify)
+    .then(assets)
     .then(serve)
   break
 case 'watch':

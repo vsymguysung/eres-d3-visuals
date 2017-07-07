@@ -46,6 +46,9 @@ export function hStackBarChart() {
   let reRenderTransitionDuration = 1000;
   let barBetweenPadding = 0.2;
 
+  let currentOrderByProperty = 'index';
+  let isDescendingOrder = false;
+
   //
   // Generate Chart
   function chart(selection) {
@@ -84,20 +87,21 @@ export function hStackBarChart() {
 
       // Dynamic sorting helper.
       function dynamicSort(property) {
-          let sortOrder = 1;
-          if(property[0] === "-") {
-              sortOrder = -1;
-              property = property.substr(1);
-          }
-          return function (a,b) {
-              let result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-              return result * sortOrder;
-          }
+        console.log(`property: ${property}`);
+        let sortOrder = 1;
+        if(property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            let result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+            return result * sortOrder;
+        }
       }
 
       //
       // Sort Data.
-      dataset.sort(dynamicSort('billid'));
+      dataset.sort(dynamicSort('index'));
 
       // Get all bill ids.
       let billIds = dataset.map( function(d) {
@@ -141,8 +145,16 @@ export function hStackBarChart() {
 
       //
       // Create the options form
-      let default_radio = 0;  // Choose the default selection.
-      let form = selection.insert("form", ":first-child").attr("class", "orderby-radios").text("Order By: ");
+      //let default_radio = 0;  // Choose the default selection.
+      let default_radio = 0;
+      allAttrs.map((item, i, a)=>{
+        console.log(`item:${item} i:${i} a:${a}`);
+        if (item === 'index') {
+          default_radio = i;
+        }
+      });
+      console.log(`default_radio: ${default_radio}`);
+      let form = selection.insert("form", ":first-child").attr("class", "form-options").text("Order By: ");
 
       form.selectAll("label")
           .data(allAttrs)
@@ -160,6 +172,16 @@ export function hStackBarChart() {
           .attr("value", function(d, i) {return d;})
           .property("checked", function(d, i) {return i===default_radio;})
           .on("change", orderByChanged);
+
+      form.append("label")
+          .attr("class", "checkbox-inline")
+          .text("decending")
+          .insert("input", ":first-child")
+          .attr("type", "checkbox")
+          .attr("id", "decending")
+          .attr("class", "decending")
+          .property("checked", false)
+          .on("change", descendingChanged);
 
 
       //
@@ -274,18 +296,31 @@ export function hStackBarChart() {
 
       function orderByChanged() {
         console.log(`orderByChanged this.value:${this.value}`);
-        //if (this.value === "index") orderByIndex();
-        //else if (this.value === "agree") orderByAgree();
-        //else if (this.value === "disagree") orderByDisagree();
 
-        orderBy(this.value);
+        currentOrderByProperty = this.value;
+        orderBy(this.value, isDescendingOrder);
       }
 
-      function orderBy( t = 'index' ) {
-        console.log(`orderBy ${t} called.`);
+      function descendingChanged() {
+        //console.log(`descendingChanged this.checked:${this.checked}`);
+        if (this.checked) {
+          isDescendingOrder = true;
+          orderBy(currentOrderByProperty, true);
+        }
+        else {
+          isDescendingOrder = false;
+          orderBy(currentOrderByProperty, false);
+        }
+      }
+
+      function orderBy( t = 'index', descending = false ) {
+
+        // Determine whether it is descending or ascending.
+        let _t = (descending) ? `-${t}` : t ;
+        //console.log(`orderBy _t:${_t} called.`);
 
         // Data Transfrom
-        dataset.sort(dynamicSort(t));
+        dataset.sort(dynamicSort(_t));
 
         // Series Update
         series = d3.stack()

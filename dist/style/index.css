@@ -5950,8 +5950,13 @@ iPad 3
 #hstackbarchart {
   margin-top: 10px; }
 
-.orderby-radios label input {
-  margin-left: 3px; }
+.form-options {
+  margin-bottom: 10px; }
+  .form-options label input {
+    margin: 0px 3px; }
+    .form-options label input#decending {
+      position: inherit;
+      margin-left: 5px; }
 
 /*Styling for the lines connecting the labels to the slices*/
 polyline {

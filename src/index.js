@@ -19,15 +19,25 @@ import { donutChart } from './visuals/donutChart';
 import avatarTemplate from './templates/avatar.hbs';
 import './scss/main.scss';
 
+//let h_stackbarchart_dataset = [
+//  {billid: 'HB 4643', agree: 67, disagree: 54, index: 121},
+//  {billid: 'HB 6066', agree: 87, disagree: 44, index: 131},
+//  {billid: 'HB 5851', agree: 164, disagree: 34, index: 198},
+//  {billid: 'HB 5400', agree: 58, disagree: 18, index: 76},
+//  {billid: 'HB 5700', agree: 88, disagree: 18, index: 106},
+//  {billid: 'HB 8200', agree: 75, disagree: 108, index: 196},
+//  {billid: 'HB 9200', agree: 63, disagree: 23, index: 86},
+//  {billid: 'HB 3400', agree: 128, disagree: 88, index: 216}
+//];
 let h_stackbarchart_dataset = [
-  {billid: 'HB 4643', agree: 67, disagree: 54, index: 121},
-  {billid: 'HB 6066', agree: 87, disagree: 44, index: 131},
-  {billid: 'HB 5851', agree: 164, disagree: 34, index: 198},
-  {billid: 'HB 5400', agree: 58, disagree: 18, index: 76},
-  {billid: 'HB 5700', agree: 88, disagree: 18, index: 106},
-  {billid: 'HB 8200', agree: 75, disagree: 108, index: 196},
-  {billid: 'HB 9200', agree: 63, disagree: 23, index: 86},
-  {billid: 'HB 3400', agree: 128, disagree: 88, index: 216}
+  {index: 121, billid: 'HB 4643', agree: 67, disagree: 54},
+  {index: 131, billid: 'HB 6066', agree: 87, disagree: 44},
+  {index: 198, billid: 'HB 5851', agree: 164, disagree: 34},
+  {index: 76, billid: 'HB 5400', agree: 58, disagree: 18},
+  {index: 106, billid: 'HB 5700', agree: 88, disagree: 18},
+  {index: 196, billid: 'HB 8200', agree: 75, disagree: 108},
+  {index: 86, billid: 'HB 9200', agree: 63, disagree: 23},
+  {index: 216, billid: 'HB 3400', agree: 128, disagree: 88}
 ];
 
 let dataset = {

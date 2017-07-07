@@ -2,6 +2,15 @@
   margin-top: 10px;
 }
 
-.orderby-radios label input {
-  margin-left: 3px;
+.form-options {
+  label {
+    input {
+      margin: 0px 3px;
+      &#decending {
+        position: inherit;
+        margin-left: 5px;
+      }
+    }
+  }
+  margin-bottom: 10px;
 }

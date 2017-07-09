@@ -5849,6 +5849,14 @@ a {
 .w3-hover-border-gray:hover {
   border-color: #bbb !important; }
 
+@media print {
+  @page {
+    size: landscape; }
+  html {
+    transform: scale(0.98); }
+  div#pg-break {
+    page-break-after: always !important; } }
+
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   /* Styles */

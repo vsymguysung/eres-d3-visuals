@@ -7573,7 +7573,6 @@
         var tooltip = select("body").append("div").style("position", "absolute").style("color", "white").style("z-index", "10").style("visibility", "hidden").text("a simple tooltip");
 
         function dynamicSort(property) {
-          console.log("property: " + property);
           var sortOrder = 1;
           if (property[0] === "-") {
             sortOrder = -1;
@@ -7607,12 +7606,11 @@
 
         var default_radio = 0;
         allAttrs.map(function (item, i, a) {
-          console.log("item:" + item + " i:" + i + " a:" + a);
           if (item === 'index') {
             default_radio = i;
           }
         });
-        console.log("default_radio: " + default_radio);
+
         var form = selection$$1.insert("form", ":first-child").attr("class", "form-options").text("Order By: ");
 
         form.selectAll("label").data(allAttrs).enter().append("label").attr("class", "checkbox-inline").text(function (d) {
@@ -7710,7 +7708,6 @@
         }
 
         function orderByChanged() {
-          console.log("orderByChanged this.value:" + this.value);
 
           currentOrderByProperty = this.value;
           orderBy(this.value, isDescendingOrder);

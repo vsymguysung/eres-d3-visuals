@@ -87,15 +87,15 @@ export function hStackBarChart() {
 
       // Dynamic sorting helper.
       function dynamicSort(property) {
-        console.log(`property: ${property}`);
+        //console.log(`property: ${property}`);
         let sortOrder = 1;
         if(property[0] === "-") {
-            sortOrder = -1;
-            property = property.substr(1);
+          sortOrder = -1;
+          property = property.substr(1);
         }
         return function (a,b) {
-            let result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-            return result * sortOrder;
+          let result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+          return result * sortOrder;
         }
       }
 
@@ -105,15 +105,15 @@ export function hStackBarChart() {
 
       // Get all bill ids.
       let billIds = dataset.map( function(d) {
-            return d.billid;
+          return d.billid;
       });
 
       //
       // Data Transform.
       let series = d3.stack()
-          .keys(renderedAttrs) //.keys(["agree", "disagree"])
-          .offset(d3.stackOffsetDiverging)
-          (dataset);
+                     .keys(renderedAttrs) //.keys(["agree", "disagree"])
+                     .offset(d3.stackOffsetDiverging)
+                     (dataset);
 
       series.map(function(serie) {
         console.log(`serie: ${JSON.stringify(serie)}`);
@@ -122,9 +122,9 @@ export function hStackBarChart() {
       //
       // SVG container.
       let svg = selection.append('svg')
-                .attr("style", "width:100%; height:100%;")
-                .attr("viewBox", "0 0 640 400")
-                .attr("preserveAspectRatio", "xMidYMid meet");
+                         .attr("style", "width:100%; height:100%;")
+                         .attr("viewBox", "0 0 640 400")
+                         .attr("preserveAspectRatio", "xMidYMid meet");
 
       //
       // Scales.
@@ -148,12 +148,12 @@ export function hStackBarChart() {
       //let default_radio = 0;  // Choose the default selection.
       let default_radio = 0;
       allAttrs.map((item, i, a)=>{
-        console.log(`item:${item} i:${i} a:${a}`);
+        //console.log(`item:${item} i:${i} a:${a}`);
         if (item === 'index') {
           default_radio = i;
         }
       });
-      console.log(`default_radio: ${default_radio}`);
+      //console.log(`default_radio: ${default_radio}`);
       let form = selection.insert("form", ":first-child").attr("class", "form-options").text("Order By: ");
 
       form.selectAll("label")
@@ -250,7 +250,6 @@ export function hStackBarChart() {
             .call(d3.axisLeft(yScale));
       }
 
-
       function render() {
         renderGraph();
         renderXaxis();
@@ -265,7 +264,9 @@ export function hStackBarChart() {
         return d3.max(serie, function(d) { return d[1]; });
       }
 
-      // Render.
+      //
+      // Rendering the graphs.
+      //
       render();
 
       function reRenderGraph() {
@@ -295,7 +296,7 @@ export function hStackBarChart() {
       }
 
       function orderByChanged() {
-        console.log(`orderByChanged this.value:${this.value}`);
+        //console.log(`orderByChanged this.value:${this.value}`);
 
         currentOrderByProperty = this.value;
         orderBy(this.value, isDescendingOrder);
@@ -314,7 +315,6 @@ export function hStackBarChart() {
       }
 
       function orderBy( t = 'index', descending = false ) {
-
         // Determine whether it is descending or ascending.
         let _t = (descending) ? `-${t}` : t ;
         //console.log(`orderBy _t:${_t} called.`);
@@ -343,7 +343,6 @@ export function hStackBarChart() {
 
         // Re-render Graph
         reRenderGraph();
-
       }
 
       //
@@ -385,7 +384,6 @@ export function hStackBarChart() {
       height = value;
       return chart;
   };
-
 
   //
   // The '.on' instance method that accepts event

@@ -9060,7 +9060,7 @@
     console.log("Custom \"was_dblclicked\" event received idx: " + idx + " billid: " + JSON.stringify(dataset.h_stackbarchart_dataset[idx].billid));
   });
 
-  var donut = donutChart().width(900).height(600).cornerRadius(3).padAngle(0.015).variable('Vote Number').category('Type').percentFormat(format(',d'));
+  var donut = donutChart().width(920).height(600).cornerRadius(3).padAngle(0.015).variable('Vote Number').category('Type').percentFormat(format(',d'));
 
   select('#donutchart').datum(donut_dataset).call(donut);var title = dataset.title,
       name = dataset.name,

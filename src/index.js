@@ -88,7 +88,7 @@ h_stackbarchart.on('was_dblclicked', function(idx) {
 // Donut Chart
 //
 let donut = donutChart()
-                .width(900)
+                .width(920)
                 .height(600)
                 .cornerRadius(3) // sets how rounded the corners are on each slice
                 .padAngle(0.015) // effectively dictates the gap between slices

@@ -1,7 +1,7 @@
 D3 Custom Visual Implementation
 ====================
 
-[Demo](https://vsymguysung.github.io/vsnxt-d3-visuals/)
+[Demo](https://vsymguysung.github.io/vsnxt-d3-visuals)
 
 # Introduction
 

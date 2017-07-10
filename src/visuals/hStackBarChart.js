@@ -96,7 +96,7 @@ export function hStackBarChart() {
         return function (a,b) {
           let result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
           return result * sortOrder;
-        }
+        };
       }
 
       //
@@ -358,7 +358,7 @@ export function hStackBarChart() {
             .attr("x", width + 18)
             .attr("width", 18)
             .attr("height", 18)
-            .attr("fill", function(d, i){  console.log(JSON.stringify(d.key)); return zScale(d.key)});
+            .attr("fill", function(d, i){ console.log(JSON.stringify(d.key)); return zScale(d.key); });
 
         legend.append("text")
             .attr("x", width + 44)
@@ -396,7 +396,7 @@ export function hStackBarChart() {
   chart.on = function() {
     let value = dispatcher.on.apply(dispatcher, arguments);
     return value === dispatcher ? chart : value;
-  }
+  };
 
   return chart;
 

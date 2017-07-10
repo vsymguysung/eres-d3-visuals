@@ -14,4 +14,4 @@ module.exports = function(options) {
   // Run eslint
   return utils.exec('./node_modules/.bin/eslint', options.folders);
 
-}
+};

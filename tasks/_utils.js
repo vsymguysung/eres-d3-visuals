@@ -29,7 +29,7 @@ var spawn = require('child_process').spawn,
         if (obj[key]) {
           ret.push(obj[key]);
         }
-      })
+      });
       return ret;
     },
     /**
@@ -100,7 +100,7 @@ var spawn = require('child_process').spawn,
           } else if (mustDelete) { // delete file
             fs.unlinkSync(curPath);
           }
-        })
+        });
         if (mustDelete) {
           fs.rmdirSync(path);
         }
@@ -143,4 +143,4 @@ var spawn = require('child_process').spawn,
     }
   };
 
-module.exports = utils
+module.exports = utils;

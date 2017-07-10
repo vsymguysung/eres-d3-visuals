@@ -21,9 +21,9 @@ module.exports = function(options) {
   var runOnlyOn = function(event) {
     if (~options.watchEvents.indexOf(event)) {
       // go to the next task
-      return Promise.resolve()
+      return Promise.resolve();
     } else {
-      return Promise.reject()
+      return Promise.reject();
     }
   };
 
@@ -39,4 +39,4 @@ module.exports = function(options) {
       .catch(e => utils.print(e, 'error'));
   });
 
-}
+};

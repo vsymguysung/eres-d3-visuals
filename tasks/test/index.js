@@ -1,4 +1,4 @@
-var utils = require('../_utils')
+var utils = require('../_utils');
 
 module.exports = function(options) {
   // run karma
@@ -13,5 +13,5 @@ module.exports = function(options) {
       LIBRARY_NAME: global.library,
       TRAVIS_JOB_ID: process.env.TRAVIS_JOB_ID
     }
-  )
-}
+  );
+};

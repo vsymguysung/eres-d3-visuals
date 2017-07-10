@@ -31,5 +31,5 @@ module.exports = function(config) {
       dir: './coverage/'
     },
     singleRun: true
-  })
-}
+  });
+};

@@ -8,4 +8,4 @@ module.exports = function(options) {
   // serve the contents of this folder
   return utils.exec('./node_modules/.bin/serve', utils.optionsToArray(options));
 
-}
+};

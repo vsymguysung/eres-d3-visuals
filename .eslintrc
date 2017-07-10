@@ -179,7 +179,8 @@ rules:
   #                                                                         #
   ###########################################################################
 
-  indent: [2, 2]                 # Set a specific tab width
+  #indent: [2, 2]                 # Set a specific tab width
+  indent: 0                      # Set a specific tab width
   brace-style: 0                 # enforce one true brace style
   camelcase: 0                   # require camel case names
   comma-spacing: 2               # enforce spacing before and after comma
@@ -207,10 +208,11 @@ rules:
   no-extra-parens: 2                # disallow wrapping of non-IIFE statements in parens
   one-var: 0                     # allow just one var statement per function
   padded-blocks: 0               # enforce padding within blocks
-  quotes:                        # specify whether double or single quotes should be used
-    [1, "single", "avoid-escape"]
+  #quotes:                        # specify whether double or single quotes should be used
+  #  [1, "single", "avoid-escape"]
+  quotes: 0
   quote-props: 0                 # require quotes around object literal property names
-  semi: [2, "never"]             # require or disallow use of semicolons instead of ASI
+  semi: [2, "always"]             # require or disallow use of semicolons instead of ASI
   semi-spacing: 0
   sort-vars: 0                   # sort variables within the same declaration block
   keyword-spacing: 2             # require a space after certain keywords

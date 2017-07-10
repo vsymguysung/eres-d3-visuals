@@ -25,14 +25,14 @@ module.exports = function(options) {
     options.assets.forEach((asset) => {
       fs.copy(asset.sourcePath, asset.destPath, function (err) {
         if (err) {
-          console.error(err)
+          console.error(err);
           return reject();
         }
-        console.log('success!')
+        console.log('success!');
         resolve();
       });
     });
 
-  })
-}
+  });
+};
 

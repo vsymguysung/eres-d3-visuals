@@ -69,7 +69,7 @@ module.exports = function(options) {
         }
       });
 
-    }).catch(e =>{ utils.print(e, 'error') });
+    }).catch(e =>{ utils.print(e, 'error'); });
   });
 
-}
+};

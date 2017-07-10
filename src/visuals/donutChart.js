@@ -33,7 +33,7 @@ export function donutChart() {
         selection.each(function(data) {
             // generate chart
 
-            let _extent = d3.extent(data, function(d) { return d['Vote Number']});
+            let _extent = d3.extent(data, function(d) { return d['Vote Number']; });
             let _sumVariable = d3.sum(_extent, function(d) { return d; });
             console.log(`data: ${JSON.stringify(data)} _extent: ${JSON.stringify(_extent)} _sumVariable: ${_sumVariable}`);
 
@@ -126,7 +126,7 @@ export function donutChart() {
                     // see label transform function for explanations of these three lines.
                     var pos = outerArc.centroid(d);
                     pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
-                    return [arc.centroid(d), outerArc.centroid(d), pos]
+                    return [arc.centroid(d), outerArc.centroid(d), pos];
                 });
             // ===========================================================================================
 

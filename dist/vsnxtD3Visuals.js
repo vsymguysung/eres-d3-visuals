@@ -7548,6 +7548,9 @@
     var reRenderTransitionDuration = 1000;
     var barBetweenPadding = 0.2;
 
+    var currentOrderByProperty = 'index';
+    var isDescendingOrder = false;
+
     function chart(selection$$1) {
       console.log("selection:" + JSON.stringify(selection$$1));
 
@@ -7581,7 +7584,7 @@
           };
         }
 
-        dataset.sort(dynamicSort('billid'));
+        dataset.sort(dynamicSort('index'));
 
         var billIds = dataset.map(function (d) {
           return d.billid;
@@ -7602,7 +7605,13 @@
         var zScale = ordinal(category10);
 
         var default_radio = 0;
-        var form = selection$$1.insert("form", ":first-child").attr("class", "orderby-radios").text("Order By: ");
+        allAttrs.map(function (item, i, a) {
+          if (item === 'index') {
+            default_radio = i;
+          }
+        });
+
+        var form = selection$$1.insert("form", ":first-child").attr("class", "form-options").text("Order By: ");
 
         form.selectAll("label").data(allAttrs).enter().append("label").attr("class", "checkbox-inline").text(function (d) {
           return d;
@@ -7611,6 +7620,8 @@
         }).property("checked", function (d, i) {
           return i === default_radio;
         }).on("change", orderByChanged);
+
+        form.append("label").attr("class", "checkbox-inline").text("decending").insert("input", ":first-child").attr("type", "checkbox").attr("id", "decending").attr("class", "decending").property("checked", false).on("change", descendingChanged);
 
         var waitForDouble = null;
         var dblClickThreshold = 250;
@@ -7697,18 +7708,28 @@
         }
 
         function orderByChanged() {
-          console.log("orderByChanged this.value:" + this.value);
 
+          currentOrderByProperty = this.value;
+          orderBy(this.value, isDescendingOrder);
+        }
 
-          orderBy(this.value);
+        function descendingChanged() {
+          if (this.checked) {
+            isDescendingOrder = true;
+            orderBy(currentOrderByProperty, true);
+          } else {
+            isDescendingOrder = false;
+            orderBy(currentOrderByProperty, false);
+          }
         }
 
         function orderBy() {
           var t = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'index';
+          var descending$$1 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-          console.log("orderBy " + t + " called.");
+          var _t = descending$$1 ? "-" + t : t;
 
-          dataset.sort(dynamicSort(t));
+          dataset.sort(dynamicSort(_t));
 
           series = stack().keys(renderedAttrs).offset(diverging)(dataset);
 
@@ -9002,7 +9023,7 @@
     return asString || typeof $ === 'undefined' ? html : $(html);
   };
 
-  var h_stackbarchart_dataset = [{ billid: 'HB 4643', agree: 67, disagree: 54, index: 121 }, { billid: 'HB 6066', agree: 87, disagree: 44, index: 131 }, { billid: 'HB 5851', agree: 164, disagree: 34, index: 198 }, { billid: 'HB 5400', agree: 58, disagree: 18, index: 76 }, { billid: 'HB 5700', agree: 88, disagree: 18, index: 106 }, { billid: 'HB 8200', agree: 75, disagree: 108, index: 196 }, { billid: 'HB 9200', agree: 63, disagree: 23, index: 86 }, { billid: 'HB 3400', agree: 128, disagree: 88, index: 216 }];
+  var h_stackbarchart_dataset = [{ index: 121, billid: 'HB 4643', agree: 67, disagree: 54 }, { index: 131, billid: 'HB 6066', agree: 87, disagree: 44 }, { index: 198, billid: 'HB 5851', agree: 164, disagree: 34 }, { index: 76, billid: 'HB 5400', agree: 58, disagree: 18 }, { index: 106, billid: 'HB 5700', agree: 88, disagree: 18 }, { index: 196, billid: 'HB 8200', agree: 75, disagree: 108 }, { index: 86, billid: 'HB 9200', agree: 63, disagree: 23 }, { index: 216, billid: 'HB 3400', agree: 128, disagree: 88 }];
 
   var dataset = {
     name: 'Gary Glenn',

@@ -5849,6 +5849,14 @@ a {
 .w3-hover-border-gray:hover {
   border-color: #bbb !important; }
 
+@media print {
+  @page {
+    size: landscape; }
+  html {
+    transform: scale(0.98); }
+  div#pg-break {
+    page-break-after: always !important; } }
+
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   /* Styles */
@@ -5950,8 +5958,13 @@ iPad 3
 #hstackbarchart {
   margin-top: 10px; }
 
-.orderby-radios label input {
-  margin-left: 3px; }
+.form-options {
+  margin-bottom: 10px; }
+  .form-options label input {
+    margin: 0px 3px; }
+    .form-options label input#decending {
+      position: inherit;
+      margin-left: 5px; }
 
 /*Styling for the lines connecting the labels to the slices*/
 polyline {
@@ -5996,8 +6009,8 @@ svg {
 #avatar {
   margin-top: 35px; }
   #avatar img {
-    width: 120px;
-    height: 120px; }
+    width: 140px;
+    height: 140px; }
   #avatar #profile {
     width: 100%;
     height: 120px;
@@ -6006,6 +6019,3 @@ svg {
       font-size: .9em; }
     #avatar #profile #name {
       font-weight: bold; }
-
-#donutchart {
-  float: right; }

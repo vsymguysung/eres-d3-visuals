@@ -6,6 +6,14 @@
   div#pg-break {
     page-break-after: always !important;
   }
+
+  @media print
+  {
+    .no-print, .no-print *
+    {
+      display: none !important;
+    }
+  }
 }
 
 /* Smartphones (portrait and landscape) ----------- */

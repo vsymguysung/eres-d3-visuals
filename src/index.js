@@ -19,6 +19,15 @@ import { donutChart } from './visuals/donutChart';
 import avatarTemplate from './templates/avatar.hbs';
 import './scss/main.scss';
 
+let legislators = [
+  { id: 4, name: 'Garry Glen'},
+  { id: 2, name: 'Debbie Stabenow'},
+  { id: 3, name: 'Rebekah Warren'},
+  { id: 1, name: 'Gary Peters'},
+  { id: 5, name: 'Mark Warner'},
+  { id: 6, name: 'Tim Kaine'},
+];
+
 //let h_stackbarchart_dataset = [
 //  {billid: 'HB 4643', agree: 67, disagree: 54, index: 121},
 //  {billid: 'HB 6066', agree: 87, disagree: 44, index: 131},
@@ -111,3 +120,19 @@ console.log(`destructuring obj: ${JSON.stringify({ title, name, avatarUrl, email
 let tmplOutput = avatarTemplate({ title, name, avatarUrl, email });
 $('#avatar').html(tmplOutput);
 
+
+//
+// Build the select list
+//
+d3.select('#legislators')
+  .selectAll('option')
+  .data(legislators)
+  .enter()
+  .append('option')
+  .attr('value', function(d) {
+    return d.id;
+  })
+  .text(
+    function(d) {
+      return d.name;
+  });

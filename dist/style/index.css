@@ -5857,6 +5857,10 @@ a {
   div#pg-break {
     page-break-after: always !important; } }
 
+@media print {
+  .no-print, .no-print * {
+    display: none !important; } }
+
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   /* Styles */
@@ -6019,3 +6023,6 @@ svg {
       font-size: .9em; }
     #avatar #profile #name {
       font-weight: bold; }
+
+nav div.legislators {
+  margin: 20px; }

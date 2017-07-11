@@ -9023,6 +9023,8 @@
     return asString || typeof $ === 'undefined' ? html : $(html);
   };
 
+  var legislators = [{ id: 4, name: 'Garry Glen' }, { id: 2, name: 'Debbie Stabenow' }, { id: 3, name: 'Rebekah Warren' }, { id: 1, name: 'Gary Peters' }, { id: 5, name: 'Mark Warner' }, { id: 6, name: 'Tim Kaine' }];
+
   var h_stackbarchart_dataset = [{ index: 121, billid: 'HB 4643', agree: 67, disagree: 54 }, { index: 131, billid: 'HB 6066', agree: 87, disagree: 44 }, { index: 198, billid: 'HB 5851', agree: 164, disagree: 34 }, { index: 76, billid: 'HB 5400', agree: 58, disagree: 18 }, { index: 106, billid: 'HB 5700', agree: 88, disagree: 18 }, { index: 196, billid: 'HB 8200', agree: 75, disagree: 108 }, { index: 86, billid: 'HB 9200', agree: 63, disagree: 23 }, { index: 216, billid: 'HB 3400', agree: 128, disagree: 88 }];
 
   var dataset = {
@@ -9072,4 +9074,10 @@
 
   var tmplOutput = avatarTemplate({ title: title, name: name, avatarUrl: avatarUrl, email: email });
   $('#avatar').html(tmplOutput);
+
+  select('#legislators').selectAll('option').data(legislators).enter().append('option').attr('value', function (d) {
+    return d.id;
+  }).text(function (d) {
+    return d.name;
+  });
 });

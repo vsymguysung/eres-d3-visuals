@@ -13,7 +13,9 @@
  *    - v0.1.0 2017.Jun by Guy-Sung Kim, Initial creation.
  */
 
-import * as d3 from 'd3';
+import { select, selectAll, event } from "d3-selection";
+import { format } from "d3-format";
+import { min, max, extent, sum } from "d3-array";
 import { hStackBarChart } from './visuals/hStackBarChart';
 import { donutChart } from './visuals/donutChart';
 import avatarTemplate from './templates/avatar.hbs';
@@ -25,19 +27,9 @@ let legislators = [
   { id: 3, name: 'Rebekah Warren'},
   { id: 1, name: 'Gary Peters'},
   { id: 5, name: 'Mark Warner'},
-  { id: 6, name: 'Tim Kaine'},
+  { id: 6, name: 'Tim Kaine'}
 ];
 
-//let h_stackbarchart_dataset = [
-//  {billid: 'HB 4643', agree: 67, disagree: 54, index: 121},
-//  {billid: 'HB 6066', agree: 87, disagree: 44, index: 131},
-//  {billid: 'HB 5851', agree: 164, disagree: 34, index: 198},
-//  {billid: 'HB 5400', agree: 58, disagree: 18, index: 76},
-//  {billid: 'HB 5700', agree: 88, disagree: 18, index: 106},
-//  {billid: 'HB 8200', agree: 75, disagree: 108, index: 196},
-//  {billid: 'HB 9200', agree: 63, disagree: 23, index: 86},
-//  {billid: 'HB 3400', agree: 128, disagree: 88, index: 216}
-//];
 let h_stackbarchart_dataset = [
   {index: 121, billid: 'HB 4643', agree: 67, disagree: 54},
   {index: 131, billid: 'HB 6066', agree: 87, disagree: 44},
@@ -57,8 +49,8 @@ let dataset = {
   h_stackbarchart_dataset: h_stackbarchart_dataset
 };
 
-let _agreeSum = d3.sum(dataset.h_stackbarchart_dataset, function(d) { return d.agree; });
-let _disagreeSum = d3.sum(dataset.h_stackbarchart_dataset, function(d) { return d.disagree; });
+let _agreeSum = sum(dataset.h_stackbarchart_dataset, function(d) { return d.agree; });
+let _disagreeSum = sum(dataset.h_stackbarchart_dataset, function(d) { return d.disagree; });
 console.log(`_agreeSum: ${_agreeSum} _disagreeSum: ${_disagreeSum}`);
 let _totalSum = _agreeSum + _disagreeSum;
 
@@ -79,7 +71,7 @@ let donut_dataset =
 //
 let h_stackbarchart = hStackBarChart().width(640).height(400);
 
-d3.select('#hstackbarchart')
+select('#hstackbarchart')
    .datum(dataset.h_stackbarchart_dataset) // bind data to the div
    .call(h_stackbarchart); // draw chart in div
 
@@ -103,9 +95,9 @@ let donut = donutChart()
                 .padAngle(0.015) // effectively dictates the gap between slices
                 .variable('Vote Number')
                 .category('Type')
-                .percentFormat(d3.format(',d'));
+                .percentFormat(format(',d'));
 
-d3.select('#donutchart')
+select('#donutchart')
             .datum(donut_dataset) // bind data to the div
             .call(donut); // draw chart in div
 
@@ -114,8 +106,8 @@ d3.select('#donutchart')
 // Update avatar section DOM
 //
 let { title, name, avatarUrl, email } = dataset;
-console.log(`destructuring title: ${JSON.stringify(title)}`);
-console.log(`destructuring obj: ${JSON.stringify({ title, name, avatarUrl, email })}`);
+//console.log(`destructuring title: ${JSON.stringify(title)}`);
+//console.log(`destructuring obj: ${JSON.stringify({ title, name, avatarUrl, email })}`);
 
 let tmplOutput = avatarTemplate({ title, name, avatarUrl, email });
 $('#avatar').html(tmplOutput);
@@ -124,7 +116,7 @@ $('#avatar').html(tmplOutput);
 //
 // Build the select list
 //
-d3.select('#legislators')
+select('#legislators')
   .selectAll('option')
   .data(legislators)
   .enter()

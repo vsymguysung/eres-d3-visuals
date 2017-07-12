@@ -13,19 +13,23 @@
  *    - v0.1.0 2017.Jun by Guy-Sung Kim, Initial creation.
  */
 
-import * as d3 from 'd3';
+import { select, selectAll } from "d3-selection";
+import { scaleOrdinal, schemeCategory10 } from "d3-scale";
+import { format } from "d3-format";
+import { extent, sum } from "d3-array";
+import { pie, arc } from "d3-shape";
 
 export function donutChart() {
     var width,
         height,
         margin = {top: 10, right: 10, bottom: 10, left: 10},
-        colour = d3.scaleOrdinal(d3.schemeCategory10), // colour scheme
+        colour = scaleOrdinal(schemeCategory10), // colour scheme
         variable, // value in data that will dictate proportions on chart
         category, // compare data by
         padAngle, // effectively dictates the gap between slices
-        floatFormat = d3.format('.4r'),
+        floatFormat = format('.4r'),
         cornerRadius, // sets how rounded the corners are on each slice
-        percentFormat = d3.format(',.2%');
+        percentFormat = format(',.2%');
 
     let fontSize = '1.1em';
 
@@ -33,8 +37,8 @@ export function donutChart() {
         selection.each(function(data) {
             // generate chart
 
-            let _extent = d3.extent(data, function(d) { return d['Vote Number']; });
-            let _sumVariable = d3.sum(_extent, function(d) { return d; });
+            let _extent = extent(data, function(d) { return d['Vote Number']; });
+            let _sumVariable = sum(_extent, function(d) { return d; });
             console.log(`data: ${JSON.stringify(data)} _extent: ${JSON.stringify(_extent)} _sumVariable: ${_sumVariable}`);
 
             // ===========================================================================================
@@ -42,20 +46,20 @@ export function donutChart() {
             var radius = Math.min(width, height) / 2;
 
             // creates a new pie generator
-            var pie = d3.pie()
+            var pieGen = pie()
                 .value(function(d) { return floatFormat(d[variable]); })
                 .sort(null);
 
             // contructs and arc generator. This will be used for the donut. The difference between outer and inner
             // radius will dictate the thickness of the donut
-            var arc = d3.arc()
+            var arcGen = arc()
                 .outerRadius(radius * 0.8)
                 .innerRadius(radius * 0.6)
                 .cornerRadius(cornerRadius)
                 .padAngle(padAngle);
 
             // this arc is used for aligning the text labels
-            var outerArc = d3.arc()
+            var outerArcInstance = arc()
                 .outerRadius(radius * 0.9)
                 .innerRadius(radius * 0.9);
             // ===========================================================================================
@@ -83,16 +87,16 @@ export function donutChart() {
             // add and colour the donut slices
             var path = svg.select('.slices')
                 .datum(data).selectAll('path')
-                .data(pie)
+                .data(pieGen)
               .enter().append('path')
                 .attr('fill', function(d) { return colour(d.data[category]); })
-                .attr('d', arc);
+                .attr('d', arcGen);
             // ===========================================================================================
 
             // ===========================================================================================
             // add text labels
             var label = svg.select('.labelName').selectAll('text')
-                .data(pie)
+                .data(pieGen)
               .enter().append('text')
                 .attr('dy', '.35em')
                 .html(function(d) {
@@ -103,7 +107,7 @@ export function donutChart() {
 
                     // effectively computes the centre of the slice.
                     // see https://github.com/d3/d3-shape/blob/master/README.md#arc_centroid
-                    var pos = outerArc.centroid(d);
+                    var pos = outerArcInstance.centroid(d);
 
                     // changes the point to be on left or right depending on where label is.
                     pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
@@ -119,24 +123,24 @@ export function donutChart() {
             // add lines connecting labels to slice. A polyline creates straight lines connecting several points
             var polyline = svg.select('.lines')
                 .selectAll('polyline')
-                .data(pie)
+                .data(pieGen)
               .enter().append('polyline')
                 .attr('points', function(d) {
 
                     // see label transform function for explanations of these three lines.
-                    var pos = outerArc.centroid(d);
+                    var pos = outerArcInstance.centroid(d);
                     pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
-                    return [arc.centroid(d), outerArc.centroid(d), pos];
+                    return [arcGen.centroid(d), outerArcInstance.centroid(d), pos];
                 });
             // ===========================================================================================
 
             // ===========================================================================================
             // add tooltip to mouse events on slices and labels
-            d3.selectAll('.labelName text, .slices path').call(toolTip);
+            selectAll('.labelName text, .slices path').call(toolTip);
             // ===========================================================================================
 
-            d3.select('.labelName text').each(function(d, i) {
-              var onMouseEnterFunc = d3.select(this).on("mouseenter");
+            select('.labelName text').each(function(d, i) {
+              var onMouseEnterFunc = select(this).on("mouseenter");
               onMouseEnterFunc.apply(this, [d, i]);
             });
 
@@ -152,7 +156,7 @@ export function donutChart() {
                 // add tooltip (svg circle element) when mouse enters label or slice
                 selection.on('mouseenter', function (data) {
 
-                    d3.selectAll('.toolCircle').remove();
+                    selectAll('.toolCircle').remove();
 
                     svg.append('text')
                         .attr('class', 'toolCircle')
@@ -171,7 +175,7 @@ export function donutChart() {
 
                 //// remove the tooltip when mouse leaves the slice/label
                 //selection.on('mouseout', function () {
-                //    d3.selectAll('.toolCircle').remove();
+                //    selectAll('.toolCircle').remove();
                 //});
             }
 

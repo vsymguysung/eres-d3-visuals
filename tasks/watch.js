@@ -1,6 +1,8 @@
 var utils = require('./_utils'),
     eslint = require('./eslint'),
+    minify = require('./minify'),
     build = require('./build'),
+    assets = require('./assets'),
     chokidar = require('chokidar');
 
 module.exports = function(options) {
@@ -36,6 +38,8 @@ module.exports = function(options) {
     runOnlyOn(event)
       .then(eslint)
       .then(build)
+      .then(minify)
+      .then(assets)
       .catch(e => utils.print(e, 'error'));
   });
 

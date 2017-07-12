@@ -1,28 +1,25 @@
 [32m Executing: ./node_modules/.bin/eslint  tasks src test 
  [39m
+[32m Listing all the files in the folder: ./dist [39m
+[32m Listing all the files in the folder: ./dist/lib [39m
+[32m Listing all the files in the folder: ./dist/style [39m
+[36m Deleting the following files: 
+ ./dist/lib
+./dist/style
+./dist/vsnxtD3Visuals.js
+./dist/vsnxtD3Visuals.min.js [39m
+[32m Library minified [39m
+[36m Created file: dist/vsnxtD3Visuals.min.js [39m
+[32m Executing: ./node_modules/.bin/karma  start tasks/test/karma.conf.js 
+ [39m
+[32m11 07 2017 21:11:54.008:INFO [karma]: [39mKarma v1.7.0 server started at http://0.0.0.0:9876/
+[32m11 07 2017 21:11:54.011:INFO [launcher]: [39mLaunching browser PhantomJS with concurrency 2
+[32m11 07 2017 21:11:54.017:INFO [launcher]: [39mStarting browser PhantomJS
+[32m11 07 2017 21:11:55.500:INFO [PhantomJS 2.1.1 (Mac OS X 0.0.0)]: [39mConnected on socket l0s1ztHX1HlavPpaAAAA with id 16039663
+PhantomJS 2.1.1 (Mac OS X 0.0.0) LOG: '_agreeSum: 730 _disagreeSum: 387'
 
-/Users/guysungkim/Documents/emberJS-Projects/vsnxt-d3-visuals/src/visuals/donutChart.js
-   32:30  error    Missing space before opening brace                                                                          space-before-blocks
-  114:28  error    Gratuitous parentheses around expression                                                                    no-extra-parens
-  185:17  warning  The body of a for-in should be wrapped in an if statement to filter unwanted properties from the prototype  guard-for-in
-  188:33  error    Gratuitous parentheses around expression                                                                    no-extra-parens
+PhantomJS 2.1.1 (Mac OS X 0.0.0) ERROR
+  TypeError: JSON.stringify cannot serialize cyclic structures.
+  at dist/vsnxtD3Visuals.js:4500
 
-/Users/guysungkim/Documents/emberJS-Projects/vsnxt-d3-visuals/src/visuals/hStackBarChart.js
-   92:9    error  Expected space(s) after "if"                      keyword-spacing
-   96:27   error  A space is required after ','                     comma-spacing
-   97:24   error  Gratuitous parentheses around expression          no-extra-parens
-   97:59   error  Gratuitous parentheses around expression          no-extra-parens
-  115:53   error  Unexpected space between function name and paren  no-spaced-func
-  211:42   error  Missing space before opening brace                space-before-blocks
-  212:41   error  Missing space before opening brace                space-before-blocks
-  212:70   error  Gratuitous parentheses around expression          no-extra-parens
-  212:105  error  A space is required after ','                     comma-spacing
-  212:106  error  Gratuitous parentheses around expression          no-extra-parens
-  213:40   error  Missing space before opening brace                space-before-blocks
-  319:18   error  Gratuitous parentheses around expression          no-extra-parens
-  328:42   error  Unexpected space between function name and paren  no-spaced-func
-  354:72   error  Gratuitous parentheses around expression          no-extra-parens
-  361:41   error  Missing space before opening brace                space-before-blocks
-
-✖ 19 problems (18 errors, 1 warning)
 

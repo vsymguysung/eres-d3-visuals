@@ -13,7 +13,17 @@
  *    - v0.1.0 2017.Jun by Guy-Sung Kim, Initial creation.
  */
 
-import * as d3 from "d3";
+//import * as d3 from "d3";
+import { select, selectAll, event } from "d3-selection";
+import { scaleBand, scaleLinear, scaleOrdinal, schemeCategory10 } from "d3-scale";
+import { format } from "d3-format";
+import { min, max, extent, sum } from "d3-array";
+import { stack, pie, arc, stackOffsetDiverging } from "d3-shape";
+import { dispatch } from "d3-dispatch";
+import { entries, keys, values } from "d3-collection";
+import { axisTop, axisLeft } from "d3-axis";
+import { easeExp } from "d3-ease";
+import { transition } from "d3-transition";
 
 /*
  * Expected Data Structure:
@@ -31,7 +41,7 @@ export function hStackBarChart() {
   //
   // Define custome event dispatcher.
   //
-  let dispatcher = d3.dispatch("was_clicked", "was_dblclicked");
+  let dispatcher = dispatch("was_clicked", "was_dblclicked");
 
   //
   // Internal variables.
@@ -52,19 +62,19 @@ export function hStackBarChart() {
   //
   // Generate Chart
   function chart(selection) {
-    console.log(`selection:${JSON.stringify(selection)}`);
+    //console.log(`selection:${JSON.stringify(selection)}`);
 
     selection.each(function(dataset) {
       console.log(`dataset:${JSON.stringify(dataset)}`);
 
       let _fixedData = dataset.map((d)=>{
-        let _ret = d3.entries(d);
+        let _ret = entries(d);
         return _ret;
       });
       console.log(`_fixedData: ${JSON.stringify(_fixedData)}`);
 
       // Get attrs that are for rendering i.e.  'agree', 'disagree'
-      let renderedAttrs = d3.keys(dataset[0]).filter(function(key) {
+      let renderedAttrs = keys(dataset[0]).filter(function(key) {
                     if (key !== "billid" && key !== "index")
                       return true;
                     else
@@ -72,11 +82,11 @@ export function hStackBarChart() {
       });
 
       // Get all attributes.
-      let allAttrs = d3.keys(dataset[0]);
+      let allAttrs = keys(dataset[0]);
       console.log(`allAttrs: ${JSON.stringify(allAttrs)}`);
 
       // Create the tooltip.
-      let tooltip = d3.select("body")
+      let tooltip = select("body")
                       .append("div")
                       .style("position", "absolute")
                       .style("color", "white")
@@ -93,7 +103,7 @@ export function hStackBarChart() {
           sortOrder = -1;
           property = property.substr(1);
         }
-        return function (a,b) {
+        return function (a, b) {
           let result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
           return result * sortOrder;
         };
@@ -110,9 +120,9 @@ export function hStackBarChart() {
 
       //
       // Data Transform.
-      let series = d3.stack()
+      let series = stack()
                      .keys(renderedAttrs) //.keys(["agree", "disagree"])
-                     .offset(d3.stackOffsetDiverging)
+                     .offset(stackOffsetDiverging)
                      (dataset);
 
       series.map(function(serie) {
@@ -128,17 +138,17 @@ export function hStackBarChart() {
 
       //
       // Scales.
-      let yScale = d3.scaleBand()
+      let yScale = scaleBand()
                      .domain(billIds)
                      .rangeRound([m_top, height - m_bottom])
                      .padding(barBetweenPadding);
 
-      let xScale = d3.scaleLinear()
-                     .domain([d3.min(series, stackMin), d3.max(series, stackMax)])
+      let xScale = scaleLinear()
+                     .domain([min(series, stackMin), max(series, stackMax)])
                      .rangeRound([m_left, width - m_right]);
 
-      let zScale = d3.scaleOrdinal(d3.schemeCategory10);
-      //let zScale = d3.scaleOrdinal()
+      let zScale = scaleOrdinal(schemeCategory10);
+      //let zScale = scaleOrdinal()
       //               .domain(renderedAttrs)
       //               .range(["#d62728", "#2ca02c", "#9467bd"]);
 
@@ -209,22 +219,22 @@ export function hStackBarChart() {
              .attr("width", function(d) { return xScale(d[1]) - xScale(d[0]); })
              .attr("y", function(d) { return yScale(d.data.billid); })
              .on("mouseover", function(d){tooltip.text(d[1]-d[0]); return tooltip.style("visibility", "visible");})
-             .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+             .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left", (event.pageX+10)+"px");})
              .on("mouseout", function(){return tooltip.style("visibility", "hidden");})
              .on('click', function(d, i) {
-                console.log(`click idx: ${i} d3.event.detail: ${JSON.stringify(d3.event.detail)}`);
+                console.log(`click idx: ${i} d3.event.detail: ${JSON.stringify(event.detail)}`);
 
                 // Register click handler on selection, that issues click and dblclick as appropriate
-                d3.event.preventDefault();
+                event.preventDefault();
                 if (waitForDouble != null) {
                   clearTimeout(waitForDouble);
                   waitForDouble = null;
-                  //const currentEvent = d3.event;
+                  //const currentEvent = event;
 
                   // Dispatch the custom event
                   dispatcher.call("was_dblclicked", this, i);
                 } else {
-                  //const currentEvent = d3.event;
+                  //const currentEvent = event;
                   waitForDouble = setTimeout(() => {
                                     // Dispatch the custom event
                                     dispatcher.call("was_clicked", this, i);
@@ -240,14 +250,14 @@ export function hStackBarChart() {
         svg.append("g")
             .attr("class", "x--axis")
             .attr("transform", "translate(0," + m_top + ")")
-            .call(d3.axisTop(xScale));
+            .call(axisTop(xScale));
       }
 
       function renderYaxis() {
         svg.append("g")
             .attr("class", "y--axis")
             .attr("transform", "translate(" + (m_left - 10) + ",0)")
-            .call(d3.axisLeft(yScale));
+            .call(axisLeft(yScale));
       }
 
       function render() {
@@ -257,11 +267,11 @@ export function hStackBarChart() {
       }
 
       function stackMin(serie) {
-        return d3.min(serie, function(d) { return d[0]; });
+        return min(serie, function(d) { return d[0]; });
       }
 
       function stackMax(serie) {
-        return d3.max(serie, function(d) { return d[1]; });
+        return max(serie, function(d) { return d[1]; });
       }
 
       //
@@ -282,7 +292,7 @@ export function hStackBarChart() {
             return d;
           })
             .transition()
-            .ease(d3.easeExp)
+            .ease(easeExp)
             .duration(axisTransitionDuration)
             .attr("height", yScale.bandwidth)
             .attr("y", function(d) {
@@ -323,9 +333,9 @@ export function hStackBarChart() {
         dataset.sort(dynamicSort(_t));
 
         // Series Update
-        series = d3.stack()
+        series = stack()
           .keys(renderedAttrs) //.keys(["agree", "disagree"])
-          .offset(d3.stackOffsetDiverging)
+          .offset(stackOffsetDiverging)
           (dataset);
 
         // Y Domain Update
@@ -335,11 +345,11 @@ export function hStackBarChart() {
         yScale.domain(_billIds);
 
         // Y Axis Update
-        d3.select(".y--axis")
+        select(".y--axis")
           .transition()
-          .ease(d3.easeExp)
+          .ease(easeExp)
           .duration(reRenderTransitionDuration)
-          .call(d3.axisLeft(yScale));
+          .call(axisLeft(yScale));
 
         // Re-render Graph
         reRenderGraph();

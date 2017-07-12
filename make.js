@@ -24,6 +24,7 @@ case 'eslint':
   break
 case 'build':
   build()
+    .then(assets)
   break
 case 'run':
   build()

@@ -28,7 +28,7 @@ module.exports = function(options) {
           console.error(err);
           return reject();
         }
-        console.log('success!');
+        console.log('asset ' + JSON.stringify(asset) + 'bundled successfully!');
         resolve();
       });
     });
